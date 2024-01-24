@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/DevOpsGroup3-1.0-SNAPSHOT-jar-with-dependencies.jar /tmp
+COPY ./target/classes/com /tmp/com
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "DevOpsGroup3-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "com.napier.sem.App"]
