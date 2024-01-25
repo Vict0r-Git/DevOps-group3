@@ -7,3 +7,9 @@ This is Group3 Readme.
 [![Releases](https://img.shields.io/github/release/Pie3215/DevOps-group3/all.svg?style=flat-square)](https://github.com/Pie3215/DevOps-group3/releases)
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Pie3215/DevOps-group3/main.yml/develop?style=flat-square)
+
+![GitHub contributors](https://img.shields.io/github/contributors/Pie3215/DevOps-group3)
+
+![Discord](https://img.shields.io/discord/1198848454215082054)
+
+
