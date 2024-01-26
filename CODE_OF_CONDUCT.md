@@ -1,5 +1,35 @@
-#CODE_OF_CONDUCT
-Our team is formed with different types of people with different experiences. To be able to work well on the project, each of the team member should tag along by helping and respecting each other. This code of conduct is dedicated to every member, including software engineers, scrum master and product owner, that everyone follows the rules to obtain harassment-free environment and experience while working towards the assigned project together. 
-In saying of harassment-free, it includes insulting one another physically, mentally, or verbally. Arguments and disagreements might exist in every team. However, team members should not take it personally and attack each other in harmful ways. If a team member is found guilty in this case, the scrum master has the responsibility to act on the victim as well as culprit. The victim will be reported to module teaching team and might as well suspended or expelled according to the action he or she did.
-Other rules in this code of conduct includes, not participating in team, coming late, being absent for no reason, and not finishing daily the assigned works. Participating is important in working with team. Team members need each other to complete the project. As for a DevOps team, we need to accomplish a continuous delivery, including development, integration, testing, monitoring, feedback, deployment, and operation. Therefore, participating is crucial to the team. If one of the team members do not participate in work, the marks of that team member will be deducted. 
-Coming late and being absent could not have much effect on the work of the team. However, if a team member  has not done the assigned work on time and being late or absent more often with no other reason, then he or she will be deducted in marks from breaking the rules.
+# Code of Conduct
+
+## Introduction
+
+Our team comprises diverse individuals with varied experiences, including software engineers, scrum masters, and product owners. In order to foster a collaborative and productive work environment, it is imperative that each team member contributes positively, shows respect, and follows the principles outlined in this Code of Conduct.
+
+## Harassment-Free Environment
+
+1. Respectful Communication: Team members must communicate in a respectful manner, avoiding any form of physical, mental, or verbal harassment.
+
+2. Conflict Resolution: Disagreements and arguments are inevitable, but team members are expected to handle them professionally. Personal attacks and offensive behavior are strictly prohibited. The scrum master has the authority to intervene and address such situations promptly.
+
+3. Reporting Mechanism: If a team member experiences harassment, they are encouraged to report it to the scrum master. The scrum master is responsible for addressing both the victim's concerns and taking appropriate action against the perpetrator.
+
+4. Consequences: Depending on the severity of the offense, actions may include reporting to the module teaching team, suspension, or expulsion from the project.
+
+## Commitment to Teamwork
+
+1. Active Participation: Each team member is expected to actively participate in project-related activities. Collaborative efforts are crucial for project success.
+
+2. Punctuality: Being punctual for team meetings and adhering to project timelines is essential. Chronic lateness or unexplained absences can impact the team's efficiency and may result in marks deduction.
+
+3. Assigned Work Completion: Meeting project milestones and completing assigned tasks on time is mandatory. Failure to do so without a valid reason may lead to marks deduction.
+
+## DevOps Team Responsibilities
+
+1. Continuous Delivery: As a DevOps team, our goal is to achieve continuous delivery, covering development, integration, testing, monitoring, feedback, deployment, and operation. Every team member plays a vital role in these processes.
+
+2. Interdependence: Team members rely on each other to successfully complete the project. Non-participation can impede progress and affect overall project outcomes.
+
+## Enforcement and Review
+
+This Code of Conduct will be enforced by the scrum master, who will address violations promptly. Periodic reviews will be conducted to ensure adherence and to make any necessary updates. Team members are encouraged to provide feedback to improve the effectiveness of this Code of Conduct.
+
+By adhering to these standards, we can create a positive and inclusive work environment, fostering collaboration and ensuring the successful completion of our project.
