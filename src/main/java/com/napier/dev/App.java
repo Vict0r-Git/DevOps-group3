@@ -1,5 +1,6 @@
 package com.napier.dev;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -30,10 +31,10 @@ public class App
                 System.out.println("Successfully connected");
                 break;
             }
-            catch (SQLException sqle)
+            catch (SQLException sql)
             {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
-                System.out.println(sqle.getMessage());
+                System.out.println(sql.getMessage());
             }
             catch (InterruptedException ie)
             {
@@ -56,6 +57,56 @@ public class App
             }
         }
     }
+    public ArrayList<World> getCountryWorld() {
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT * FROM country ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<World> country = new ArrayList<World>();
+            while (rset.next()) {
+                World wrld = new World();
+                wrld.CountryName = rset.getString("Name");
+                wrld.Continent = rset.getString("Continent");
+                wrld.Region = rset.getString("Region");
+                wrld.CountryPopulation = rset.getInt("Population");
+                wrld.Capital = rset.getString("Capital");
+                wrld.Code = rset.getString("Code");
+                wrld.Code2 = rset.getString("Code2");
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world details");
+            return null;
+        }
+    }
+//    public void display(World wrld) {
+//        if (wrld != null) {
+//            System.out.println("Country: " + wrld.CountryName + "\n"
+//                            + "Continent: " + wrld.Continent + "\n"
+//                            + "Region: " + wrld.Region + "\n"
+//                            + "Population: " + wrld.CountryPopulation + "\n"
+//                            + "Capital: " + wrld.Capital + "\n"
+//                            + "Country Code: " + wrld.Code + "\n"
+//                            + "Country Code 2: " + wrld.Code2);
+//        }
+//    }
+
+    public void printOutput(ArrayList<World> country)
+    {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
+        // Loop over all employees in the list
+        for (World wrld : country)
+        {
+            String wrld_str =
+                    String.format("%-10s %-15s %-20s %-8s",
+                            wrld.CountryName, wrld.Continent, wrld.Region, wrld.CountryPopulation, wrld.Capital, wrld.Code, wrld.Code2);
+            System.out.println(wrld_str);
+        }
+    }
     public static void main(String[] args)
     {
         // Create new Application
@@ -67,6 +118,9 @@ public class App
         //Employee emp = a.getEmployee(255530);
         // Display results
         //a.displayEmployee(emp);
+
+        ArrayList<World> wrld = a.getCountryWorld();
+        a.printOutput(wrld);
 
         // Disconnect from database
         a.disconnect();
@@ -104,7 +158,7 @@ public class App
 //                // Exit for loop
 //                break;
 //            }
-//            catch (SQLException sqle)
+//            catch (SQLException sql)
 //            {
 //                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
 //                System.out.println(sqle.getMessage());
