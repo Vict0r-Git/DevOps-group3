@@ -13,7 +13,7 @@ public class World
 
     public int CountryPopulation;
 
-    public String Capital;
+    public int Capital;
 
     public String Code;
 
