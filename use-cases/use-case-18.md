@@ -24,7 +24,7 @@ Request report data of analyst’s desired sorted outcome is entered
 1.  The request from analyst is received
 2.  The lists of capital city in the world from the database are fetched
 3.  15 data of countries are sorted
-4.  The data is displayed to the analyst
+4.  The data is displayed to the analyst.
 
 ## SCHEDULE
 Due Date: 2/2/2024
