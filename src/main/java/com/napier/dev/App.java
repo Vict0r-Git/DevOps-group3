@@ -1,9 +1,9 @@
 package com.napier.dev;
+
 import java.sql.*;
 import java.util.ArrayList;
 public class App {
     public Connection con = null;
-
     public void connect() {
         try {
             // Load Database driver
@@ -43,6 +43,10 @@ public class App {
         }
     }
 
+    /**
+     * A method to output print messages with cyan color
+     * @param message Get a string message to print
+     */
     public static void printCyanMessage(String message) {
         // ANSI escape code for red text
         String redColor = "\u001B[36m";
@@ -55,25 +59,28 @@ public class App {
 
     /**
      * All the countries in the world organised by largest population to smallest.
-     * @return
+     * @return An array list of all the countries in the world
+     * ordered by population in descending order.
      */
     public ArrayList<World> getCountryWorld() {
         try {
             Statement stmt = con.createStatement();
             String strSelect =
-                    "SELECT Name, Continent, Code, Capital, Region, Population FROM country ORDER BY Population DESC";
+                    "SELECT Name, Continent, Code, Capital, Region, Population " +
+                            "FROM country " +
+                            "ORDER BY Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CountryName = rset.getString("country.Name");
-                wrld.Continent = rset.getString("country.Continent");
-                wrld.Region = rset.getString("country.Region");
-                wrld.CountryPopulation = rset.getInt("country.Population");
-                wrld.Capital = rset.getInt("country.Capital");
-                wrld.Code = rset.getString("country.Code");
-                country.add(wrld);
+            while (result.next()) {
+                World world = new World();
+                world.CountryName = result.getString("country.Name");
+                world.Continent = result.getString("country.Continent");
+                world.Region = result.getString("country.Region");
+                world.CountryPopulation = result.getInt("country.Population");
+                world.Capital = result.getInt("country.Capital");
+                world.Code = result.getString("country.Code");
+                country.add(world);
 
             }
             return country;
@@ -87,7 +94,8 @@ public class App {
 
     /**
      * All the countries in a continent organised by largest population to smallest.
-     * @return
+     * @return An array list of all the countries in a continent 'Asia'
+     * ordered by population in descending order.
      */
     public ArrayList<World> getCountryCont() {
         try {
@@ -99,17 +107,17 @@ public class App {
                             + "Asia" +
                             "' ORDER BY Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CountryName = rset.getString("country.Name");
-                wrld.Continent = rset.getString("country.Continent");
-                wrld.Region = rset.getString("country.Region");
-                wrld.CountryPopulation = rset.getInt("country.Population");
-                wrld.Capital = rset.getInt("country.Capital");
-                wrld.Code = rset.getString("country.Code");
-                country.add(wrld);
+            while (result.next()) {
+                World world = new World();
+                world.CountryName = result.getString("country.Name");
+                world.Continent = result.getString("country.Continent");
+                world.Region = result.getString("country.Region");
+                world.CountryPopulation = result.getInt("country.Population");
+                world.Capital = result.getInt("country.Capital");
+                world.Code = result.getString("country.Code");
+                country.add(world);
 
             }
             return country;
@@ -120,10 +128,10 @@ public class App {
         }
     }
 
-
     /**
      * All the countries in a region organised by largest population to smallest.
-     * @return
+     * @return An array list of all the countries in a region 'Southeast Asia'
+     * ordered by population in descending order.
      */
     public ArrayList<World> getCountryRegion() {
         try {
@@ -135,17 +143,17 @@ public class App {
                             + "Southeast Asia" +
                             "' ORDER BY Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CountryName = rset.getString("country.Name");
-                wrld.Continent = rset.getString("country.Continent");
-                wrld.Region = rset.getString("country.Region");
-                wrld.CountryPopulation = rset.getInt("country.Population");
-                wrld.Capital = rset.getInt("country.Capital");
-                wrld.Code = rset.getString("country.Code");
-                country.add(wrld);
+            while (result.next()) {
+                World world = new World();
+                world.CountryName = result.getString("country.Name");
+                world.Continent = result.getString("country.Continent");
+                world.Region = result.getString("country.Region");
+                world.CountryPopulation = result.getInt("country.Population");
+                world.Capital = result.getInt("country.Capital");
+                world.Code = result.getString("country.Code");
+                country.add(world);
 
             }
             return country;
@@ -159,7 +167,8 @@ public class App {
 
     /**
      * All the cities in the world organised by largest population to smallest.
-     * @return
+     * @return An array list of all the cities the world
+     * ordered by population in descending order.
      */
     public  ArrayList<World> getCityWorld(){
         try {
@@ -170,15 +179,15 @@ public class App {
                             "WHERE country.Code = city.CountryCode " +
                             "ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> city = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CityName = rset.getString("Name");
-                wrld.CountryName = rset.getString("Country");
-                wrld.District = rset.getString("District");
-                wrld.CityPopulation = rset.getInt("Population");
-                city.add(wrld);
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.District = result.getString("District");
+                world.CityPopulation = result.getInt("Population");
+                city.add(world);
             }
             return city;
         } catch (Exception e) {
@@ -190,7 +199,8 @@ public class App {
 
     /**
      * All the cities in a continent organised by largest population to smallest
-     * @return
+     * @return An array list of all the cities in a continent 'Asia'
+     * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByCont(){
         try {
@@ -203,17 +213,17 @@ public class App {
                             "WHERE country.Continent = 'Asia'" +
                             "ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<World> citybycont = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CityName = rset.getString("Name");
-                wrld.CountryName = rset.getString("Country");
-                wrld.District = rset.getString("District");
-                wrld.CityPopulation = rset.getInt("Population");
-                citybycont.add(wrld);
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> cityByCont = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.District = result.getString("District");
+                world.CityPopulation = result.getInt("Population");
+                cityByCont.add(world);
             }
-            return citybycont;
+            return cityByCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by continent");
@@ -224,7 +234,8 @@ public class App {
 
     /**
      * All the cities in a region organised by largest population to smallest.
-     * @return
+     * @return An array list of all the cities in a region 'Southern and Central Asia'
+     * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByRegion(){
         try {
@@ -236,17 +247,17 @@ public class App {
                             "WHERE country.Region = 'Southern and Central Asia'" +
                             "ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<World> citybyregion = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CityName = rset.getString("Name");
-                wrld.CountryName = rset.getString("Country");
-                wrld.District = rset.getString("District");
-                wrld.CityPopulation = rset.getInt("Population");
-                citybyregion.add(wrld);
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> cityByRegion = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.District = result.getString("District");
+                world.CityPopulation = result.getInt("Population");
+                cityByRegion.add(world);
             }
-            return citybyregion;
+            return cityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by region");
@@ -257,7 +268,8 @@ public class App {
 
     /**
      * All the cities in a country organised by largest population to smallest.
-     * @return
+     * @return An array list of all the cities in a country 'Myanmar'
+     * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByCountry(){
         try {
@@ -269,18 +281,18 @@ public class App {
                             "WHERE country.Name = 'Myanmar'" +
                             "ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<World> citybyregion = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CityName = rset.getString("Name");
-                wrld.CountryName = rset.getString("Country");
-                wrld.District = rset.getString("District");
-                wrld.CityPopulation = rset.getInt("Population");
-                citybyregion.add(wrld);
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> cityByRegion = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.District = result.getString("District");
+                world.CityPopulation = result.getInt("Population");
+                cityByRegion.add(world);
 
             }
-            return citybyregion;
+            return cityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by country");
@@ -291,9 +303,9 @@ public class App {
 
     /**
      * All the cities in a district organised by largest population to smallest.
-     * @return city by region
+     * @return An array list of all the cities in a district 'Rangoon [Yangon]'
+     * ordered by population in descending order.
      */
-
     public  ArrayList<World> getCitiesByDistrict(){
         try {
             Statement stmt = con.createStatement();
@@ -304,17 +316,17 @@ public class App {
                             "WHERE city.District = 'Rangoon [Yangon]'" +
                             "ORDER BY city.Population DESC";
 
-            ResultSet rset = stmt.executeQuery(strSelect);
-            ArrayList<World> citybyregion = new ArrayList<>();
-            while (rset.next()) {
-                World wrld = new World();
-                wrld.CityName = rset.getString("Name");
-                wrld.CountryName = rset.getString("Country");
-                wrld.District = rset.getString("District");
-                wrld.CityPopulation = rset.getInt("Population");
-                citybyregion.add(wrld);
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> cityByRegion = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.District = result.getString("District");
+                world.CityPopulation = result.getInt("Population");
+                cityByRegion.add(world);
             }
-            return citybyregion;
+            return cityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by district");
@@ -323,53 +335,166 @@ public class App {
 
     }
 
-    // Print out the data
+    /**
+     * All the capital cities in the world organised by largest population to smallest.
+     * @return An array list of all capital cities in the world
+     * ordered by population in descending order.
+     */
+    public  ArrayList<World> getCapitalCityWorld(){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "ORDER BY city.Population DESC";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> capitalCity = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.CityPopulation = result.getInt("Population");
+                capitalCity.add(world);
+
+            }
+            return capitalCity;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    /**
+     * All the capital cities in a continent organised by largest population to smallest.
+     * @return An array list of all capital cities in a continent
+     * ordered by population in descending order.
+     */
+    public  ArrayList<World> getCapitalCityCont(){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "ORDER BY country.Continent, city.Population DESC;";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> capitalCity = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.CityPopulation = result.getInt("Population");
+                capitalCity.add(world);
+
+            }
+            return capitalCity;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    /**
+     * All the capital cities in a region organised by largest to smallest.
+     * @return An array list of all capital cities in a region
+     * ordered by population in descending order.
+     */
+    public  ArrayList<World> getCapitalCityRegion(){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population, country.Region " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "ORDER BY country.Region, city.Population DESC;";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> capitalCity = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.CityName = result.getString("Name");
+                world.CountryName = result.getString("Country");
+                world.CityPopulation = result.getInt("Population");
+                capitalCity.add(world);
+
+            }
+            return capitalCity;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    /*
+        displayCountry() method gets parameter as an array list contains countries' data
+        and output them under the following columns.
+        Columns: "Code", "Name", "Continent", "Region", "Population", "Capital"
+     */
     public void displayCountry(ArrayList<World> country) {
         // Print header
         System.out.printf("%-5s %-49s %-14s %-25s %-13s %-10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
-        for (World wrld : country) {
-            String wrld_str =
+        for (World world : country) {
+            String world_str =
                     String.format("%-5s %-49s %-14s %-25s %-13s %-10s",
-                            wrld.Code, wrld.CountryName, wrld.Continent, wrld.Region, wrld.CountryPopulation, wrld.Capital);
-            System.out.println(wrld_str);
+                            world.Code, world.CountryName, world.Continent, world.Region, world.CountryPopulation, world.Capital);
+            System.out.println(world_str);
         }
     }
-    public void DisplayCities(ArrayList<World> city) {
+
+    /*
+        displayCities() method gets parameter as an array list contains cities' data
+        and output them under the following columns.
+        Columns: "Name", "Country", "District", "Population"
+     */
+    public void displayCities(ArrayList<World> city) {
         // Print header
         System.out.printf("%-37s %-49s %-23s %-25s%n",
                 "Name", "Country", "District", "Population");
 
         // Loop over all cities in the list
-        for (World wrld : city) {
-            String wrld_str =
+        for (World world : city) {
+            String world_str =
                     String.format("%-37s %-49s %-23s %-25s",
-                            wrld.CityName, wrld.CountryName, wrld.District, wrld.CityPopulation);
-            System.out.println(wrld_str);
+                            world.CityName, world.CountryName, world.District, world.CityPopulation);
+            System.out.println(world_str);
         }
     }
-    public void DisplayCapitalCity(ArrayList<World> capital){
+
+    /*
+        displayCapitalCities() method gets parameter as an array list contains capital cities' data
+        and output them under the following columns.
+        Columns: "Name", "Country", "Population"
+     */
+    public void displayCapitalCities(ArrayList<World> capital){
         // Print header
         System.out.printf("%-37s %-49s %-13s%n",
                 "Name", "Country", "Population");
 
         // Loop over all cities in the list
-        for (World wrld : capital) {
-            String wrld_str =
+        for (World world : capital) {
+            String world_str =
                     String.format("%-37s %-49s %-13s",
-                            wrld.CityName, wrld.CountryName, wrld.CityPopulation);
-            System.out.println(wrld_str);
+                            world.CityName, world.CountryName, world.CityPopulation);
+            System.out.println(world_str);
         }
     }
 
-
-
+    /*
+        The method CR2() represent for the code review 2
+        Grouped methods to output required tasks
+     */
     public void CR2(){
         ArrayList<World> country;
-        ArrayList<World> CT;
-        ArrayList<World> CapitalCity;
+        ArrayList<World> city;
 
         printCyanMessage("All the countries in the world organized by largest to smallest population");
         country = getCountryWorld();
@@ -384,29 +509,50 @@ public class App {
         displayCountry(country);
 
         printCyanMessage("All the Cities in the world organized by largest to smallest population");
-        CT = getCityWorld();
-        DisplayCities(CT);
+        city = getCityWorld();
+        displayCities(city);
 
         printCyanMessage("All the Cities in a continent organized by largest to smallest population");
-        CT = getCitiesByCont();
-        DisplayCities(CT);
+        city = getCitiesByCont();
+        displayCities(city);
 
         printCyanMessage("All the Cities in a region organized by largest to smallest population");
-        CT = getCitiesByRegion();
-        DisplayCities(CT);
+        city = getCitiesByRegion();
+        displayCities(city);
 
         printCyanMessage("All the Cities in a Country organized by largest to smallest population");
-        CT = getCitiesByCountry();
-        DisplayCities(CT);
+        city = getCitiesByCountry();
+        displayCities(city);
 
         printCyanMessage("All the Cities in a District organized by largest to smallest population");
-        CT = getCitiesByDistrict();
-        DisplayCities(CT);
+        city = getCitiesByDistrict();
+        displayCities(city);
     }
 
+    /*
+        The method CR2() represent for the code review 2
+     */
+    public void CR3(){
+        // Create a CapitalCity array list
+        ArrayList<World> CapitalCity;
+
+        printCyanMessage("All the capital cities in the world organised by largest population to smallest.");
+        CapitalCity = getCapitalCityWorld();
+        displayCapitalCities(CapitalCity);
+
+        printCyanMessage("All the capital cities in a continent organised by largest population to smallest.");
+        CapitalCity = getCapitalCityCont();
+        displayCapitalCities(CapitalCity);
+
+        printCyanMessage("All the capital cities in a region organised by largest to smallest.");
+        CapitalCity = getCapitalCityRegion();
+        displayCapitalCities(CapitalCity);
+    }
 
     /**
-     * main class
+     * The main entry point for the application. It creates an instance of the App class,
+     * connects to the database, performs code reviews, and then disconnects from the database.
+     * @param args The command-line arguments passed to the application. But it is not used in here.
      */
     public static void main(String[] args) {
         // Create new Application
@@ -415,8 +561,10 @@ public class App {
         // Connect to database
         a.connect();
 
-        // Code Review 1
+        // Code Review 2
         a.CR2();
+        // Code Review 3
+        //a.CR3();
 
         // Disconnect from database
         a.disconnect();
