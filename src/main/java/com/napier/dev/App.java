@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
-    private Connection con = null;
+    public Connection con = null;
 
     public void connect() {
         try {
@@ -73,6 +73,68 @@ public class App {
             return null;
         }
     }
+    public ArrayList<World> getCountryCont(String continentName) {
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT Name, Continent, Code, Capital, Region, Population "
+                            + "FROM country "
+                            + "WHERE Continent = '"
+                            + continentName +
+                            "' ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<World> country = new ArrayList<World>();
+            while (rset.next()) {
+                World wrld = new World();
+                wrld.CountryName = rset.getString("country.Name");
+                wrld.Continent = rset.getString("country.Continent");
+                wrld.Region = rset.getString("country.Region");
+                wrld.CountryPopulation = rset.getInt("country.Population");
+                wrld.Capital = rset.getInt("country.Capital");
+                wrld.Code = rset.getString("country.Code");
+                country.add(wrld);
+
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getCountryRegion(String regionName) {
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT Name, Continent, Code, Capital, Region, Population "
+                            + "FROM country "
+                            + "WHERE Region = '"
+                            + regionName +
+                            "' ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            ArrayList<World> country = new ArrayList<World>();
+            while (rset.next()) {
+                World wrld = new World();
+                wrld.CountryName = rset.getString("country.Name");
+                wrld.Continent = rset.getString("country.Continent");
+                wrld.Region = rset.getString("country.Region");
+                wrld.CountryPopulation = rset.getInt("country.Population");
+                wrld.Capital = rset.getInt("country.Capital");
+                wrld.Code = rset.getString("country.Code");
+                country.add(wrld);
+
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world details");
+            return null;
+        }
+    }
+
     public  ArrayList<World> getCitiesByCont(String continentName){
         try {
             Statement stmt = con.createStatement();
@@ -105,7 +167,7 @@ public class App {
     }
 
     // Print out the data
-    public void printOutput(ArrayList<World> country) {
+    public void displayCountry(ArrayList<World> country) {
         // Print header
         System.out.println(String.format("%-5s %-49s %-14s %-25s %-13s %-10s",
                 "Code", "Name", "Continent", "Region", "Population", "Capital"));
@@ -132,6 +194,25 @@ public class App {
         }
     }
 
+    public void CR1(){
+        ArrayList<World> country = null;
+        System.out.println("\nAll the countries in the world organized by largest to smallest population\n");
+        country = getCountryWorld();
+        displayCountry(country);
+
+        System.out.println("\nAll the countries in a continent organized by largest to smallest population\n");
+        country = getCountryCont("Asia");
+        displayCountry(country);
+
+        System.out.println("\nAll the countries in a region organized by largest to smallest population\n");
+        country = getCountryCont("Southeast Asia");
+        displayCountry(country);
+
+        System.out.println("\nAll the Cities in a continent organized by largest to smallest population\n");
+        ArrayList<World> CT = getCitiesByCont("Asia");
+        DisplayCities(CT);
+    }
+
     public static void main(String[] args) {
         // Create new Application
         App a = new App();
@@ -139,36 +220,8 @@ public class App {
         // Connect to database
         a.connect();
 
-        // Prompt user for choice
-        // Prompt user for choice
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Choose a function:");
-            System.out.println("1. Countries\n"
-            + "2. Cities");
-
-            // Read user input
-            int choice = Integer.parseInt(reader.readLine());
-
-            // Execute chosen function
-            switch (choice) {
-                case 1:
-                    // Extract world details from the database
-                    ArrayList<World> country = a.getCountryWorld();
-                    a.printOutput(country);
-                    break;
-                case 2:
-                    System.out.println("Choose a Continent");
-                    String contChoice = reader.readLine();
-                    ArrayList<World> CT = a.getCitiesByCont(contChoice);
-                    a.DisplayCities(CT);
-                    break;
-                default:
-                    System.out.println("Invalid choice");
-            }
-        } catch (Exception e) {
-            System.out.println("Error reading input: " + e.getMessage());
-        }
-
+        // Code Review 1
+        a.CR1();
 
         // Disconnect from database
         a.disconnect();
