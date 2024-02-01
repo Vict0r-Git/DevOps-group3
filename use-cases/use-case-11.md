@@ -1,4 +1,4 @@
-# Use Case: 12 	Generate a report of all top 15 populated cities in the continents
+# Use Case: 11 	Generate a report of all top 15 populated cities in the continents
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
