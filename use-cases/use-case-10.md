@@ -1,5 +1,6 @@
 # Use Case: 10 	Generate a report of all top 15 populated cities in the world
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report on top 15 populated cities in the world to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst request report of sorted data of top 15 populated cities
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of cities in the world from the database are fetched

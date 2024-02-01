@@ -1,5 +1,6 @@
 # Use Case: 11 	Generate a report of all top 15 populated cities in the continents
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report on top 15 populated cities in a continent to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst request report of sorted data of top 15 populated cities in all continents
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of cities in the continents from the database are fetched

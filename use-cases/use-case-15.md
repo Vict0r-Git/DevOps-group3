@@ -1,5 +1,6 @@
-# Use Case: 16 	Generate a report of all capital cities in the world from largest to smallest population
+# Use Case: 15 	Generate a report of all capital cities in the world from largest to smallest population
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report where all the capital cities in the world are organized by largest to smallest population to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst request report of all sorted capital cities in the world is entered
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of capital cities in the world from the database are fetched

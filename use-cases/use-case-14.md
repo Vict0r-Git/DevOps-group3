@@ -1,5 +1,6 @@
 # Use Case: 14 	Generate a report of all top 15 populated cities in each district
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report on top 15 populated cities in a district to get easy access to the population information
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst request report of all top 15 populated cities in all districts is entered
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of cities in the districts from the database are fetched
