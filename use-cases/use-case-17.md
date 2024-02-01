@@ -1,4 +1,4 @@
-# Use Case: 19	Generate capital cities in region that sorted by largest to smallest population
+# Use Case: 17	Generate capital cities in region that sorted by largest to smallest population
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context
