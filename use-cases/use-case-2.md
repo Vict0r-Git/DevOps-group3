@@ -1,5 +1,6 @@
 # Use Case: 2 	Organize countries in each continent from largest to smallest populations
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context:
 As an analyst, I want to generate a report on all the countries in each continent sorted in largest to smaller population to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger:
 The request data of analyst’s desired sorted outcome is entered
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of countries in continents from the database are fetched

@@ -1,5 +1,6 @@
 # Use Case: 7 	Generate a list of all cities in the world from largest to smallest by population
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report that lists all the cities in the world, organized by largest to smallest population to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst enters request of sorted data of all cities in the world
 
+----------------------
 ## MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of cities in the world from the database are fetched

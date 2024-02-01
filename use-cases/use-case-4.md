@@ -1,5 +1,6 @@
 # Use Case: 4 	Generate top 15 populated countries in the world
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate reports on top 15 populated countries in the world to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 The request data of top 15 populated countries in the world is entered
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of countries in the world from the database are fetched

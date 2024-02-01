@@ -1,5 +1,6 @@
 # Use Case: 8 	Generate a list of all cities in the continent from largest to smallest by population
 
+----------------------
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context: 
 As an analyst, I want to generate a report that list all the cities in a continent that are organized by largest to smallest population to get easy access to the population information.
@@ -18,6 +19,7 @@ Analyst
 ### Trigger: 
 Analyst enter request of sorted data of all cities in all continents
 
+----------------------
 ### MAIN SUCCESS SCENARIO
 1.	The request from analyst is received
 2.	The lists of cities in the continents from the database are fetched
