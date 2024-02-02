@@ -1,0 +1,29 @@
+# Use Case: 30	Generate countries that speaks Chinese, English, Hindi, Spanish, Arabic from largest to smallest population
+
+## CHARACTERISTIC INFORMATION
+### Goal in Context
+As an analyst, I want to generate a report of countries that speaks Chinese, English, Hindi, Spanish, Arabic from largest to smallest percentage of world population to get easy access to the population information.
+### Scope
+Organization (black box)
+### Level
+Primary
+### Preconditions
+Obtain dataset of all information of world
+### Success End Condition
+Analyst receives the requested report of countries that speaks Chinese, English, Hindi, Spanish, Arabic from largest to smallest percentage
+### Failed End Condition
+None
+### Primary Actor
+Analyst
+### Trigger
+Request report data of analyst’s desired sorted outcome is entered
+
+## MAIN SUCCESS SCENARIO
+1.  The request from analyst is received
+2.  The lists of countries that speaks Chinese, English, Hindi, Spanish, Arabic from largest to smallest percentage from largest to smallest population from the database are fetched
+3.  All fetched data are sorted.
+4.  The data is displayed to the analyst
+
+## SCHEDULE
+Due Date: 2/2/2024
+
