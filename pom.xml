@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.napier.dev</groupId>
   <artifactId>DevOpsGroup3</artifactId>
-  <version>1.0-ALPHA</version>
+  <version>1.1-ALPHA</version>
   <name>Archetype - DevOpsGroup3</name>
   <url>http://maven.apache.org</url>
 

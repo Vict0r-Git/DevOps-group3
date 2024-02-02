@@ -438,13 +438,13 @@ public class App {
      */
     public void displayCountry(ArrayList<World> country) {
         // Print header
-        System.out.printf("%-5s %-49s %-14s %-25s %-13s %-10s%n",
+        System.out.printf("%-5s %-49s %-14s %-25s %-13s %10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
         for (World world : country) {
             String world_str =
-                    String.format("%-5s %-49s %-14s %-25s %-13s %-10s",
+                    String.format("%-5s %-49s %-14s %-25s %-13s %10s",
                             world.Code, world.CountryName, world.Continent, world.Region, world.CountryPopulation, world.Capital);
             System.out.println(world_str);
         }
@@ -457,13 +457,13 @@ public class App {
      */
     public void displayCities(ArrayList<World> city) {
         // Print header
-        System.out.printf("%-37s %-49s %-23s %-25s%n",
+        System.out.printf("%-37s %-49s %-23s %25s%n",
                 "Name", "Country", "District", "Population");
 
         // Loop over all cities in the list
         for (World world : city) {
             String world_str =
-                    String.format("%-37s %-49s %-23s %-25s",
+                    String.format("%-37s %-49s %-23s %25s",
                             world.CityName, world.CountryName, world.District, world.CityPopulation);
             System.out.println(world_str);
         }
@@ -476,13 +476,13 @@ public class App {
      */
     public void displayCapitalCities(ArrayList<World> capital){
         // Print header
-        System.out.printf("%-37s %-49s %-13s%n",
+        System.out.printf("%-37s %-49s %13s%n",
                 "Name", "Country", "Population");
 
         // Loop over all cities in the list
         for (World world : capital) {
             String world_str =
-                    String.format("%-37s %-49s %-13s",
+                    String.format("%-37s %-49s %13s",
                             world.CityName, world.CountryName, world.CityPopulation);
             System.out.println(world_str);
         }
