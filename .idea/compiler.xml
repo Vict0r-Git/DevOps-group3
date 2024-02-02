@@ -10,7 +10,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DevOpsGroup3" />
       </profile>
     </annotationProcessing>
   </component>
