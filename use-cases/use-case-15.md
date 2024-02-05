@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report of sorted data of top 15 populated cities in all countries
+Analyst enters the input number of top populated cities in the country
 
 ----------------------
 ### MAIN SUCCESS SCENARIO

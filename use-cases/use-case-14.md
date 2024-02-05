@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report for all top 15 populated cities in each region is entered
+Analyst enters the input number of top populated cities in the region
 
 ----------------------
 ### MAIN SUCCESS SCENARIO

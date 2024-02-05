@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report of all top 15 populated cities in all districts is entered
+Analyst enters the input number of top populated cities in the district
 
 ----------------------
 ### MAIN SUCCESS SCENARIO

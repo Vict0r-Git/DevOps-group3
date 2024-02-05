@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-The request data of top 15 populated countries in the world is entered
+Analyst enters the input number of top populated countries in the world
 
 ----------------------
 ### MAIN SUCCESS SCENARIO
