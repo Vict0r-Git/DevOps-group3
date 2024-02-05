@@ -13,11 +13,11 @@ Obtain dataset of all information of world
 ### Success End Condition: 
 Analyst obtains the report of all capital cities in all continents sorted by largest to smallest population
 ### Failed End Condition: 
-None
+Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report of all sorted capital cities in all continents is entered
+The desired information is requested
 
 ----------------------
 ### MAIN SUCCESS SCENARIO
