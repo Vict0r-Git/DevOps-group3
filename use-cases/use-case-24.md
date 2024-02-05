@@ -1,8 +1,8 @@
-# Use Case: 24	Generate population of the world
+# Use Case: 22	Generate population of people living in the cities and people not living in cities in each region.
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context
-As an analyst, I want to be able to access the population of the world to get easy access to the population information.
+As an analyst, I want to generate a comprehensive report on the population of people living in the cities and people not living in cities in each region to get easy access to the population information.
 ### Scope
 Organization (black box)
 ### Level
@@ -10,7 +10,7 @@ Primary
 ### Preconditions
 Obtain dataset of all information of world
 ### Success End Condition
-Analyst receives the requested report of population of world.
+Analyst receives the requested report of population of people living in the cities and people not living in cities in each region.
 ### Failed End Condition
 None
 ### Primary Actor
@@ -20,11 +20,9 @@ Request report data of analyst’s desired sorted outcome is entered
 
 ## MAIN SUCCESS SCENARIO
 1.  The request from analyst is received
-2.  The lists of population of the world from the database are fetched
+2.  The lists of people living in the cities and people not living in cities in each reagion from the database are fetched
 3.  All fetched data are sorted.
-4. The data is displayed to the analyst
+4.  The data is displayed to the analyst
 
 ## SCHEDULE
 Due Date: 2/2/2024
-
-

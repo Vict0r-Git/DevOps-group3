@@ -1,30 +1,30 @@
-# Use Case: 10 	Generate a report of all top 15 populated cities in the world
+# Use Case: 31	Generate all the cities in a country that sorted from largest to smallest population
 
-----------------------
 ## CHARACTERISTIC INFORMATION
-### Goal in Context: 
-As an analyst, I want to generate a report on top 15 populated cities in the world to get easy access to the population information.
-### Scope: 
-Organization (Black Box)
-### Level: 
-Primary
-### Preconditions: 
-Obtain dataset of all information of world
-### Success End Condition: 
-Analyst obtains the report of top 15 populated cities in the world.
-### Failed End Condition: 
-None
-### Primary Actor: 
-Analyst
-### Trigger: 
-Analyst request report of sorted data of top 15 populated cities
+### Goal in Context
+As an analyst, I want to generate a report that list all the cities in a country that are organized by largest to smallest population to get easy access to the population information.
 
-----------------------
-### MAIN SUCCESS SCENARIO
-1.	The request from analyst is received
-2.	The lists of cities in the world from the database are fetched
-3.	15 data of countries are sorted
-4.	The data is displayed to the analyst
-----------------------
-### SCHEDULE
+### Scope
+Organization (black box)
+### Level
+Primary
+### Preconditions
+Obtain dataset of all information of world
+### Success End Condition
+Analyst receives the requested report of all the cities in a country that are sorted from largest to smallest.
+### Failed End Condition
+None
+### Primary Actor
+Analyst
+### Trigger
+Request report data of analyst’s desired sorted outcome is entered
+
+## MAIN SUCCESS SCENARIO
+1.  The request from analyst is received
+2.  The lists of all cities in a country that are sorted from largest to smallest population from the database are fetched
+3.  All fetched data are sorted.
+4.  The data is displayed to the analyst
+
+## SCHEDULE
 Due Date: 2/2/2024
+

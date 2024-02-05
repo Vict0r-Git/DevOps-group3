@@ -1,30 +1,29 @@
-# Use Case: 11 	Generate a report of all top 15 populated cities in the continents
+# Use Case: 32	Generate countries that all the cities in a district from largest to smallest population
 
-----------------------
 ## CHARACTERISTIC INFORMATION
-### Goal in Context: 
-As an analyst, I want to generate a report on top 15 populated cities in a continent to get easy access to the population information.
-### Scope: 
-Organization (Black Box)
-### Level: 
+### Goal in Context
+As an analyst, I want to generate a report that list all the cities in a district that are organized by largest to smallest population to get easy access to the population information.
+### Scope
+Organization (black box)
+### Level
 Primary
-### Preconditions: 
+### Preconditions
 Obtain dataset of all information of world
-### Success End Condition: 
-Analyst obtains the report of top 15 populated cities in all continents.
-### Failed End Condition: 
+### Success End Condition
+Analyst receives the requested report of all the cities in a district from largest to smallest population
+### Failed End Condition 
 None
-### Primary Actor: 
+### Primary Actor
 Analyst
-### Trigger: 
-Analyst request report of sorted data of top 15 populated cities in all continents
+### Trigger
+Request report data of analyst’s desired sorted outcome is entered
 
-----------------------
-### MAIN SUCCESS SCENARIO
-1.	The request from analyst is received
-2.	The lists of cities in the continents from the database are fetched
-3.	15 data of cities are sorted
-4.	The data is displayed to the analyst
-----------------------
-### SCHEDULE
+## MAIN SUCCESS SCENARIO
+1.  The request from analyst is received
+2.  The lists of all countries that all the cities in a district from largest to smallest population from the database are fetched
+3.  All fetched data are sorted.
+4.  The data is displayed to the analyst
+
+##  SCHEDULE
 Due Date: 2/2/2024
+
