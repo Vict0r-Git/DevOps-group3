@@ -12,7 +12,7 @@ Obtain dataset of all information of world
 ### Success End Condition
 Analyst receives the requested report of all the cities in a district from largest to smallest population
 ### Failed End Condition 
-None
+Analyst does not receive desired result or receive incorrect report
 ### Primary Actor
 Analyst
 ### Trigger

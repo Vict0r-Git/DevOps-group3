@@ -13,7 +13,7 @@ Obtain dataset of all information of the world
 ### Success End Condition: 
 Analyst receives the requested report of countries sorted from largest to smallest by population
 ### Failed End Condition: 
-None
+Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 

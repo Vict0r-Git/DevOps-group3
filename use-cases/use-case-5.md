@@ -13,7 +13,7 @@ Obtain dataset of all information of world
 ### Success End Condition: 
 Analyst obtains the top 15 populated countries in the continent
 ### Failed End Condition: 
-None
+Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
