@@ -5,27 +5,114 @@ package com.napier.dev;
  */
 public class World
 {
-    public String CountryName;
+    private String countryName;
+    private String continent;
+    private String region;
+    private int countryPopulation;
+    private int capital;
+    private String code;
+    private String code2;
+    private String cityName;
+    private String district;
+    private int cityPopulation;
+    private String countryLanguage;
+    private float percentage;
 
-    public String Continent;
+    // Getter and Setter methods for each field
 
-    public String Region;
+    public String getCountryName() {
+        return countryName;
+    }
 
-    public int CountryPopulation;
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
 
-    public int Capital;
+    public String getContinent() {
+        return continent;
+    }
 
-    public String Code;
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
 
-    public String Code2;
+    public String getRegion() {
+        return region;
+    }
 
-    public String CityName;
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-    public String District;
+    public int getCountryPopulation() {
+        return countryPopulation;
+    }
 
-    public int CityPopulation;
+    public void setCountryPopulation(int countryPopulation) {
+        this.countryPopulation = countryPopulation;
+    }
 
-    public String CountryLanguage;
+    public int getCapital() {
+        return capital;
+    }
 
-    public float Percentage;
+    public void setCapital(int capital) {
+        this.capital = capital;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCode2() {
+        return code2;
+    }
+
+    public void setCode2(String code2) {
+        this.code2 = code2;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public int getCityPopulation() {
+        return cityPopulation;
+    }
+
+    public void setCityPopulation(int cityPopulation) {
+        this.cityPopulation = cityPopulation;
+    }
+
+    public String getCountryLanguage() {
+        return countryLanguage;
+    }
+
+    public void setCountryLanguage(String countryLanguage) {
+        this.countryLanguage = countryLanguage;
+    }
+
+    public float getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(float percentage) {
+        this.percentage = percentage;
+    }
 }
