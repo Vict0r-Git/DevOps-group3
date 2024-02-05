@@ -24,6 +24,6 @@ Request report data of analyst’s desired sorted outcome is entered
 3.  All fetched data are sorted.
 4.  The data is displayed to the analyst
 
-## SCHEDULE
+##  SCHEDULE
 Due Date: 2/2/2024
 
