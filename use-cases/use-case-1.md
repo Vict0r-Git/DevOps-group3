@@ -26,6 +26,11 @@ The request data of analyst’s desired sorted outcome is entered
 3.	All data are sorted
 4.	The data is displayed to the analyst
 ----------------------
+### EXTENSIONS
+2. Incorrect data from database are fetched.
+    - The request is sent again.
+3. The data is not shown to analyst.
+
 ### SCHEDULE
 Due Date: 2/2/2024
 
