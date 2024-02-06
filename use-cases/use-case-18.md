@@ -21,10 +21,10 @@ Respective users request analyst to report desired information.
 
 ----------------------
 ### MAIN SUCCESS SCENARIO
-1.	The request from analyst is received
-2.	The lists of capital cities in the continents from the database are fetched
-3.	All data are sorted
-4.	The data is displayed to the analyst
+1.	The request from analyst is received.
+2.	The lists of capital cities in the continents from the database are fetched.
+3.	All data are sorted.
+4.	The data is displayed to the analyst.
 ----------------------
 ### EXTENSIONS
 2. Incorrect data from database are fetched.
