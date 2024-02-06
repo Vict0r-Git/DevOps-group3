@@ -18,6 +18,7 @@ Analyst
 ### Trigger
 Respective users request analyst to report desired information
 
+----------------------
 ## MAIN SUCCESS SCENARIO
 1.  The request from analyst is received
 2.  The lists of all countries that all the cities in a district from largest to smallest population from the database are fetched
