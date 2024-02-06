@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Respective users request analyst to report desired information. 
+The request data of analyst’s desired sorted outcome is entered
 
 ----------------------
 ### MAIN SUCCESS SCENARIO
@@ -25,13 +25,6 @@ Respective users request analyst to report desired information.
 2.	The lists of countries in the world from the database are fetched
 3.	All data are sorted
 4.	The data is displayed to the analyst
-----------------------
-
-### EXTENSIONS
-2. Incorrect data from database are fetched.
-   - The request is sent again.
-3. The data is not shown to analyst.
-   - The request is sent again. 
 ----------------------
 ### SCHEDULE
 Due Date: 2/2/2024

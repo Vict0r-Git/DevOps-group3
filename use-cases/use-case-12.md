@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report of sorted data of top 15 populated cities
+Respective users request analyst to report desired information
 
 ----------------------
 ### MAIN SUCCESS SCENARIO

@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst request report of all top 15 populated cities in all districts is entered
+Respective users request analyst to report desired information
 
 ----------------------
 ### MAIN SUCCESS SCENARIO
@@ -25,6 +25,12 @@ Analyst request report of all top 15 populated cities in all districts is entere
 2.	The lists of cities in the districts from the database are fetched
 3.	15 data of cities are sorted
 4.	The data is displayed to the analyst
+
+### Extension
+2.  Incorrect data from database are fetched
+    - The request is sent again
+4.  The data is not shown to analyst
+    - The request is sent again 
 ----------------------
 ### SCHEDULE
 Due Date: 2/2/2024

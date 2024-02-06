@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-The request data of 15 populated countries in continent is entered
+Respective users request analyst to report desired information
 
 ----------------------
 ### MAIN SUCCESS SCENARIO

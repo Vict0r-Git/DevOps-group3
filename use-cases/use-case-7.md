@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor: 
 Analyst
 ### Trigger: 
-Analyst enters request of sorted data of all cities in the world
+Respective users request analyst to report desired information
 
 ----------------------
 ## MAIN SUCCESS SCENARIO

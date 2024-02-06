@@ -17,7 +17,7 @@ Analyst does not receive desired result or receive incorrect report
 ### Primary Actor
 Analyst
 ### Trigger
-Request report data of analyst’s desired sorted outcome is entered
+Respective users request analyst to report desired information
 
 ## MAIN SUCCESS SCENARIO
 1.  The request from analyst is received
