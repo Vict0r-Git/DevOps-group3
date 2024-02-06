@@ -31,7 +31,7 @@ Respective users request analyst to report desired information.
 ### EXTENSIONS
 2. Incorrect data from database are fetched.
     - The request is sent again.
-3. The data is not shown to analyst.
+4The data is not shown to analyst.
     - The request is sent again.
 
 ## SCHEDULE
