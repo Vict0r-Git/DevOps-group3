@@ -25,6 +25,12 @@ Respective users request analyst to report desired information
 2.	The lists of countries in continents from the database are fetched
 3.	All data are sorted
 4.	The data is displayed to the analyst
+
+### EXTENSIONS
+-  2.Incorrect data from database are fetched.
+    - The request is sent again.
+-  4.The data is not shown to analyst.
+    - The request is sent again.
 ----------------------
 ### SCHEDULE
 Due Date: 2/2/2024
