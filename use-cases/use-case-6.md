@@ -27,10 +27,10 @@ Respective users request analyst to report desired information
 4.	The data is displayed to the analyst
 
 ### EXTENSIONS
-2. Incorrect data from database are fetched.
-    - The request is sent again.
-4. The data is not shown to analyst.
-    - The request is sent again.
+-  2.Incorrect data from database are fetched.
+   - The request is sent again.
+-  4.The data is not shown to analyst.
+   - The request is sent again.
 ----------------------
 ### SCHEDULE
 Due Date: 2/2/2024
