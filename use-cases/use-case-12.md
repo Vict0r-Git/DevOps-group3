@@ -1,4 +1,4 @@
-# Use Case: 10 	Generate a report of all top 15 populated cities in the world
+# Use Case: 12 	Generate a report of all top 15 populated cities in the world
 
 ----------------------
 ## CHARACTERISTIC INFORMATION

@@ -1,4 +1,4 @@
-# Use Case: 12 	Generate a report of all top 15 populated cities in each region
+# Use Case: 14 	Generate a report of all top 15 populated cities in each region
 
 ----------------------
 ## CHARACTERISTIC INFORMATION

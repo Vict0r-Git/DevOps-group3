@@ -1,4 +1,4 @@
-# Use Case: 17	Generate capital cities in region that sorted by largest to smallest population
+# Use Case: 19	Generate capital cities in region that sorted by largest to smallest population
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context
@@ -27,10 +27,11 @@ Respective users request analyst to report desired information.
 
 
 ### EXTENSIONS
-2. Incorrect data from database are fetched.
-    - The request is sent again. 
-4. The data is not shown to analyst.
-    - The request is sent again.
+- 2.Incorrect data from database are fetched.
+   - The request is sent again.
+- 4.The data is not shown to analyst.
+   - The request is sent again.
+
 
 ## SCHEDULE
 Due Date: 2/2/2024

@@ -1,4 +1,4 @@
-# Use Case: 16 	Generate a report of all capital cities in the continent from largest to smallest population
+# Use Case: 18 	Generate a report of all capital cities in the continent from largest to smallest population
 
 ----------------------
 ## CHARACTERISTIC INFORMATION
@@ -27,10 +27,11 @@ Respective users request analyst to report desired information.
 4.	The data is displayed to the analyst.
 ----------------------
 ### EXTENSIONS
-2. Incorrect data from database are fetched.
-    - The request is sent again.
-4. The data is not shown to analyst.
-    - The request is sent again.
+- 2.Incorrect data from database are fetched.
+   - The request is sent again.
+- 4.The data is not shown to analyst.
+   - The request is sent again.
+
 
 ----------------------
 ### SCHEDULE

@@ -1,4 +1,4 @@
-# Use Case: 31	Generate all the cities in a country that sorted from largest to smallest population
+# Use Case: 10	Generate all the cities in a country that sorted from largest to smallest population
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context

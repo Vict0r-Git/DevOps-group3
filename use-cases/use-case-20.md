@@ -1,5 +1,5 @@
 
-# Use Case: 18	Generate Top 15 populated capital cities in the world
+# Use Case: 20	Generate Top 15 populated capital cities in the world
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context
@@ -29,10 +29,10 @@ Respective users request analyst to report desired information.
 
 
 ### EXTENSIONS
-2. Incorrect data from database are fetched.
-    - The request is sent again.
-4The data is not shown to analyst.
-    - The request is sent again.
+- 2.Incorrect data from database are fetched.
+   - The request is sent again.
+- 4.The data is not shown to analyst.
+   - The request is sent again.
 
 ## SCHEDULE
 Due Date: 2/2/2024

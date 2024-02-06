@@ -1,4 +1,4 @@
-# Use Case: 32	Generate countries that all the cities in a district from largest to smallest population
+# Use Case: 11	Generate countries that all the cities in a district from largest to smallest population
 
 ## CHARACTERISTIC INFORMATION
 ### Goal in Context
