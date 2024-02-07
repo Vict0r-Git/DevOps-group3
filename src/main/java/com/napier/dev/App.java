@@ -98,7 +98,7 @@ public class App {
                     "SELECT * FROM country ORDER BY Population DESC"
                             + " LIMIT " + countryCount;
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> countries = new ArrayList<>();
+            ArrayList<World> topCountries = new ArrayList<>();
             while (result.next()){
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -107,9 +107,9 @@ public class App {
                 world.setCountryPopulation(result.getInt("country.Population"));
                 world.setCapital(result.getInt("country.Capital"));
                 world.setCode(result.getString("country.Code"));
-                countries.add(world);
+                topCountries.add(world);
             }
-            return countries;
+            return topCountries;
         }catch (Exception e){
             System.out.println(e.getMessage());
             System.out.println("Failed to get world details");
@@ -134,7 +134,7 @@ public class App {
                             "' ORDER BY Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> country = new ArrayList<>();
+            ArrayList<World> countryCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -143,10 +143,10 @@ public class App {
                 world.setCountryPopulation(result.getInt("country.Population"));
                 world.setCapital(result.getInt("country.Capital"));
                 world.setCode(result.getString("country.Code"));
-                country.add(world);
+                countryCont.add(world);
 
             }
-            return country;
+            return countryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details in world");
@@ -167,7 +167,7 @@ public class App {
                             + "LIMIT 10";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> country = new ArrayList<>();
+            ArrayList<World> topCountryCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -176,10 +176,10 @@ public class App {
                 world.setCountryPopulation(result.getInt("country.Population"));
                 world.setCapital(result.getInt("country.Capital"));
                 world.setCode(result.getString("country.Code"));
-                country.add(world);
+                topCountryCont.add(world);
 
             }
-            return country;
+            return topCountryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details in world");
@@ -204,7 +204,7 @@ public class App {
                             "' ORDER BY Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> country = new ArrayList<>();
+            ArrayList<World> countryRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -213,10 +213,10 @@ public class App {
                 world.setCountryPopulation(result.getInt("country.Population"));
                 world.setCapital(result.getInt("country.Capital"));
                 world.setCode(result.getString("country.Code"));
-                country.add(world);
+                countryRegion.add(world);
 
             }
-            return country;
+            return countryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get region details in world");
@@ -236,7 +236,7 @@ public class App {
                             + "LIMIT 10";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> country = new ArrayList<>();
+            ArrayList<World> topCountryRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -245,10 +245,10 @@ public class App {
                 world.setCountryPopulation(result.getInt("country.Population"));
                 world.setCapital(result.getInt("country.Capital"));
                 world.setCode(result.getString("country.Code"));
-                country.add(world);
+                topCountryRegion.add(world);
 
             }
-            return country;
+            return topCountryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details in world");
