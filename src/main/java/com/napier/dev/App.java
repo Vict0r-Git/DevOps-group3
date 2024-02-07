@@ -351,6 +351,36 @@ public class App {
 
     }
 
+    public ArrayList<World> getTopCitiesByCont(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
+                            "city.Population " +
+                            "FROM world.city " +
+                            "JOIN world.country ON city.CountryCode = country.Code " +
+                            "WHERE country.Continent = 'Asia' " +
+                            "ORDER BY city.Population DESC LIMIt 10";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> topCityByCont = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
+                topCityByCont.add(world);
+            }
+            return topCityByCont;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details in world");
+            return null;
+        }
+    }
+
+
     /**
      * All the cities in a region organised by largest population to smallest.
      * @return An array list of all the cities in a region 'Southern and Central Asia'
@@ -384,6 +414,36 @@ public class App {
         }
 
     }
+
+    public ArrayList<World> getTopCitiesByRegion(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
+                            "city.Population " +
+                            "FROM world.city " +
+                            "JOIN world.country ON city.CountryCode = country.Code " +
+                            "WHERE country.Region = 'Southeast Asia' " +
+                            "ORDER BY city.Population DESC LIMIt 10";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> topCityByRegion = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
+                topCityByRegion.add(world);
+            }
+            return topCityByRegion;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details in world");
+            return null;
+        }
+    }
+
 
     /**
      * All the cities in a country organised by largest population to smallest.
@@ -420,6 +480,36 @@ public class App {
 
     }
 
+    public ArrayList<World> getTopCitiesByCountry(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
+                            "city.Population " +
+                            "FROM world.city " +
+                            "JOIN world.country ON city.CountryCode = country.Code " +
+                            "WHERE country.Name = 'Myanmar' " +
+                            "ORDER BY city.Population DESC LIMIt 10";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> topCityByCountry = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
+                topCityByCountry.add(world);
+            }
+            return topCityByCountry;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details in world");
+            return null;
+        }
+    }
+
+
     /**
      * All the cities in a district organised by largest population to smallest.
      * @return An array list of all the cities in a district 'Rangoon [Yangon]'
@@ -454,34 +544,116 @@ public class App {
 
     }
 
-    public ArrayList<World> getTopCitiesByCont(int countryCount){
+    public ArrayList<World> getTopCitiesByDistrict(int countryCount){
         try {
             Statement stmt = con.createStatement();
             String strSelect =
-                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
-                            "city.Population " +
-                            "FROM world.city " +
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
+                            "FROM world.city "+
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Continent = 'Asia' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                            "WHERE city.District = 'Rangoon [Yangon]' " +
+                            " ORDER BY city.Population DESC LIMIt 10";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> topCityByCont = new ArrayList<>();
+            ArrayList<World> topCityByDistrict = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
                 world.setCountryName(result.getString("Country"));
                 world.setDistrict(result.getString("District"));
                 world.setCityPopulation(result.getInt("Population"));
-                topCityByCont.add(world);
+                topCityByDistrict.add(world);
             }
-            return topCityByCont;
+            return topCityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details in world");
             return null;
         }
     }
+
+    public ArrayList<World> getTopCapitalCitiesWorld(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "ORDER BY city.Population DESC " +
+                            "LIMIT " + countryCount;
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> topCityWorld = new ArrayList<>();
+            while (result.next()){
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("Population"));
+                topCityWorld.add(world);
+            }
+            return topCityWorld;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getTopCapitalCitiesCont(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "AND country.Continent = 'Asia' " +
+                            "ORDER BY country.Continent, city.Population DESC " +
+                            "LIMIT " + countryCount;
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> country = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("Population"));
+                country.add(world);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details in world");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getTopCapitalCitiesRegion(int countryCount){
+        try {
+            Statement stmt = con.createStatement();
+            String strSelect =
+                    "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
+                            "FROM city, country " +
+                            "WHERE country.Capital = city.ID " +
+                            "AND country.Region = 'Southeast Asia' " +
+                            "ORDER BY country.Continent, city.Population DESC " +
+                            "LIMIT " + countryCount;
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> country = new ArrayList<>();
+            while (result.next()) {
+                World world = new World();
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("Population"));
+                country.add(world);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details in world");
+            return null;
+        }
+    }
+
 
     /**
      * All the capital cities in the world organised by largest population to smallest.
@@ -593,7 +765,7 @@ public class App {
         for (World world : country) {
             String world_str =
                     String.format("%-5s %-49s %-14s %-25s %-13s %10s",
-                            world.Code, world.CountryName, world.Continent, world.Region, world.CountryPopulation, world.Capital);
+                            world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), world.getCountryPopulation(), world.getCapital());
             System.out.println(world_str);
         }
     }
@@ -612,7 +784,7 @@ public class App {
         for (World world : city) {
             String world_str =
                     String.format("%-37s %-49s %-23s %25s",
-                            world.CityName, world.CountryName, world.District, world.CityPopulation);
+                            world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -631,7 +803,7 @@ public class App {
         for (World world : capital) {
             String world_str =
                     String.format("%-37s %-49s %13s",
-                            world.CityName, world.CountryName, world.CityPopulation);
+                            world.getCityName(), world.getCountryName(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -684,6 +856,8 @@ public class App {
     public void CR3(){
         // Create a CapitalCity array list
         ArrayList<World> CapitalCity;
+        ArrayList<World> country;
+        ArrayList<World> city;
 
         printCyanMessage("All the capital cities in the world organised by largest population to smallest.");
         CapitalCity = getCapitalCityWorld();
@@ -729,7 +903,7 @@ public class App {
         // Code Review 2
         a.CR2();
         // Code Review 3
-        //a.CR3();
+        a.CR3();
 
         // Disconnect from database
         a.disconnect();
