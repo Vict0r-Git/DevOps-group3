@@ -401,17 +401,17 @@ public class App {
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> cityByRegion = new ArrayList<>();
+            ArrayList<World> cityByCountry = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.District = result.getString("District");
-                world.CityPopulation = result.getInt("Population");
-                cityByRegion.add(world);
+                world.setCityName(result.getString("city.name"));
+                world.setCountryName(result.getString("city.Country"));
+                world.setDistrict(result.getString("city.District"));
+                world.setCityPopulation(result.getInt("city.Population"));
+                cityByCountry.add(world);
 
             }
-            return cityByRegion;
+            return cityByCountry;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by country");
@@ -436,16 +436,16 @@ public class App {
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> cityByRegion = new ArrayList<>();
+            ArrayList<World> cityByDistrict = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.District = result.getString("District");
-                world.CityPopulation = result.getInt("Population");
-                cityByRegion.add(world);
+                world.setCityName(result.getString("city.Name"));
+                world.setCountryName(result.getString("city.Country"));
+                world.setDistrict(result.getString("city.District"));
+                world.setCityPopulation(result.getInt("city.Population"));
+                cityByDistrict.add(world);
             }
-            return cityByRegion;
+            return cityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities' details by district");
@@ -501,9 +501,9 @@ public class App {
             ArrayList<World> capitalCity = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.CityPopulation = result.getInt("Population");
+                world.setCityName(result.getString("capital.Name"));
+                world.setCountryName(result.getString("capital.countryName"));
+                world.setCityPopulation(result.getInt("capital.population"));
                 capitalCity.add(world);
 
             }
@@ -530,16 +530,16 @@ public class App {
                             "ORDER BY country.Continent, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> capitalCity = new ArrayList<>();
+            ArrayList<World> capitalCityCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.CityPopulation = result.getInt("Population");
-                capitalCity.add(world);
+                world.setCityName(result.getString("city.Name"));
+                world.setCountryName(result.getString("city.countryName"));
+                world.setCityPopulation(result.getInt("city.population"));
+                capitalCityCont.add(world);
 
             }
-            return capitalCity;
+            return capitalCityCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
@@ -562,16 +562,16 @@ public class App {
                             "ORDER BY country.Region, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> capitalCity = new ArrayList<>();
+            ArrayList<World> capitalCityRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.CityPopulation = result.getInt("Population");
-                capitalCity.add(world);
+                world.setCityName(result.getString("city.Name"));
+                world.setCountryName(result.getString("city.countryName"));
+                world.setCityPopulation(result.getInt("city.population"));
+                capitalCityRegion.add(world);
 
             }
-            return capitalCity;
+            return capitalCityRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
