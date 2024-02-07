@@ -74,12 +74,12 @@ public class App {
             ArrayList<World> country = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CountryName = result.getString("country.Name");
-                world.Continent = result.getString("country.Continent");
-                world.Region = result.getString("country.Region");
-                world.CountryPopulation = result.getInt("country.Population");
-                world.Capital = result.getInt("country.Capital");
-                world.Code = result.getString("country.Code");
+                world.setCountryName(result.getString("country.Name"));
+                world.setContinent(result.getString("country.Continent"));
+                world.setRegion(result.getString("country.Region"));
+                world.setCountryPopulation(result.getInt("country.Population"));
+                world.setCapital(result.getInt("country.Capital"));
+                world.setCode(result.getString("country.code"));
                 country.add(world);
 
             }
@@ -101,12 +101,12 @@ public class App {
             ArrayList<World> countries = new ArrayList<>();
             while (result.next()){
                 World world = new World();
-                world.setCountryName(result.getString("Name"));
-                world.setContinent(result.getString("Continent"));
-                world.setRegion(result.getString("Region"));
-                world.setCountryPopulation(result.getInt("Population"));
-                world.setCapital(result.getInt("Capital"));
-                world.setCode(result.getString("Code"));
+                world.setCountryName(result.getString("country.Name"));
+                world.setContinent(result.getString("country.Continent"));
+                world.setRegion(result.getString("country.Region"));
+                world.setCountryPopulation(result.getInt("country.Population"));
+                world.setCapital(result.getInt("country.Capital"));
+                world.setCode(result.getString("country.Code"));
                 countries.add(world);
             }
             return countries;
@@ -137,12 +137,12 @@ public class App {
             ArrayList<World> country = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CountryName = result.getString("country.Name");
-                world.Continent = result.getString("country.Continent");
-                world.Region = result.getString("country.Region");
-                world.CountryPopulation = result.getInt("country.Population");
-                world.Capital = result.getInt("country.Capital");
-                world.Code = result.getString("country.Code");
+                world.setCountryName(result.getString("country.Name"));
+                world.setContinent(result.getString("country.Continent"));
+                world.setRegion(result.getString("country.Region"));
+                world.setCountryPopulation(result.getInt("country.Population"));
+                world.setCapital(result.getInt("country.Capital"));
+                world.setCode(result.getString("country.Code"));
                 country.add(world);
 
             }
@@ -207,12 +207,12 @@ public class App {
             ArrayList<World> country = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CountryName = result.getString("country.Name");
-                world.Continent = result.getString("country.Continent");
-                world.Region = result.getString("country.Region");
-                world.CountryPopulation = result.getInt("country.Population");
-                world.Capital = result.getInt("country.Capital");
-                world.Code = result.getString("country.Code");
+                world.setCountryName(result.getString("country.Name"));
+                world.setContinent(result.getString("country.Continent"));
+                world.setRegion(result.getString("country.Region"));
+                world.setCountryPopulation(result.getInt("country.Population"));
+                world.setCapital(result.getInt("country.Capital"));
+                world.setCode(result.getString("country.Code"));
                 country.add(world);
 
             }
@@ -275,10 +275,10 @@ public class App {
             ArrayList<World> city = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.District = result.getString("District");
-                world.CityPopulation = result.getInt("Population");
+                world.setCityName(result.getString("city.Name"));
+                world.setCountryName(result.getString("city.Country"));
+                world.setDistrict(result.getString("city.District"));
+                world.setCityPopulation(result.getInt("city.Population"));
                 city.add(world);
             }
             return city;
@@ -336,10 +336,10 @@ public class App {
             ArrayList<World> cityByCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.District = result.getString("District");
-                world.CityPopulation = result.getInt("Population");
+                world.setCityName(result.getString("city.Name"));
+                world.setCityName(result.getString("city.Country"));
+                world.setDistrict(result.getString("city.District"));
+                world.setCityPopulation(result.getInt("city.Population"));
                 cityByCont.add(world);
             }
             return cityByCont;
@@ -370,10 +370,10 @@ public class App {
             ArrayList<World> cityByRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.CityName = result.getString("Name");
-                world.CountryName = result.getString("Country");
-                world.District = result.getString("District");
-                world.CityPopulation = result.getInt("Population");
+                world.setCityName(result.getString("city.Name"));
+                world.setCountryName(result.getString("city.Country"));
+                world.setDistrict(result.getString("city.District"));
+                world.setCityPopulation(result.getInt("city.Population"));
                 cityByRegion.add(world);
             }
             return cityByRegion;
