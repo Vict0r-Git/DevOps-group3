@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 public class App {
     public Connection con = null;
-    public void connect() {
+    public void connect(String location, int delay) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -18,14 +18,16 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "group3");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                                + "/world?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "group3");
                 System.out.println("Successfully connected");
                 break;
-            } catch (SQLException sql) {
-                System.out.println("Failed to connect to database attempt " + i);
-                System.out.println(sql.getMessage());
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
+                System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -52,7 +54,10 @@ public class App {
         String redColor = "\u001B[36m";
         // ANSI escape code to reset text color to default
         String resetColor = "\u001B[0m";
-
+        if (message == null)
+        {
+            System.out.println("Nothing to print");
+        }
         // Print the message in red
         System.out.println("\n" + redColor + message + resetColor + "\n");
     }
@@ -275,10 +280,10 @@ public class App {
             ArrayList<World> city = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 city.add(world);
             }
             return city;
@@ -336,10 +341,10 @@ public class App {
             ArrayList<World> cityByCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCityName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCityName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByCont.add(world);
             }
             return cityByCont;
@@ -400,10 +405,10 @@ public class App {
             ArrayList<World> cityByRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByRegion.add(world);
             }
             return cityByRegion;
@@ -464,10 +469,10 @@ public class App {
             ArrayList<World> cityByCountry = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByCountry.add(world);
 
             }
@@ -529,10 +534,10 @@ public class App {
             ArrayList<World> cityByDistrict = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByDistrict.add(world);
             }
             return cityByDistrict;
@@ -673,9 +678,9 @@ public class App {
             ArrayList<World> capitalCity = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("capital.Name"));
-                world.setCountryName(result.getString("capital.countryName"));
-                world.setCityPopulation(result.getInt("capital.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCity.add(world);
 
             }
@@ -705,9 +710,9 @@ public class App {
             ArrayList<World> capitalCityCont = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.countryName"));
-                world.setCityPopulation(result.getInt("city.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCityCont.add(world);
 
             }
@@ -737,9 +742,9 @@ public class App {
             ArrayList<World> capitalCityRegion = new ArrayList<>();
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.countryName"));
-                world.setCityPopulation(result.getInt("city.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCityRegion.add(world);
 
             }
@@ -757,12 +762,20 @@ public class App {
         Columns: "Code", "Name", "Continent", "Region", "Population", "Capital"
      */
     public void displayCountry(ArrayList<World> country) {
+        if (country == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
         // Print header
         System.out.printf("%-5s %-49s %-14s %-25s %-13s %10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
-        for (World world : country) {
+        for (World world : country)
+        {
+            if (world == null)
+                continue;
             String world_str =
                     String.format("%-5s %-49s %-14s %-25s %-13s %10s",
                             world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), world.getCountryPopulation(), world.getCapital());
@@ -776,15 +789,24 @@ public class App {
         Columns: "Name", "Country", "District", "Population"
      */
     public void displayCities(ArrayList<World> city) {
+        if (city == null)
+        {
+            System.out.println("No cities");
+            return;
+        }
         // Print header
         System.out.printf("%-37s %-49s %-23s %25s%n",
                 "Name", "Country", "District", "Population");
 
         // Loop over all cities in the list
-        for (World world : city) {
-            String world_str =
-                    String.format("%-37s %-49s %-23s %25s",
-                            world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
+        for (World world : city)
+        {
+            if (world == null)
+            {
+                System.out.println("Data is null in city.");
+                continue;
+            }
+            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -795,15 +817,24 @@ public class App {
         Columns: "Name", "Country", "Population"
      */
     public void displayCapitalCities(ArrayList<World> capital){
+        if (capital == null)
+        {
+            System.out.println("No capital cities");
+            return;
+        }
         // Print header
         System.out.printf("%-37s %-49s %13s%n",
                 "Name", "Country", "Population");
 
         // Loop over all cities in the list
         for (World world : capital) {
-            String world_str =
-                    String.format("%-37s %-49s %13s",
-                            world.getCityName(), world.getCountryName(), world.getCityPopulation());
+            if (world == null)
+            {
+                System.out.println("Data is null in capital.");
+                continue;
+            }
+            System.out.println("Data is null in capital.");
+            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -851,7 +882,7 @@ public class App {
     }
 
     /*
-        The method CR2() represent for the code review 2
+        The method CR3() represent for the code review 2
      */
     public void CR3(){
         // Create a CapitalCity array list
@@ -897,8 +928,11 @@ public class App {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
+        if(args.length < 1){
+            a.connect("localhost:33060", 30000);
+        }else{
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         // Code Review 2
         a.CR2();
