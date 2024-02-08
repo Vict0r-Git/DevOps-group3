@@ -9,8 +9,7 @@ public class App {
             // Load Database driver
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
-            System.out.println("Could not load SQL driver");
-            System.exit(-1);
+            System.out.println("Could not load SQL driver :" + e.getMessage());
         }
 
         int retries = 10;
@@ -26,7 +25,7 @@ public class App {
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
