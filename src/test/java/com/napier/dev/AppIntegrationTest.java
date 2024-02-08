@@ -90,6 +90,21 @@ public class AppIntegrationTest {
         assertNull(app.getCapitalCityWorld());
         assertNull(app.getCapitalCityCont());
         assertNull(app.getCapitalCityRegion());
+
+        assertNull(app.getTopCountryWorld(15));
+        assertNull(app.getTopCountryByRegion(15));
+        assertNull(app.getTopCountryByCont(15));
+
+        assertNull(app.getTopCitiesWorld(15));
+        assertNull(app.getTopCitiesByCont(15));
+        assertNull(app.getTopCitiesByCountry(15));
+        assertNull(app.getTopCitiesByRegion(15));
+        assertNull(app.getTopCitiesByDistrict(15));
+
+        assertNull(app.getTopCapitalCitiesWorld(15));
+        assertNull(app.getTopCapitalCitiesCont(15));
+        assertNull(app.getTopCapitalCitiesRegion(15));
+
         AppIntegrationTest.setUpBeforeTesting();
     }
 
