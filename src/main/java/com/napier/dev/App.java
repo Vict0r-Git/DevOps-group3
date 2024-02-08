@@ -883,7 +883,7 @@ public class App {
             if (world == null)
                 continue;
             String world_str =
-                    String.format("%-5s %-49s %-14s %-25s %-13s %10s",
+                    String.format("%-5s %-49s %-14s %-25s %13s %10s",
                             world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), decimalFormat.format(world.getCountryPopulation()), world.getCapital());
             System.out.println(world_str);
         }
