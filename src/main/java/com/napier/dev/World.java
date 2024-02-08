@@ -68,13 +68,11 @@ public class World
         this.code = code;
     }
 
-    public String getCode2() {
-        return code2;
-    }
-
-    public void setCode2(String code2) {
-        this.code2 = code2;
-    }
+//    public String getCode2() {return code2;}
+//
+//    public void setCode2(String code2) {
+//        this.code2 = code2;
+//    }
 
     public String getCityName() {
         return cityName;
@@ -100,19 +98,19 @@ public class World
         this.cityPopulation = cityPopulation;
     }
 
-    public String getCountryLanguage() {
-        return countryLanguage;
-    }
-
-    public void setCountryLanguage(String countryLanguage) {
-        this.countryLanguage = countryLanguage;
-    }
-
-    public float getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(float percentage) {
-        this.percentage = percentage;
-    }
+//    public String getCountryLanguage() {
+//        return countryLanguage;
+//    }
+//
+//    public void setCountryLanguage(String countryLanguage) {
+//        this.countryLanguage = countryLanguage;
+//    }
+//
+//    public float getPercentage() {
+//        return percentage;
+//    }
+//
+//    public void setPercentage(float percentage) {
+//        this.percentage = percentage;
+//    }
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,9 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * It tests various methods related to retrieving country and city data.
  */
 public class AppIntegrationTest {
-
+    // Location of the database
     private static final String DB_LOCATION = "localhost:33060";
+    // Database connection delay in seconds
     private static final int DB_DELAY = 30000;
+    // Database SQL driver
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static App app;
 

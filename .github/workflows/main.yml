@@ -1,8 +1,9 @@
-name: A workflow for my Hello World App
+name: A workflow for The World App
 on:
   push:
     branches:
       - features/unit-test
+      - master
 jobs:
   UnitTests:
     name: Unit Tests

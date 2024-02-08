@@ -3,7 +3,7 @@ package com.napier.dev;
 import java.sql.*;
 import java.util.ArrayList;
 public class App {
-    public Connection con = null;
+    public static Connection con = null;
     public void connect(String location, int delay, String driver) {
         try {
             // Load Database driver
