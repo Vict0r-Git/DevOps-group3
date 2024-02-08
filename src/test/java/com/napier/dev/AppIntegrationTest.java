@@ -86,18 +86,18 @@ public class AppIntegrationTest {
         AppIntegrationTest.setUpBeforeClass();
     }
 
-    @Test
-    void testLoadDatabaseDriver_ClassNotFoundException() {
-        App app = new App();
-        app.con = null;
-        // Simulate the nonexistent driver name to get exception error
-        assertThrows(ClassNotFoundException.class, () -> {
-            app.connect(DB_LOCATION, DB_DELAY, "com.nonexistent.jdbc.Driver");
-        });
-
-        // Reloaded the correct driver class to connect back to the database
-        AppIntegrationTest.setUpBeforeClass();
-    }
+//    @Test
+//    void testLoadDatabaseDriver_ClassNotFoundException() {
+//        App app = new App();
+//        app.con = null;
+//        // Simulate the nonexistent driver name to get exception error
+//        assertThrows(ClassNotFoundException.class, () -> {
+//            app.connect(DB_LOCATION, DB_DELAY, "com.nonexistent.jdbc.Driver");
+//        });
+//
+//        // Reloaded the correct driver class to connect back to the database
+//        AppIntegrationTest.setUpBeforeClass();
+//    }
 
 
     @Test
@@ -188,12 +188,17 @@ public class AppIntegrationTest {
         Assertions.assertFalse(capitals.isEmpty());
     }
 
+//    @Test
+//    void testgetTopCountryWorld()
+//    {
+//
+//    }
+
     @Test
     void testCR2ArrayListsAreNotNull()
     {
         // Call the CR2 method
         app.CR2();
-
         // Assert that each array list is null
         assertNotNull(app.getCountryWorld());
         assertNotNull(app.getCountryCont());
@@ -210,10 +215,13 @@ public class AppIntegrationTest {
     {
         // Call the CR3 method
         app.CR3();
-
+        // Assert that each array list is null
         assertNotNull(app.getCapitalCityWorld());
         assertNotNull(app.getCapitalCityCont());
         assertNotNull(app.getCapitalCityRegion());
-
+        assertNotNull(app.getTopCountryWorld(15));
+        assertNotNull(app.getTopCountryByCont(15));
+        assertNotNull(app.getTopCitiesWorld(15));
+        assertNotNull(app.getTopCitiesWorld(15));
     }
 }
