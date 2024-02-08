@@ -306,4 +306,602 @@ public class AppIntegrationTest {
         assertNotNull(app.getTopCitiesWorld(15));
         assertNotNull(app.getTopCitiesWorld(15));
     }
+
+    @Test
+    void testGetCountryWorldTopAndBottom()
+    {
+        ArrayList<World> country = app.getCountryWorld();
+        World topCountry = country.get(0);
+        if ("China".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "CHN".equals(topCountry.getCode()) && "Eastern Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("United States Minor Outlying Islands".equals(botCountry.getCountryName()) &&
+                        "Oceania".equals(botCountry.getContinent()) && "UMI".equals(botCountry.getCode()) &&
+                        "Micronesia/Caribbean".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CountryWorldTopAndBottom()
+    {
+        ArrayList<World> country = app.getTopCountryWorld(15);
+        World topCountry = country.get(0);
+        if ("China".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "CHN".equals(topCountry.getCode()) && "Eastern Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("Egypt".equals(botCountry.getCountryName()) &&
+                        "Africa".equals(botCountry.getContinent()) && "EGY".equals(botCountry.getCode()) &&
+                        "Northern Africa".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCountryContTopAndBottom()
+    {
+        ArrayList<World> country = app.getCountryCont();
+        World topCountry = country.get(0);
+        if ("China".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "CHN".equals(topCountry.getCode()) && "Eastern Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("Maldives".equals(botCountry.getCountryName()) &&
+                        "Asia".equals(botCountry.getContinent()) && "MDV".equals(botCountry.getCode()) &&
+                        "Southern and Central Asia".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CountryContTopAndBottom()
+    {
+        ArrayList<World> country = app.getTopCountryByCont(15);
+        World topCountry = country.get(0);
+        if ("China".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "CHN".equals(topCountry.getCode()) && "Eastern Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("North Korea".equals(botCountry.getCountryName()) &&
+                        "Asia".equals(botCountry.getContinent()) && "PRK".equals(botCountry.getCode()) &&
+                        "Eastern Asia".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCountryRegionTopAndBottom()
+    {
+        ArrayList<World> country = app.getCountryRegion();
+        World topCountry = country.get(0);
+        if ("Indonesia".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "IDN".equals(topCountry.getCode()) && "Southeast Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("Brunei".equals(botCountry.getCountryName()) &&
+                        "Asia".equals(botCountry.getContinent()) && "BRN".equals(botCountry.getCode()) &&
+                        "Southeast Asia".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CountryRegionTopAndBottom()
+    {
+        ArrayList<World> country = app.getTopCountryByRegion(15);
+        World topCountry = country.get(0);
+        if ("Indonesia".equals(topCountry.getCountryName()) && "Asia".equals(topCountry.getContinent()) &&
+                "IDN".equals(topCountry.getCode()) && "Southeast Asia".equals(topCountry.getRegion())) {
+            if (country.size()>1){
+                World botCountry = country.get(country.size()-1);
+                if ("Brunei".equals(botCountry.getCountryName()) &&
+                        "Asia".equals(botCountry.getContinent()) && "BRN".equals(botCountry.getCode()) &&
+                        "Southeast Asia".equals(botCountry.getRegion())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetCityWorldTopAndBottom()
+    {
+        ArrayList<World> city = app.getCityWorld();
+        World topCity = city.get(0);
+        if ("Mumbai (Bombay)".equals(topCity.getCityName()) && "India".equals(topCity.getCountryName()) &&
+                "Maharashtra".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Adamstown".equals(botCity.getCityName()) &&
+                        "Pitcairn".equals(botCity.getCountryName()) && "–".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CityWorldTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCitiesWorld(15);
+        World topCity = city.get(0);
+        if ("Mumbai (Bombay)".equals(topCity.getCityName()) && "India".equals(topCity.getCountryName()) &&
+                "Maharashtra".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Cairo".equals(botCity.getCityName()) &&
+                        "Egypt".equals(botCity.getCountryName()) && "Kairo".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetCityContTopAndBottom()
+    {
+        ArrayList<World> city = app.getCitiesByCont();
+        World topCity = city.get(0);
+        if ("Mumbai (Bombay)".equals(topCity.getCityName()) && "India".equals(topCity.getCountryName()) &&
+                "Maharashtra".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Bandar Seri Begawan".equals(botCity.getCityName()) &&
+                        "Brunei".equals(botCity.getCountryName()) && "Brunei and Muara".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CityContTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCitiesByCont(15);
+        World topCity = city.get(0);
+        if ("Mumbai (Bombay)".equals(topCity.getCityName()) && "India".equals(topCity.getCountryName()) &&
+                "Maharashtra".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Calcutta [Kolkata]".equals(botCity.getCityName()) &&
+                        "India".equals(botCity.getCountryName()) && "West Bengali".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCityCountryTopAndBottom()
+    {
+        ArrayList<World> city = app.getCitiesByCountry();
+        World topCity = city.get(0);
+        if ("Rangoon (Yangon)".equals(topCity.getCityName()) && "Myanmar".equals(topCity.getCountryName()) &&
+                "Rangoon [Yangon]".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Pagakku (Pakokku)".equals(botCity.getCityName()) &&
+                        "Myanmar".equals(botCity.getCountryName()) && "Magwe [Magway]".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CityCountryTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCitiesByCountry(15);
+        World topCity = city.get(0);
+        if ("Rangoon (Yangon)".equals(topCity.getCityName()) && "Myanmar".equals(topCity.getCountryName()) &&
+                "Rangoon [Yangon]".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Tavoy (Dawei)".equals(botCity.getCityName()) &&
+                        "Myanmar".equals(botCity.getCountryName()) && "Tenasserim [Tanintha".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetCityRegionTopAndBottom()
+    {
+        ArrayList<World> city = app.getCitiesByRegion();
+        World topCity = city.get(0);
+        if ("Mumbai (Bombay)".equals(topCity.getCityName()) && "India".equals(topCity.getCountryName()) &&
+                "Maharashtra".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Thimphu".equals(botCity.getCityName()) &&
+                        "Bhutan".equals(botCity.getCountryName()) && "Thimphu".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CityRegionTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCitiesByRegion(15);
+        World topCity = city.get(0);
+        if ("Jakarta".equals(topCity.getCityName()) && "Indonesia".equals(topCity.getCountryName()) &&
+                "Jakarta Raya".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Kalookan".equals(botCity.getCityName()) &&
+                        "Philippines".equals(botCity.getCountryName()) && "National Capital Reg".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCityDistrictTopAndBottom()
+    {
+        ArrayList<World> city = app.getCitiesByDistrict();
+        World topCity = city.get(0);
+        if ("Rangoon (Yangon)".equals(topCity.getCityName()) && "Myanmar".equals(topCity.getCountryName()) &&
+                "Rangoon [Yangon]".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Rangoon (Yangon)".equals(botCity.getCityName()) &&
+                        "Myanmar".equals(botCity.getCountryName()) && "Rangoon [Yangon]".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CityDistrictTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCitiesByDistrict(15);
+        World topCity = city.get(0);
+        if ("Rangoon (Yangon)".equals(topCity.getCityName()) && "Myanmar".equals(topCity.getCountryName()) &&
+                "Rangoon [Yangon]".equals(topCity.getDistrict())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Rangoon (Yangon)".equals(botCity.getCityName()) &&
+                        "Myanmar".equals(botCity.getCountryName()) && "Rangoon [Yangon]".equals(botCity.getDistrict())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCapitalCityWorldTopAndBottom()
+    {
+        ArrayList<World> city = app.getCapitalCityWorld();
+        World topCity = city.get(0);
+        if ("Seoul".equals(topCity.getCityName()) && "South Korea".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Adamstown".equals(botCity.getCityName()) &&
+                        "Pitcairn".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CapitalCityWorldTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCapitalCitiesWorld(15);
+        World topCity = city.get(0);
+        if ("Seoul".equals(topCity.getCityName()) && "South Korea".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Baghdad".equals(botCity.getCityName()) &&
+                        "Iraq".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetCapitalCityContTopAndBottom()
+    {
+        ArrayList<World> city = app.getCapitalCityCont();
+        World topCity = city.get(0);
+        if ("Seoul".equals(topCity.getCityName()) && "South Korea".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Bandar Seri Begawan".equals(botCity.getCityName()) &&
+                        "Brunei".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CapitalCityContTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCapitalCitiesCont(15);
+        World topCity = city.get(0);
+        if ("Seoul".equals(topCity.getCityName()) && "South Korea".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Toskent".equals(botCity.getCityName()) &&
+                        "Uzbekistan".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+    @Test
+    void testGetCapitalCityRegionTopAndBottom()
+    {
+        ArrayList<World> city = app.getCapitalCityRegion();
+        World topCity = city.get(0);
+        if ("Seoul".equals(topCity.getCityName()) && "South Korea".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Macao".equals(botCity.getCityName()) &&
+                        "Macao".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetTop15CapitalCityRegionTopAndBottom()
+    {
+        ArrayList<World> city = app.getTopCapitalCitiesRegion(15);
+        World topCity = city.get(0);
+        if ("Jakarta".equals(topCity.getCityName()) && "Indonesia".equals(topCity.getCountryName())) {
+            if (city.size()>1){
+                World botCity = city.get(city.size()-1);
+                if ("Bandar Seri Begawan".equals(botCity.getCityName()) &&
+                        "Brunei".equals(botCity.getCountryName())){
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                }
+                else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            }
+            else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        }
+        else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
 }

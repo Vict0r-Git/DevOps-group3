@@ -99,7 +99,7 @@ public class App {
         try {
             Statement stmt = con.createStatement();
             String strSelect =
-                    "SELECT * FROM country ORDER BY Population DESC"
+                    "SELECT Name, Continent, Code, Capital, Region, Population FROM country ORDER BY Population DESC"
                             + " LIMIT " + countryCount;
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountries = new ArrayList<>();
@@ -165,10 +165,9 @@ public class App {
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population "
                             + "FROM country "
-                            + "WHERE Continent = '"
-                            + "Asia" +
-                            "' ORDER BY Population DESC "
-                            + "LIMIT 10";
+                            + "WHERE Continent = 'Asia'"
+                            + " ORDER BY Population DESC "
+                            + "LIMIT " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountryCont = new ArrayList<>();
@@ -237,7 +236,7 @@ public class App {
                             + "WHERE Region = '"
                             + "Southeast Asia" +
                             "' ORDER BY Population DESC "
-                            + "LIMIT 10";
+                            + "LIMIT " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountryRegion = new ArrayList<>();
@@ -333,7 +332,7 @@ public class App {
                             "city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Continent = 'Asia'" +
+                            "WHERE country.Continent = 'Asia' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
@@ -341,7 +340,7 @@ public class App {
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
-                world.setCityName(result.getString("Country"));
+                world.setCountryName(result.getString("Country"));
                 world.setDistrict(result.getString("District"));
                 world.setCityPopulation(result.getInt("Population"));
                 cityByCont.add(world);
@@ -359,12 +358,12 @@ public class App {
         try {
             Statement stmt = con.createStatement();
             String strSelect =
-                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
-                            "city.Population " +
-                            "FROM world.city " +
-                            "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Continent = 'Asia' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                    "SELECT city.Name, country.Name Country, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE country.Code = city.CountryCode " +
+                            "AND country.Continent = 'Asia' " +
+                            "ORDER BY Population DESC LIMIT " +
+                            countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByCont = new ArrayList<>();
@@ -397,7 +396,7 @@ public class App {
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Region = 'Southern and Central Asia'" +
+                            "WHERE country.Region = 'Southern and Central Asia' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
@@ -428,7 +427,7 @@ public class App {
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
                             "WHERE country.Region = 'Southeast Asia' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                            "ORDER BY city.Population DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByRegion = new ArrayList<>();
@@ -461,7 +460,7 @@ public class App {
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Name = 'Myanmar'" +
+                            "WHERE country.Name = 'Myanmar' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
@@ -488,12 +487,13 @@ public class App {
         try {
             Statement stmt = con.createStatement();
             String strSelect =
-                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
-                            "city.Population " +
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
-                            "JOIN world.country ON city.CountryCode = country.Code " +
+                            "JOIN world.country " +
+                            "ON city.CountryCode = country.Code " +
                             "WHERE country.Name = 'Myanmar' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                            "ORDER BY city.Population " +
+                            "DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByCountry = new ArrayList<>();
@@ -526,7 +526,7 @@ public class App {
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE city.District = 'Rangoon [Yangon]'" +
+                            "WHERE city.District = 'Rangoon [Yangon]' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
@@ -556,7 +556,7 @@ public class App {
                             "FROM world.city "+
                             "JOIN world.country ON city.CountryCode = country.Code " +
                             "WHERE city.District = 'Rangoon [Yangon]' " +
-                            " ORDER BY city.Population DESC LIMIt 10";
+                            " ORDER BY city.Population DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByDistrict = new ArrayList<>();
@@ -703,6 +703,7 @@ public class App {
                     "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
                             "FROM city, country " +
                             "WHERE country.Capital = city.ID " +
+                            "AND country.Continent = 'Asia' " +
                             "ORDER BY country.Continent, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
@@ -735,6 +736,7 @@ public class App {
                     "SELECT city.Name, country.Name Country, city.Population, country.Region " +
                             "FROM city, country " +
                             "WHERE country.Capital = city.ID " +
+                            "AND country.Region = 'Eastern Asia' " +
                             "ORDER BY country.Region, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
