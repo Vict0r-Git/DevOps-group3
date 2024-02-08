@@ -6,6 +6,7 @@ package com.napier.dev;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 public class App {
     // Connection object to manage database connection
     public Connection con = null;
@@ -856,6 +857,10 @@ public class App {
         }
     }
 
+
+
+    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
     /**
      * displayCountry() method takes an ArrayList containing countries' data as a parameter
      * and prints them under the following columns:
@@ -879,7 +884,7 @@ public class App {
                 continue;
             String world_str =
                     String.format("%-5s %-49s %-14s %-25s %-13s %10s",
-                            world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), world.getCountryPopulation(), world.getCapital());
+                            world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), decimalFormat.format(world.getCountryPopulation()), world.getCapital());
             System.out.println(world_str);
         }
     }
@@ -908,7 +913,7 @@ public class App {
                 System.out.println("Data is null in city.");
                 continue;
             }
-            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
+            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), decimalFormat.format(world.getCityPopulation()));
             System.out.println(world_str);
         }
     }
@@ -937,7 +942,7 @@ public class App {
                 continue;
             }
             System.out.println("Data is null in capital.");
-            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), world.getCityPopulation());
+            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), decimalFormat.format(world.getCityPopulation()));
             System.out.println(world_str);
         }
     }
