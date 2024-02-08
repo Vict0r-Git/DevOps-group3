@@ -874,7 +874,7 @@ public class App {
             return;
         }
         // Print header
-        System.out.printf("%-5s %-49s %-14s %-25s %-13s %10s%n",
+        System.out.printf("%-5s %-49s %-14s %-25s %13s %10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
