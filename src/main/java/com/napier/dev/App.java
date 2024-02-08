@@ -1003,11 +1003,39 @@ public class App {
         displayCountry(country);
 
         printCyanMessage("Top 15 countries in a Region organised by largest population to smallest.");
-        country = getTopCountryByCont(15);
+        country = getTopCountryByRegion(15);
         displayCountry(country);
 
         printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
         city = getTopCitiesWorld(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCitiesByCont(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCitiesByRegion(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCitiesByCountry(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCitiesByDistrict(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCapitalCitiesWorld(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCapitalCitiesCont(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        city = getTopCapitalCitiesRegion(15);
         displayCities(city);
     }
 
