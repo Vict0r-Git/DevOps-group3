@@ -12,13 +12,12 @@ public class App {
     /**
      * Establishes a connection to the MySQL database.
      */
-    public void connect() {
+    public void connect(String location, int delay, String driver) {
         try {
             // Load Database driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
-            System.out.println("Could not load SQL driver");
-            System.exit(-1);
+            System.out.println("Could not load SQL driver :" + e.getMessage());
         }
 
         int retries = 10;
@@ -26,14 +25,16 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "group3");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                                + "/world?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "group3");
                 System.out.println("Successfully connected");
                 break;
-            } catch (SQLException sql) {
+            } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
-                System.out.println(sql.getMessage());
+                System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
@@ -63,7 +64,10 @@ public class App {
         String redColor = "\u001B[36m";
         // ANSI escape code to reset text color to default
         String resetColor = "\u001B[0m";
-
+        if (message == null)
+        {
+            System.out.println("Nothing to print");
+        }
         // Print the message in cyan
         System.out.println("\n" + redColor + message + resetColor + "\n");
     }
@@ -186,18 +190,15 @@ public class App {
     public ArrayList<World> getTopCountryByCont(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' countries in a continent 'Asia' based on population
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population "
                             + "FROM country "
-                            + "WHERE Continent = '"
-                            + "Asia" +
-                            "' ORDER BY Population DESC "
-                            + "LIMIT 10";
+                            + "WHERE Continent = 'Asia'"
+                            + " ORDER BY Population DESC "
+                            + "LIMIT " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountryCont = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -265,18 +266,16 @@ public class App {
     public ArrayList<World> getTopCountryByRegion(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' countries in a region 'Southeast Asia' based on population
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population "
                             + "FROM country "
                             + "WHERE Region = '"
                             + "Southeast Asia" +
                             "' ORDER BY Population DESC "
-                            + "LIMIT 10";
+                            + "LIMIT " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountryRegion = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -305,7 +304,6 @@ public class App {
     public  ArrayList<World> getCityWorld(){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select city details ordered by population in descending order
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.District, city.Population " +
                             "FROM country, city " +
@@ -314,13 +312,12 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> city = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 city.add(world);
             }
             return city;
@@ -388,10 +385,10 @@ public class App {
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCityName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCityName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByCont.add(world);
             }
             return cityByCont;
@@ -412,18 +409,16 @@ public class App {
     public ArrayList<World> getTopCitiesByCont(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' cities in a continent 'Asia' based on population
             String strSelect =
-                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
-                            "city.Population " +
-                            "FROM world.city " +
-                            "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Continent = 'Asia' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                    "SELECT city.Name, country.Name Country, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE country.Code = city.CountryCode " +
+                            "AND country.Continent = 'Asia' " +
+                            "ORDER BY Population DESC LIMIT " +
+                            countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByCont = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -449,23 +444,21 @@ public class App {
     public  ArrayList<World> getCitiesByRegion(){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select city details in a region 'Southern and Central Asia' ordered by population in descending order
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Region = 'Southern and Central Asia'" +
+                            "WHERE country.Region = 'Southern and Central Asia' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> cityByRegion = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByRegion.add(world);
             }
             return cityByRegion;
@@ -486,18 +479,16 @@ public class App {
     public ArrayList<World> getTopCitiesByRegion(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' cities in a region 'Southeast Asia' based on population
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
                             "city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
                             "WHERE country.Region = 'Southeast Asia' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                            "ORDER BY city.Population DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByRegion = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -523,23 +514,21 @@ public class App {
     public  ArrayList<World> getCitiesByCountry(){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select city details in a country 'Myanmar' ordered by population in descending order
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Name = 'Myanmar'" +
+                            "WHERE country.Name = 'Myanmar' " +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> cityByCountry = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByCountry.add(world);
 
             }
@@ -561,18 +550,17 @@ public class App {
     public ArrayList<World> getTopCitiesByCountry(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' cities in a country 'Myanmar' based on population
             String strSelect =
-                    "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
-                            "city.Population " +
+                    "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
-                            "JOIN world.country ON city.CountryCode = country.Code " +
+                            "JOIN world.country " +
+                            "ON city.CountryCode = country.Code " +
                             "WHERE country.Name = 'Myanmar' " +
-                            "ORDER BY city.Population DESC LIMIt 10";
+                            "ORDER BY city.Population " +
+                            "DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByCountry = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -611,10 +599,10 @@ public class App {
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.Country"));
-                world.setDistrict(result.getString("city.District"));
-                world.setCityPopulation(result.getInt("city.Population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setDistrict(result.getString("District"));
+                world.setCityPopulation(result.getInt("Population"));
                 cityByDistrict.add(world);
             }
             return cityByDistrict;
@@ -635,17 +623,15 @@ public class App {
     public ArrayList<World> getTopCitiesByDistrict(int countryCount){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select top 'n' cities in a district 'Rangoon [Yangon]' based on population
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city "+
                             "JOIN world.country ON city.CountryCode = country.Code " +
                             "WHERE city.District = 'Rangoon [Yangon]' " +
-                            " ORDER BY city.Population DESC LIMIt 10";
+                            " ORDER BY city.Population DESC LIMIt " + countryCount;
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityByDistrict = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -661,6 +647,7 @@ public class App {
             return null;
         }
     }
+
 
     /**
      * Retrieves the top capital cities in the world based on population.
@@ -789,9 +776,9 @@ public class App {
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("capital.Name"));
-                world.setCountryName(result.getString("capital.countryName"));
-                world.setCityPopulation(result.getInt("capital.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCity.add(world);
 
             }
@@ -811,21 +798,20 @@ public class App {
     public  ArrayList<World> getCapitalCityCont(){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select all capital cities in a continent based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
                             "FROM city, country " +
                             "WHERE country.Capital = city.ID " +
+                            "AND country.Continent = 'Asia' " +
                             "ORDER BY country.Continent, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> capitalCityCont = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.countryName"));
-                world.setCityPopulation(result.getInt("city.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCityCont.add(world);
 
             }
@@ -845,21 +831,20 @@ public class App {
     public  ArrayList<World> getCapitalCityRegion(){
         try {
             Statement stmt = con.createStatement();
-            // SQL query to select all capital cities in a region based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population, country.Region " +
                             "FROM city, country " +
                             "WHERE country.Capital = city.ID " +
+                            "AND country.Region = 'Eastern Asia' " +
                             "ORDER BY country.Region, city.Population DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> capitalCityRegion = new ArrayList<>();
-            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setCityName(result.getString("city.Name"));
-                world.setCountryName(result.getString("city.countryName"));
-                world.setCityPopulation(result.getInt("city.population"));
+                world.setCityName(result.getString("Name"));
+                world.setCountryName(result.getString("Country"));
+                world.setCityPopulation(result.getInt("population"));
                 capitalCityRegion.add(world);
 
             }
@@ -878,12 +863,20 @@ public class App {
      * @param country An ArrayList of World objects representing countries' data
      */
     public void displayCountry(ArrayList<World> country) {
+        if (country == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
         // Print header
         System.out.printf("%-5s %-49s %-14s %-25s %-13s %10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
-        for (World world : country) {
+        for (World world : country)
+        {
+            if (world == null)
+                continue;
             String world_str =
                     String.format("%-5s %-49s %-14s %-25s %-13s %10s",
                             world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), world.getCountryPopulation(), world.getCapital());
@@ -898,15 +891,24 @@ public class App {
      * @param city An ArrayList of World objects representing cities' data
      */
     public void displayCities(ArrayList<World> city) {
+        if (city == null)
+        {
+            System.out.println("No cities");
+            return;
+        }
         // Print header
         System.out.printf("%-37s %-49s %-23s %25s%n",
                 "Name", "Country", "District", "Population");
 
         // Loop over all cities in the list
-        for (World world : city) {
-            String world_str =
-                    String.format("%-37s %-49s %-23s %25s",
-                            world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
+        for (World world : city)
+        {
+            if (world == null)
+            {
+                System.out.println("Data is null in city.");
+                continue;
+            }
+            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -918,15 +920,24 @@ public class App {
      * @param capital An ArrayList of World objects representing capital cities' data
      */
     public void displayCapitalCities(ArrayList<World> capital){
+        if (capital == null)
+        {
+            System.out.println("No capital cities");
+            return;
+        }
         // Print header
         System.out.printf("%-37s %-49s %13s%n",
                 "Name", "Country", "Population");
 
         // Loop over all cities in the list
         for (World world : capital) {
-            String world_str =
-                    String.format("%-37s %-49s %13s",
-                            world.getCityName(), world.getCountryName(), world.getCityPopulation());
+            if (world == null)
+            {
+                System.out.println("Data is null in capital.");
+                continue;
+            }
+            System.out.println("Data is null in capital.");
+            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), world.getCityPopulation());
             System.out.println(world_str);
         }
     }
@@ -1048,8 +1059,13 @@ public class App {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
+        String driver = "com.mysql.cj.jdbc.Driver";
+
+        if(args.length < 2){
+            a.connect("localhost:33060", 30000, driver);
+        }else{
+            a.connect(args[0], Integer.parseInt(args[1]), driver);
+        }
 
         // Code Review 2
         a.CR2();
