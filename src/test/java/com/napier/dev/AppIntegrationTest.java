@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,12 +22,15 @@ public class AppIntegrationTest {
 
     private static final String DB_LOCATION = "localhost:33060";
     private static final int DB_DELAY = 30000;
+
+    private static final String driver = "com.mysql.cj.jdbc.Driver";
+
     private static App app;
 
     @BeforeAll
     public static void setUpBeforeClass() {
         app = new App();
-        app.connect(DB_LOCATION, DB_DELAY);
+        app.connect(DB_LOCATION, DB_DELAY, driver);
     }
 
     @AfterAll
@@ -51,17 +55,49 @@ public class AppIntegrationTest {
     }
 
 //    @Test
-//    void testGetCountryWorldException()
+//    void connectionException()
 //    {
-//        // Create an instance of App
-//        App app = new App();
-//
-//        // Set a null connection to induce an SQLException in the getCountryWorld method
 //        app.con = null;
+//        // Testing for Country exception
+//        assertNull(app.getCountryWorld());
+//        assertNull(app.getCountryCont());
+//        assertNull(app.getCountryRegion());
 //
-//        // Call the getCountryWorld method and assert that it throws SQLException
-//        assertThrows(SQLException.class, () -> app.getCountryWorld());
+//        // Testing for Cities exception
+//        assertNull(app.getCityWorld());
+//        assertNull(app.getCitiesByCountry());
+//        assertNull(app.getCitiesByRegion());
+//        assertNull(app.getCitiesByCont());
+//        assertNull(app.getCitiesByDistrict());
+//
+//        // Testing for Capital City exception
+//        assertNull(app.getCapitalCityWorld());
+//        assertNull(app.getCapitalCityCont());
+//        assertNull(app.getCapitalCityRegion());
+//        AppIntegrationTest.setUpBeforeClass();
 //    }
+
+
+    @Test
+    void testConnectInterruptedException() {
+        App app = new App();
+        Thread.currentThread().interrupt(); // Simulate interruption
+//        assertThrows(RuntimeException.class, () -> app.connect("localhost:3306", 1, driver));
+        AppIntegrationTest.setUpBeforeClass();
+    }
+
+    @Test
+    void testLoadDatabaseDriver_ClassNotFoundException() {
+        App app = new App();
+        app.con = null;
+        // Simulate the nonexistent driver name to get exception error
+        assertThrows(ClassNotFoundException.class, () -> {
+            app.connect(DB_LOCATION, DB_DELAY, "com.nonexistent.jdbc.Driver");
+        });
+
+        // Reloaded the correct driver class to connect back to the database
+        AppIntegrationTest.setUpBeforeClass();
+    }
 
 
     @Test
@@ -70,6 +106,14 @@ public class AppIntegrationTest {
         ArrayList<World> countries = app.getCountryCont();
         assertNotNull(countries);
         Assertions.assertFalse(countries.isEmpty());
+    }
+
+    @Test
+    void testGetCountryContException()
+    {
+        app.con = null;
+        assertNull(app.getCountryCont());
+        AppIntegrationTest.setUpBeforeClass();
     }
 
     @Test

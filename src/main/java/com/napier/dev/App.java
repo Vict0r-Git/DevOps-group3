@@ -4,10 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 public class App {
     public Connection con = null;
-    public void connect(String location, int delay) {
+    public void connect(String location, int delay, String driver) {
         try {
             // Load Database driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
@@ -928,10 +928,12 @@ public class App {
         // Create new Application
         App a = new App();
 
-        if(args.length < 1){
-            a.connect("localhost:33060", 30000);
+        String driver = "com.mysql.cj.jdbc.Driver";
+
+        if(args.length < 2){
+            a.connect("localhost:33060", 30000, driver);
         }else{
-            a.connect(args[0], Integer.parseInt(args[1]));
+            a.connect(args[0], Integer.parseInt(args[1]), driver);
         }
 
         // Code Review 2
