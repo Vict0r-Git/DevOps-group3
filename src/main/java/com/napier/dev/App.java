@@ -1,9 +1,18 @@
+/**
+ * Author: (40632018 - Swan Pyae Ko Ko Maung, 40632021 - Ye Min Than, 40637328 - Ye Phone Pyae, 40632007 - Aung Ko Oo, 40637320 - Min Thant Phyo, 40632014 - Paing Thet Kyaw)
+ *Description: This class represents an application that connects to a MySQL database.
+ */
 package com.napier.dev;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 public class App {
-    public static Connection con = null;
+    // Connection object to manage database connection
+    public Connection con = null;
+    /**
+     * Establishes a connection to the MySQL database.
+     */
     public void connect(String location, int delay, String driver) {
         try {
             // Load Database driver
@@ -33,6 +42,9 @@ public class App {
         }
     }
 
+    /**
+     * Disconnects from the MySQL database.
+     */
     public void disconnect() {
         if (con != null) {
             try {
@@ -45,11 +57,11 @@ public class App {
     }
 
     /**
-     * A method to output print messages with cyan color
-     * @param message Get a string message to print
+     * Prints a message in cyan color to the console.
+     * @param message The message to be printed in cyan color.
      */
     public static void printCyanMessage(String message) {
-        // ANSI escape code for red text
+        // ANSI escape code for cyan text
         String redColor = "\u001B[36m";
         // ANSI escape code to reset text color to default
         String resetColor = "\u001B[0m";
@@ -57,18 +69,19 @@ public class App {
         {
             System.out.println("Nothing to print");
         }
-        // Print the message in red
+        // Print the message in cyan
         System.out.println("\n" + redColor + message + resetColor + "\n");
     }
 
     /**
-     * All the countries in the world organised by largest population to smallest.
-     * @return An array list of all the countries in the world
+     * Retrieves all the countries in the world organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the countries in the world,
      * ordered by population in descending order.
      */
     public ArrayList<World> getCountryWorld() {
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select country details ordered by population in descending order
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population " +
                             "FROM country " +
@@ -76,6 +89,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -95,14 +109,22 @@ public class App {
         }
     }
 
+    /**
+     * Retrieves the top 'n' countries in the world based on population.
+     * @param countryCount The number of top countries to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' countries
+     * in the world, ordered by population in descending order.
+     */
     public ArrayList<World> getTopCountryWorld(int countryCount){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select top 'n' countries based on population
             String strSelect =
-                    "SELECT Name, Continent, Code, Capital, Region, Population FROM country ORDER BY Population DESC"
+                    "SELECT * FROM country ORDER BY Population DESC"
                             + " LIMIT " + countryCount;
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCountries = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()){
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -116,20 +138,21 @@ public class App {
             return topCountries;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top country in world details");
             return null;
         }
     }
 
 
     /**
-     * All the countries in a continent organised by largest population to smallest.
-     * @return An array list of all the countries in a continent 'Asia'
+     * Retrieves all the countries in a continent organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the countries in a continent 'Asia',
      * ordered by population in descending order.
      */
     public ArrayList<World> getCountryCont() {
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select country details in a continent 'Asia' ordered by population in descending order
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population "
                             + "FROM country "
@@ -139,6 +162,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> countryCont = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -153,12 +177,17 @@ public class App {
             return countryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get country details in a continent");
             return null;
         }
     }
 
-
+    /**
+     * Retrieves the top 'n' countries in a continent based on population.
+     * @param countryCount The number of top countries to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' countries
+     * in a continent 'Asia', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCountryByCont(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -185,20 +214,21 @@ public class App {
             return topCountryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top country details in a continent");
             return null;
         }
     }
 
 
     /**
-     * All the countries in a region organised by largest population to smallest.
-     * @return An array list of all the countries in a region 'Southeast Asia'
+     * Retrieves all the countries in a region organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the countries in a region 'Southeast Asia',
      * ordered by population in descending order.
      */
     public ArrayList<World> getCountryRegion() {
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select country details in a region 'Southeast Asia' ordered by population in descending order
             String strSelect =
                     "SELECT Name, Continent, Code, Capital, Region, Population "
                             + "FROM country "
@@ -208,6 +238,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> countryRegion = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryName(result.getString("country.Name"));
@@ -222,11 +253,17 @@ public class App {
             return countryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get region details in world");
+            System.out.println("Failed to get country details in a region");
             return null;
         }
     }
 
+    /**
+     * Retrieves the top 'n' countries in a region based on population.
+     * @param countryCount The number of top countries to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' countries
+     * in a region 'Southeast Asia', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCountryByRegion(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -254,15 +291,15 @@ public class App {
             return topCountryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top country details in a region");
             return null;
         }
     }
 
 
     /**
-     * All the cities in the world organised by largest population to smallest.
-     * @return An array list of all the cities the world
+     * Retrieves all the cities in the world organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the cities in the world,
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCityWorld(){
@@ -292,9 +329,16 @@ public class App {
         }
     }
 
+    /**
+     * Retrieves the top 'n' cities in the world based on population.
+     * @param countryCount The number of top cities to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' cities
+     * in the world, ordered by population in descending order.
+     */
     public ArrayList<World> getTopCitiesWorld(int countryCount){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select top 'n' cities in the world based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.District, city.Population " +
                             "FROM city, country " +
@@ -303,6 +347,7 @@ public class App {
                             "LIMIT " + countryCount;
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityWorld = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()){
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -314,33 +359,35 @@ public class App {
             return topCityWorld;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top cities' details in world");
             return null;
         }
     }
 
     /**
-     * All the cities in a continent organised by largest population to smallest
-     * @return An array list of all the cities in a continent 'Asia'
+     * Retrieves all the cities in a continent organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the cities in a continent 'Asia',
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByCont(){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select city details in a continent 'Asia' ordered by population in descending order
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, " +
                             "city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE country.Continent = 'Asia' " +
+                            "WHERE country.Continent = 'Asia'" +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> cityByCont = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
-                world.setCountryName(result.getString("Country"));
+                world.setCityName(result.getString("Country"));
                 world.setDistrict(result.getString("District"));
                 world.setCityPopulation(result.getInt("Population"));
                 cityByCont.add(world);
@@ -348,12 +395,18 @@ public class App {
             return cityByCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by continent");
+            System.out.println("Failed to get cities' details in a continent");
             return null;
         }
 
     }
 
+    /**
+     * Retrieves the top 'n' cities in a continent based on population.
+     * @param countryCount The number of top cities to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' cities
+     * in a continent 'Asia', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCitiesByCont(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -378,15 +431,15 @@ public class App {
             return topCityByCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a continent");
             return null;
         }
     }
 
 
     /**
-     * All the cities in a region organised by largest population to smallest.
-     * @return An array list of all the cities in a region 'Southern and Central Asia'
+     * Retrieves all the cities in a region organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the cities in a region 'Southern and Central Asia',
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByRegion(){
@@ -412,12 +465,18 @@ public class App {
             return cityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by region");
+            System.out.println("Failed to get cities' details in a region");
             return null;
         }
 
     }
 
+    /**
+     * Retrieves the top 'n' cities in a region based on population.
+     * @param countryCount The number of top cities to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' cities
+     * in a region 'Southeast Asia', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCitiesByRegion(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -442,15 +501,15 @@ public class App {
             return topCityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a region");
             return null;
         }
     }
 
 
     /**
-     * All the cities in a country organised by largest population to smallest.
-     * @return An array list of all the cities in a country 'Myanmar'
+     * Retrieves all the cities in a country organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the cities in a country 'Myanmar',
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByCountry(){
@@ -477,12 +536,18 @@ public class App {
             return cityByCountry;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by country");
+            System.out.println("Failed to get cities' details in a country");
             return null;
         }
 
     }
 
+    /**
+     * Retrieves the top 'n' cities in a country based on population.
+     * @param countryCount The number of top cities to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' cities
+     * in a country 'Myanmar', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCitiesByCountry(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -508,29 +573,31 @@ public class App {
             return topCityByCountry;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a continent");
             return null;
         }
     }
 
 
     /**
-     * All the cities in a district organised by largest population to smallest.
-     * @return An array list of all the cities in a district 'Rangoon [Yangon]'
+     * Retrieves all the cities in a district organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all the cities in a district 'Rangoon [Yangon]',
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCitiesByDistrict(){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select city details in a district 'Rangoon [Yangon]' ordered by population in descending order
             String strSelect =
                     "SELECT city.Name AS Name, country.Name AS Country, city.District, city.Population " +
                             "FROM world.city " +
                             "JOIN world.country ON city.CountryCode = country.Code " +
-                            "WHERE city.District = 'Rangoon [Yangon]' " +
+                            "WHERE city.District = 'Rangoon [Yangon]'" +
                             "ORDER BY city.Population DESC";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> cityByDistrict = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -542,12 +609,18 @@ public class App {
             return cityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by district");
+            System.out.println("Failed to get cities' details in a district");
             return null;
         }
 
     }
 
+    /**
+     * Retrieves the top 'n' cities in a district based on population.
+     * @param countryCount The number of top cities to retrieve.
+     * @return An ArrayList of World objects representing the top 'n' cities
+     * in a district 'Rangoon [Yangon]', ordered by population in descending order.
+     */
     public ArrayList<World> getTopCitiesByDistrict(int countryCount){
         try {
             Statement stmt = con.createStatement();
@@ -571,14 +644,22 @@ public class App {
             return topCityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a district");
             return null;
         }
     }
 
+
+    /**
+     * Retrieves the top capital cities in the world based on population.
+     * @param countryCount The number of top capital cities to retrieve.
+     * @return An ArrayList of World objects representing the top capital cities in the world,
+     * ordered by population in descending order.
+     */
     public ArrayList<World> getTopCapitalCitiesWorld(int countryCount){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select top capital cities in the world based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population " +
                             "FROM city, country " +
@@ -587,6 +668,7 @@ public class App {
                             "LIMIT " + countryCount;
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> topCityWorld = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()){
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -597,14 +679,21 @@ public class App {
             return topCityWorld;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top capital cities' details in the world");
             return null;
         }
     }
 
+    /**
+     * Retrieves the top capital cities in a continent based on population.
+     * @param countryCount The number of top capital cities to retrieve.
+     * @return An ArrayList of World objects representing the top capital cities in a continent 'Asia',
+     * ordered by population in descending order.
+     */
     public ArrayList<World> getTopCapitalCitiesCont(int countryCount){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select top capital cities in a continent 'Asia' based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
                             "FROM city, country " +
@@ -615,6 +704,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -625,14 +715,21 @@ public class App {
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top capital cities' details in a continent");
             return null;
         }
     }
 
+    /**
+     * Retrieves the top capital cities in a region based on population.
+     * @param countryCount The number of top capital cities to retrieve.
+     * @return An ArrayList of World objects representing the top capital cities in a region 'Southeast Asia',
+     * ordered by population in descending order.
+     */
     public ArrayList<World> getTopCapitalCitiesRegion(int countryCount){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select top capital cities in a region 'Southeast Asia' based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population, country.Continent " +
                             "FROM city, country " +
@@ -643,6 +740,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> country = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -653,20 +751,21 @@ public class App {
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top capital cities' details in a region");
             return null;
         }
     }
 
 
     /**
-     * All the capital cities in the world organised by largest population to smallest.
-     * @return An array list of all capital cities in the world
+     * Retrieves all capital cities in the world organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all capital cities in the world,
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCapitalCityWorld(){
         try {
             Statement stmt = con.createStatement();
+            // SQL query to select all capital cities in the world based on population
             String strSelect =
                     "SELECT city.Name, country.Name Country, city.Population " +
                             "FROM city, country " +
@@ -675,6 +774,7 @@ public class App {
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> capitalCity = new ArrayList<>();
+            // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCityName(result.getString("Name"));
@@ -686,14 +786,14 @@ public class App {
             return capitalCity;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get top capital cities details in the world");
             return null;
         }
     }
 
     /**
-     * All the capital cities in a continent organised by largest population to smallest.
-     * @return An array list of all capital cities in a continent
+     * Retrieves all capital cities in a continent organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all capital cities in a continent,
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCapitalCityCont(){
@@ -719,14 +819,14 @@ public class App {
             return capitalCityCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get capital cities' details in a continent");
             return null;
         }
     }
 
     /**
-     * All the capital cities in a region organised by largest to smallest.
-     * @return An array list of all capital cities in a region
+     * Retrieves all capital cities in a region organized by largest population to smallest.
+     * @return An ArrayList of World objects representing all capital cities in a region,
      * ordered by population in descending order.
      */
     public  ArrayList<World> getCapitalCityRegion(){
@@ -752,15 +852,20 @@ public class App {
             return capitalCityRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get capital cities details in a region");
             return null;
         }
     }
 
-    /*
-        displayCountry() method gets parameter as an array list contains countries' data
-        and output them under the following columns.
-        Columns: "Code", "Name", "Continent", "Region", "Population", "Capital"
+
+    // For number format
+    DecimalFormat decimalFormat = new DecimalFormat("#,###");
+
+    /**
+     * displayCountry() method takes an ArrayList containing countries' data as a parameter
+     * and prints them under the following columns:
+     * Columns: "Code", "Name", "Continent", "Region", "Population", "Capital"
+     * @param country An ArrayList of World objects representing countries' data
      */
     public void displayCountry(ArrayList<World> country) {
         if (country == null)
@@ -769,7 +874,7 @@ public class App {
             return;
         }
         // Print header
-        System.out.printf("%-5s %-49s %-14s %-25s %-13s %10s%n",
+        System.out.printf("%-5s %-49s %-14s %-25s %13s %10s%n",
                 "Code", "Name", "Continent", "Region", "Population", "Capital");
 
         // Loop over all countries in the list
@@ -778,16 +883,17 @@ public class App {
             if (world == null)
                 continue;
             String world_str =
-                    String.format("%-5s %-49s %-14s %-25s %-13s %10s",
-                            world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), world.getCountryPopulation(), world.getCapital());
+                    String.format("%-5s %-49s %-14s %-25s %13s %10s",
+                            world.getCode(), world.getCountryName(), world.getContinent(), world.getRegion(), decimalFormat.format(world.getCountryPopulation()), world.getCapital());
             System.out.println(world_str);
         }
     }
 
-    /*
-        displayCities() method gets parameter as an array list contains cities' data
-        and output them under the following columns.
-        Columns: "Name", "Country", "District", "Population"
+    /**
+     * displayCities() method takes an ArrayList containing cities' data as a parameter
+     * and prints them under the following columns:
+     * Columns: "Name", "Country", "District", "Population"
+     * @param city An ArrayList of World objects representing cities' data
      */
     public void displayCities(ArrayList<World> city) {
         if (city == null)
@@ -807,15 +913,16 @@ public class App {
                 System.out.println("Data is null in city.");
                 continue;
             }
-            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), world.getCityPopulation());
+            String world_str = String.format("%-37s %-49s %-23s %25s", world.getCityName(), world.getCountryName(), world.getDistrict(), decimalFormat.format(world.getCityPopulation()));
             System.out.println(world_str);
         }
     }
 
-    /*
-        displayCapitalCities() method gets parameter as an array list contains capital cities' data
-        and output them under the following columns.
-        Columns: "Name", "Country", "Population"
+    /**
+     * displayCapitalCities() method takes an ArrayList containing capital cities' data as a parameter
+     * and prints them under the following columns:
+     * Columns: "Name", "Country", "Population"
+     * @param capital An ArrayList of World objects representing capital cities' data
      */
     public void displayCapitalCities(ArrayList<World> capital){
         if (capital == null)
@@ -834,16 +941,15 @@ public class App {
                 System.out.println("Data is null in capital.");
                 continue;
             }
-            System.out.println("Data is null in capital.");
-            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), world.getCityPopulation());
+            String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), decimalFormat.format(world.getCityPopulation()));
             System.out.println(world_str);
         }
     }
 
 
-    /*
-        The method CR2() represent for the code review 2
-        Grouped methods to output required tasks
+    /**
+     * The CR2() method represents code review 2.
+     * It groups methods to output required tasks.
      */
     public void CR2(){
         ArrayList<World> country;
@@ -882,8 +988,8 @@ public class App {
         displayCities(city);
     }
 
-    /*
-        The method CR3() represent for the code review 2
+    /**
+     * The CR3() method represents code review 3.
      */
     public void CR3(){
         // Create a CapitalCity array list
@@ -912,12 +1018,40 @@ public class App {
         displayCountry(country);
 
         printCyanMessage("Top 15 countries in a Region organised by largest population to smallest.");
-        country = getTopCountryByCont(15);
+        country = getTopCountryByRegion(15);
         displayCountry(country);
 
         printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
         city = getTopCitiesWorld(15);
         displayCities(city);
+
+        printCyanMessage("Top 15 Cities in a Continent organised by largest population to smallest.");
+        city = getTopCitiesByCont(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in a Region organised by largest population to smallest.");
+        city = getTopCitiesByRegion(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in a Country organised by largest population to smallest.");
+        city = getTopCitiesByCountry(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Cities in a District organised by largest population to smallest.");
+        city = getTopCitiesByDistrict(15);
+        displayCities(city);
+
+        printCyanMessage("Top 15 Capital Cities in the World organised by largest population to smallest.");
+        city = getTopCapitalCitiesWorld(15);
+        displayCapitalCities(city);
+
+        printCyanMessage("Top 15 Capital Cities in a Continent organised by largest population to smallest.");
+        city = getTopCapitalCitiesCont(15);
+        displayCapitalCities(city);
+
+        printCyanMessage("Top 15 Capital Cities in a Region organised by largest population to smallest.");
+        city = getTopCapitalCitiesRegion(15);
+        displayCapitalCities(city);
     }
 
     /**
@@ -938,7 +1072,7 @@ public class App {
         }
 
         // Code Review 2
-        a.CR2();
+        // a.CR2();
         // Code Review 3
         a.CR3();
 
