@@ -138,7 +138,7 @@ public class App {
             return topCountries;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top country in world details");
             return null;
         }
     }
@@ -177,7 +177,7 @@ public class App {
             return countryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get country details in a continent");
             return null;
         }
     }
@@ -214,7 +214,7 @@ public class App {
             return topCountryCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top country details in a continent");
             return null;
         }
     }
@@ -253,7 +253,7 @@ public class App {
             return countryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get region details in world");
+            System.out.println("Failed to get country details in a region");
             return null;
         }
     }
@@ -291,7 +291,7 @@ public class App {
             return topCountryRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top country details in a region");
             return null;
         }
     }
@@ -359,7 +359,7 @@ public class App {
             return topCityWorld;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top cities' details in world");
             return null;
         }
     }
@@ -395,7 +395,7 @@ public class App {
             return cityByCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by continent");
+            System.out.println("Failed to get cities' details in a continent");
             return null;
         }
 
@@ -431,7 +431,7 @@ public class App {
             return topCityByCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a continent");
             return null;
         }
     }
@@ -465,7 +465,7 @@ public class App {
             return cityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by region");
+            System.out.println("Failed to get cities' details in a region");
             return null;
         }
 
@@ -501,7 +501,7 @@ public class App {
             return topCityByRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a region");
             return null;
         }
     }
@@ -536,7 +536,7 @@ public class App {
             return cityByCountry;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by country");
+            System.out.println("Failed to get cities' details in a country");
             return null;
         }
 
@@ -573,7 +573,7 @@ public class App {
             return topCityByCountry;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a continent");
             return null;
         }
     }
@@ -609,7 +609,7 @@ public class App {
             return cityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities' details by district");
+            System.out.println("Failed to get cities' details in a district");
             return null;
         }
 
@@ -644,7 +644,7 @@ public class App {
             return topCityByDistrict;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top cities' details in a district");
             return null;
         }
     }
@@ -679,7 +679,7 @@ public class App {
             return topCityWorld;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            System.out.println("Failed to get world details");
+            System.out.println("Failed to get top capital cities' details in the world");
             return null;
         }
     }
@@ -715,7 +715,7 @@ public class App {
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top capital cities' details in a continent");
             return null;
         }
     }
@@ -751,7 +751,7 @@ public class App {
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details in world");
+            System.out.println("Failed to get top capital cities' details in a region");
             return null;
         }
     }
@@ -786,7 +786,7 @@ public class App {
             return capitalCity;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get top capital cities details in the world");
             return null;
         }
     }
@@ -819,7 +819,7 @@ public class App {
             return capitalCityCont;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get capital cities' details in a continent");
             return null;
         }
     }
@@ -852,13 +852,13 @@ public class App {
             return capitalCityRegion;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get cities in world details");
+            System.out.println("Failed to get capital cities details in a region");
             return null;
         }
     }
 
 
-
+    // For number format
     DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
     /**
@@ -941,7 +941,6 @@ public class App {
                 System.out.println("Data is null in capital.");
                 continue;
             }
-            System.out.println("Data is null in capital.");
             String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), decimalFormat.format(world.getCityPopulation()));
             System.out.println(world_str);
         }
@@ -1026,33 +1025,33 @@ public class App {
         city = getTopCitiesWorld(15);
         displayCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Cities in a Continent organised by largest population to smallest.");
         city = getTopCitiesByCont(15);
         displayCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Cities in a Region organised by largest population to smallest.");
         city = getTopCitiesByRegion(15);
         displayCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Cities in a Country organised by largest population to smallest.");
         city = getTopCitiesByCountry(15);
         displayCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Cities in a District organised by largest population to smallest.");
         city = getTopCitiesByDistrict(15);
         displayCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Capital Cities in the World organised by largest population to smallest.");
         city = getTopCapitalCitiesWorld(15);
-        displayCities(city);
+        displayCapitalCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Capital Cities in a Continent organised by largest population to smallest.");
         city = getTopCapitalCitiesCont(15);
-        displayCities(city);
+        displayCapitalCities(city);
 
-        printCyanMessage("Top 15 Cities in the World organised by largest population to smallest.");
+        printCyanMessage("Top 15 Capital Cities in a Region organised by largest population to smallest.");
         city = getTopCapitalCitiesRegion(15);
-        displayCities(city);
+        displayCapitalCities(city);
     }
 
     /**
@@ -1073,7 +1072,7 @@ public class App {
         }
 
         // Code Review 2
-        a.CR2();
+        // a.CR2();
         // Code Review 3
         a.CR3();
 
