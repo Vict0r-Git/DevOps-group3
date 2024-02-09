@@ -116,21 +116,21 @@ public class World
         this.code = code;
     }
 
-    /**
-     * Gets the code2.
-     * @return The code2.
-     */
-    public String getCode2() {
-        return code2;
-    }
-
-    /**
-     * Sets the code2.
-     * @param code2 The code2 to set.
-     */
-    public void setCode2(String code2) {
-        this.code2 = code2;
-    }
+//    /**
+//     * Gets the code2.
+//     * @return The code2.
+//     */
+//    public String getCode2() {
+//        return code2;
+//    }
+//
+//    /**
+//     * Sets the code2.
+//     * @param code2 The code2 to set.
+//     */
+//    public void setCode2(String code2) {
+//        this.code2 = code2;
+//    }
 
     /**
      * Gets the city name.
@@ -180,35 +180,35 @@ public class World
         this.cityPopulation = cityPopulation;
     }
 
-    /**
-     * Gets the country language.
-     * @return The country language.
-     */
-    public String getCountryLanguage() {
-        return countryLanguage;
-    }
-
-    /**
-     * Sets the country language.
-     * @param countryLanguage The country language to set.
-     */
-    public void setCountryLanguage(String countryLanguage) {
-        this.countryLanguage = countryLanguage;
-    }
-
-    /**
-     * Gets the percentage.
-     * @return The percentage.
-     */
-    public float getPercentage() {
-        return percentage;
-    }
-
-    /**
-     * Sets the percentage.
-     * @param percentage The percentage to set.
-     */
-    public void setPercentage(float percentage) {
-        this.percentage = percentage;
-    }
+//    /**
+//     * Gets the country language.
+//     * @return The country language.
+//     */
+//    public String getCountryLanguage() {
+//        return countryLanguage;
+//    }
+//
+//    /**
+//     * Sets the country language.
+//     * @param countryLanguage The country language to set.
+//     */
+//    public void setCountryLanguage(String countryLanguage) {
+//        this.countryLanguage = countryLanguage;
+//    }
+//
+//    /**
+//     * Gets the percentage.
+//     * @return The percentage.
+//     */
+//    public float getPercentage() {
+//        return percentage;
+//    }
+//
+//    /**
+//     * Sets the percentage.
+//     * @param percentage The percentage to set.
+//     */
+//    public void setPercentage(float percentage) {
+//        this.percentage = percentage;
+//    }
 }
