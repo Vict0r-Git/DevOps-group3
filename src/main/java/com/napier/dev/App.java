@@ -857,6 +857,106 @@ public class App {
         }
     }
 
+    public ArrayList<PopulationRatio> getPopulationOfPeopleContinentRatio() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to select all capital cities in a continent based on population
+            String strSelect =
+                    "SELECT " +
+                            "continent_cont.CountryContinent AS Continent, " +
+                            "continent.CountryPopulation, " +
+                            "continent_cont.TotalCityPopulation, " +
+                            "continent.CountryPopulation - continent_cont.TotalCityPopulation AS PopulationDifference " +
+                            "FROM " +
+                            "(SELECT " +
+                            "country.Continent AS CountryContinent, " +
+                            "COALESCE(SUM(city.Population), 0) AS TotalCityPopulation " +
+                            "FROM " +
+                            "world.country " +
+                            "LEFT JOIN " +
+                            "world.city ON country.Code = city.CountryCode " +
+                            "GROUP BY " +
+                            "country.Continent) AS continent_cont " +
+                            "JOIN " +
+                            "(SELECT " +
+                            "country.Continent AS CountryContinent, " +
+                            "SUM(country.Population) AS CountryPopulation " +
+                            "FROM " +
+                            "world.country " +
+                            "GROUP BY " +
+                            "country.Continent) AS continent " +
+                            "ON " +
+                            "continent.CountryContinent = continent_cont.CountryContinent";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                PopulationRatio ratio = new PopulationRatio();
+                ratio.setContinent(result.getString("Continent"));
+                ratio.setPplPopulation(result.getLong("CountryPopulation"));
+                ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
+                populationContinentR.add(ratio);
+            }
+            return populationContinentR;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<PopulationRatio> getPopulationOfPeopleRegionRatio() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to select all capital cities in a continent based on population
+            String strSelect =
+                    "SELECT " +
+                            "continent_cont.CountryContinent AS Continent, " +
+                            "continent.CountryPopulation, " +
+                            "continent_cont.TotalCityPopulation, " +
+                            "continent.CountryPopulation - continent_cont.TotalCityPopulation AS PopulationDifference " +
+                            "FROM " +
+                            "(SELECT " +
+                            "country.Continent AS CountryContinent, " +
+                            "COALESCE(SUM(city.Population), 0) AS TotalCityPopulation " +
+                            "FROM " +
+                            "world.country " +
+                            "LEFT JOIN " +
+                            "world.city ON country.Code = city.CountryCode " +
+                            "GROUP BY " +
+                            "country.Continent) AS continent_cont " +
+                            "JOIN " +
+                            "(SELECT " +
+                            "country.Continent AS CountryContinent, " +
+                            "SUM(country.Population) AS CountryPopulation " +
+                            "FROM " +
+                            "world.country " +
+                            "GROUP BY " +
+                            "country.Continent) AS continent " +
+                            "ON " +
+                            "continent.CountryContinent = continent_cont.CountryContinent";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                PopulationRatio ratio = new PopulationRatio();
+                ratio.setContinent(result.getString("Continent"));
+                ratio.setPplPopulation(result.getLong("CountryPopulation"));
+                ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
+                populationContinentR.add(ratio);
+            }
+            return populationContinentR;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
     // For number format
     DecimalFormat decimalFormat = new DecimalFormat("#,###");
@@ -942,6 +1042,20 @@ public class App {
                 continue;
             }
             String world_str = String.format("%-37s %-49s %13s", world.getCityName(), world.getCountryName(), decimalFormat.format(world.getCityPopulation()));
+            System.out.println(world_str);
+        }
+    }
+
+    public void displayPopulationRatio(ArrayList<PopulationRatio> populationRatios, String str) {
+        // Print header
+        System.out.printf("%-47s %-50s %-49s %13s%n",
+                str + " Name" ,"Total People Living In " + str, "Total People Living In Cities", "Total People Not Living in Cities");
+
+        // Loop over all cities in the list
+        for (PopulationRatio ratio : populationRatios) {
+            String world_str =
+                    String.format("%-47s %-50d %-49d %13d",
+                            ratio.getContinent() ,ratio.getPplPopulation(), ratio.getPopLivCT(), ratio.getPopNotLivCT());
             System.out.println(world_str);
         }
     }
@@ -1054,6 +1168,14 @@ public class App {
         displayCapitalCities(city);
     }
 
+    public void CR4(){
+        ArrayList<PopulationRatio> population;
+
+        printCyanMessage("Continent Ratio");
+        population  = getPopulationOfPeopleContinentRatio();
+        displayPopulationRatio(population, "Continent");
+    }
+
     /**
      * The main entry point for the application. It creates an instance of the App class,
      * connects to the database, performs code reviews, and then disconnects from the database.
@@ -1074,7 +1196,9 @@ public class App {
         // Code Review 2
         // a.CR2();
         // Code Review 3
-        a.CR3();
+        // a.CR3();
+        // Code Review 4
+        a.CR4();
 
         // Disconnect from database
         a.disconnect();
