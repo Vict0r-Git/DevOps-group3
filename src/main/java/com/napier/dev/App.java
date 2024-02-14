@@ -70,7 +70,7 @@ public class App {
             System.out.println("Nothing to print");
         }
         // Print the message in cyan
-        System.out.println("\n" + redColor + message + resetColor + "\n");
+        System.out.println("" + redColor + message + resetColor + "");
     }
 
     /**
@@ -863,37 +863,33 @@ public class App {
             // SQL query to select all capital cities in a continent based on population
             String strSelect =
                     "SELECT " +
-                            "continent_cont.CountryContinent AS Continent, " +
-                            "continent.CountryPopulation, " +
-                            "continent_cont.TotalCityPopulation, " +
-                            "continent.CountryPopulation - continent_cont.TotalCityPopulation AS PopulationDifference " +
+                            "    country.Continent AS Specifier, " +
+                            "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
+                            "    SUM(country.Population) AS CountryPopulation, " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
                             "FROM " +
-                            "(SELECT " +
-                            "country.Continent AS CountryContinent, " +
-                            "COALESCE(SUM(city.Population), 0) AS TotalCityPopulation " +
-                            "FROM " +
-                            "world.country " +
+                            "    world.country " +
                             "LEFT JOIN " +
-                            "world.city ON country.Code = city.CountryCode " +
+                            "    (SELECT " +
+                            "        country.Continent, " +
+                            "        SUM(city.Population) AS TotalCityPopulation " +
+                            "    FROM " +
+                            "        world.country " +
+                            "    LEFT JOIN " +
+                            "        world.city ON country.Code = city.CountryCode " +
+                            "    GROUP BY " +
+                            "        country.Continent) AS city_population ON country.Continent = city_population.Continent " +
                             "GROUP BY " +
-                            "country.Continent) AS continent_cont " +
-                            "JOIN " +
-                            "(SELECT " +
-                            "country.Continent AS CountryContinent, " +
-                            "SUM(country.Population) AS CountryPopulation " +
-                            "FROM " +
-                            "world.country " +
-                            "GROUP BY " +
-                            "country.Continent) AS continent " +
-                            "ON " +
-                            "continent.CountryContinent = continent_cont.CountryContinent";
+                            "    country.Continent " +
+                            "ORDER BY " +
+                            "    CountryPopulation DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 PopulationRatio ratio = new PopulationRatio();
-                ratio.setContinent(result.getString("Continent"));
+                ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
@@ -913,37 +909,79 @@ public class App {
             // SQL query to select all capital cities in a continent based on population
             String strSelect =
                     "SELECT " +
-                            "continent_cont.CountryContinent AS Continent, " +
-                            "continent.CountryPopulation, " +
-                            "continent_cont.TotalCityPopulation, " +
-                            "continent.CountryPopulation - continent_cont.TotalCityPopulation AS PopulationDifference " +
+                            "    country.Region AS Specifier, " +
+                            "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
+                            "    SUM(country.Population) AS CountryPopulation, " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
                             "FROM " +
-                            "(SELECT " +
-                            "country.Continent AS CountryContinent, " +
-                            "COALESCE(SUM(city.Population), 0) AS TotalCityPopulation " +
-                            "FROM " +
-                            "world.country " +
+                            "    world.country " +
                             "LEFT JOIN " +
-                            "world.city ON country.Code = city.CountryCode " +
+                            "    (SELECT " +
+                            "        country.Region, " +
+                            "        SUM(city.Population) AS TotalCityPopulation " +
+                            "    FROM " +
+                            "        world.country " +
+                            "    LEFT JOIN " +
+                            "        world.city ON country.Code = city.CountryCode " +
+                            "    GROUP BY " +
+                            "        country.Region) AS city_population ON country.Region = city_population.Region " +
                             "GROUP BY " +
-                            "country.Continent) AS continent_cont " +
-                            "JOIN " +
-                            "(SELECT " +
-                            "country.Continent AS CountryContinent, " +
-                            "SUM(country.Population) AS CountryPopulation " +
-                            "FROM " +
-                            "world.country " +
-                            "GROUP BY " +
-                            "country.Continent) AS continent " +
-                            "ON " +
-                            "continent.CountryContinent = continent_cont.CountryContinent";
+                            "    country.Region " +
+                            "ORDER BY " +
+                            "    CountryPopulation DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 PopulationRatio ratio = new PopulationRatio();
-                ratio.setContinent(result.getString("Continent"));
+                ratio.setSpecifer(result.getString("Specifier"));
+                ratio.setPplPopulation(result.getLong("CountryPopulation"));
+                ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
+                populationContinentR.add(ratio);
+            }
+            return populationContinentR;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<PopulationRatio> getPopulationOfPeopleCountryRatio() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to select all capital cities in a continent based on population
+            String strSelect =
+                    "SELECT " +
+                            "    country.Name AS Specifier, " +
+                            "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
+                            "    SUM(country.Population) AS CountryPopulation, " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
+                            "FROM " +
+                            "    world.country " +
+                            "LEFT JOIN " +
+                            "    (SELECT " +
+                            "        country.Name, " +
+                            "        SUM(city.Population) AS TotalCityPopulation " +
+                            "    FROM " +
+                            "        world.country " +
+                            "    LEFT JOIN " +
+                            "        world.city ON country.Code = city.CountryCode " +
+                            "    GROUP BY " +
+                            "        country.Name) AS city_population ON country.Name = city_population.Name " +
+                            "GROUP BY " +
+                            "    country.Name " +
+                            "ORDER BY " +
+                            "    CountryPopulation DESC;";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                PopulationRatio ratio = new PopulationRatio();
+                ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
@@ -1055,7 +1093,7 @@ public class App {
         for (PopulationRatio ratio : populationRatios) {
             String world_str =
                     String.format("%-47s %-50d %-49d %13d",
-                            ratio.getContinent() ,ratio.getPplPopulation(), ratio.getPopLivCT(), ratio.getPopNotLivCT());
+                            ratio.getSpecifer() ,ratio.getPplPopulation(), ratio.getPopLivCT(), ratio.getPopNotLivCT());
             System.out.println(world_str);
         }
     }
@@ -1174,6 +1212,14 @@ public class App {
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
         displayPopulationRatio(population, "Continent");
+
+        printCyanMessage("Region Ratio");
+        population  = getPopulationOfPeopleRegionRatio();
+        displayPopulationRatio(population, "Region");
+
+        printCyanMessage("Country Ratio");
+        population  = getPopulationOfPeopleCountryRatio();
+        displayPopulationRatio(population, "Country");
     }
 
     /**

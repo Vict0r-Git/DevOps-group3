@@ -8,7 +8,7 @@ public class PopulationRatio {
 
     private long popNotLivCT;
 
-    private String continent;
+    private String specifer;
 
     public long getPplPopulation() {
         return pplPopulation;
@@ -34,11 +34,11 @@ public class PopulationRatio {
         this.popNotLivCT = popNotLivCT;
     }
 
-    public String getContinent() {
-        return continent;
+    public String getSpecifer() {
+        return specifer;
     }
 
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setSpecifer(String specifer) {
+        this.specifer = specifer;
     }
 }
