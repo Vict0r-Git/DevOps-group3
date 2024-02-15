@@ -1154,17 +1154,6 @@ public class App {
                             "FROM countrylanguage " +
                             "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
                             "WHERE countrylanguage.Language = 'Arabic'";
-
-
-
-
-
-
-
-
-
-
-
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> countryLanguage = new ArrayList<>();
             while (result.next()){
