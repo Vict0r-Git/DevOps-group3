@@ -1112,8 +1112,8 @@ public class App {
     }
 
     public void displayTotalPopulation(ArrayList<World> totalPopulation){
-        System.out.printf("%-37s%n" ,
-                "Population");
+        System.out.printf("%20s%n" ,
+                 "Population");
         for (World world : totalPopulation){
 
 //            String Country = world.getCountryLanguage();
@@ -1125,7 +1125,7 @@ public class App {
     }
 
     public void displayContinentPopulation(ArrayList<World> continentPopulation){
-        System.out.printf("%-37s%n" ,
+        System.out.printf("%20s%n" ,
                 "Population");
         for (World world : continentPopulation){
 
@@ -1138,13 +1138,13 @@ public class App {
     }
 
     public void displayCountryPop(ArrayList<World> countryPop){
-        System.out.printf("%-37s%n" ,
+        System.out.printf("%20s%n" ,
                 "Population");
         for (World world : countryPop){
 
 //            String Country = world.getCountryLanguage();
             long Population = world.getCountryPop();
-            String popCountry = String.format("%-37s", world.getCountryPop());
+            String popCountry = String.format("%-37s", world.getTotalPopulation());
 
             System.out.println(popCountry);
         }
@@ -1210,14 +1210,14 @@ public class App {
         }
     }
 
-    public ArrayList<World> getPopulationTotal() {
+    public ArrayList<World> getTotalPopulation() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
             String strSelect =
-                    "SELECT sum(country.population) as Population " + "FROM country ";
+                    "SELECT sum(country.population) " + "FROM country ";
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> totalPopulation= new ArrayList<>();
+            ArrayList<World> totalPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
@@ -1232,23 +1232,23 @@ public class App {
         }
     }
 
-    public ArrayList<World> getPopulationContinent() {
+    public ArrayList<World> getContinentPopulation() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
             String strSelect =
-                    "SELECT sum(country.population) as Population "
+                    "SELECT sum(country.population) "
                             + "FROM country "
                             + "WHERE country.Continent = 'Asia' ";
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> continentPopulation = new ArrayList<>();
+            ArrayList<World> ContinentPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setContinentPopulation(result.getLong("Population"));
-                continentPopulation.add(world);
+                world.setTotalPopulation(result.getLong("Population"));
+                ContinentPopulation.add(world);
             }
-            return continentPopulation;
+            return ContinentPopulation;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
@@ -1256,7 +1256,7 @@ public class App {
         }
     }
 
-    public ArrayList<World> getPopCountry() {
+    public ArrayList<World> getCountryPop() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
@@ -1266,14 +1266,14 @@ public class App {
                             "WHERE country.Name = 'Myanmar' ";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> countryofPopulation = new ArrayList<>();
+            ArrayList<World> countryPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryPop(result.getLong("Population"));
-                countryofPopulation.add(world);
+                countryPopulation.add(world);
             }
-            return countryofPopulation;
+            return countryPopulation;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
@@ -1394,8 +1394,8 @@ public class App {
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
         ArrayList<World> worldPopulation;
-        ArrayList<World> popContinent;
-        ArrayList<World> popofCountry;
+        ArrayList<World> continentPopulation;
+        ArrayList<World> countryPopulation;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1414,16 +1414,16 @@ public class App {
         displayCountryLanguage(language);
 
         printCyanMessage("Total population of the world");
-        worldPopulation = getPopulationTotal();
+        worldPopulation = getTotalPopulation();
         displayTotalPopulation(worldPopulation);
 
         printCyanMessage("Total population of the continent");
-        popContinent = getPopulationContinent();
-        displayContinentPopulation(popContinent);
+        continentPopulation = getContinentPopulation();
+        displayContinentPopulation(continentPopulation);
 
         printCyanMessage("Total population of the country");
-        popofCountry = getPopCountry();
-        displayCountryPop(popofCountry);
+        countryPopulation = getCountryPop();
+        displayCountryPop(countryPopulation);
 
 
     }
