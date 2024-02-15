@@ -42,7 +42,7 @@ jobs:
         - git tag $TRAVIS_TAG
       deploy:
         provider: releases
-        api_key: $OAUTH_TOKEN
+        api_key: $GITHUB_OAUTH_TOKEN
         # Copy built JAR file.  JAR built in $TRAVIS_BUILD_DIR/
         file: $TRAVIS_BUILD_DIR/target/DevOpsGroup3.jar
         skip_cleanup: true
