@@ -71,7 +71,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.REPO_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: "Code Review 4"
+          prerelease: true
+          automatic_release_tag: "latest"
           files: |
             ./target/*.jar
