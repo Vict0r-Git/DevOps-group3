@@ -22,6 +22,7 @@ public class World
     private long countryPop;
     private long regionPop;
     private long districtPop;
+    private long cityPop;
 
     // Getter and Setter methods for each field
 
@@ -243,5 +244,13 @@ public class World
 
     public void setDistrictPop(long districtPop) {
         this.districtPop = districtPop;
+    }
+
+    public long getCityPop() {
+        return cityPop;
+    }
+
+    public void setCityPop(long cityPop) {
+        this.cityPop = cityPop;
     }
 }

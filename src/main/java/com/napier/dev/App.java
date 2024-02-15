@@ -1173,6 +1173,17 @@ public class App {
         }
     }
 
+    public void displayPopCity(ArrayList<World> popCity){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popCity){
+            long Population = world.getCityPop();
+            String PopOfCity = String.format("%-37s", world.getCityPop());
+
+            System.out.println(PopOfCity);
+        }
+    }
+
 
 
     public ArrayList<World> getLanguageCountry() {
@@ -1353,6 +1364,31 @@ public class App {
         }
     }
 
+    public ArrayList<World> getCityPopulation(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT city.population as Population "
+                            + "FROM city "
+                            + "WHERE city.Name = 'Sydney ' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> popCity = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setCityPop(result.getLong("Population"));
+                popCity.add(world);
+            }
+            return popCity;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
 
     /**
@@ -1470,6 +1506,7 @@ public class App {
         ArrayList<World> popofCountry;
         ArrayList<World> popOfRegion;
         ArrayList<World> popofDistrict;
+        ArrayList<World> CityofPop;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1507,6 +1544,9 @@ public class App {
         popofDistrict = getPopulationDistrict();
         displayPopDistrict(popofDistrict);
 
+        printCyanMessage("Total population of the city");
+        CityofPop = getCityPopulation();
+        displayPopCity(CityofPop);
     }
 
     /**
