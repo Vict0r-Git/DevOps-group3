@@ -1346,7 +1346,7 @@ public class App {
             String strSelect =
                     "SELECT sum(city.population) as Population "
                             + "FROM city "
-                            + "WHERE city.District = 'Gelderland ' ";
+                            + "WHERE city.District = 'Gelderland' ";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> districtPopulation = new ArrayList<>();
@@ -1371,7 +1371,7 @@ public class App {
             String strSelect =
                     "SELECT city.population as Population "
                             + "FROM city "
-                            + "WHERE city.Name = 'Sydney ' ";
+                            + "WHERE city.Name = 'Sydney' ";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> popCity = new ArrayList<>();
