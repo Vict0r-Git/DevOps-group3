@@ -2,7 +2,7 @@ name: A workflow for The World App
 on:
   push:
     branches:
-      - features/deployment
+      - features/unit-test
 jobs:
   UnitTests:
     name: Unit Tests
@@ -41,16 +41,16 @@ jobs:
           docker stop world
           docker rm world
           docker image rm database
-      - name: CodeCov
-        uses: codecov/codecov-action@v2
-        #        env:
-        #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          # token: 0122e0f6-6c18-40d3-a2fc-83879e396524
-          directory: ./target/site/jacoco
-          flags: Integration-Tests # optional
-          verbose: true # optional (default = false)
+#      - name: CodeCov
+#        uses: codecov/codecov-action@v2
+#        #        env:
+#        #          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+#          # token: 0122e0f6-6c18-40d3-a2fc-83879e396524
+#          directory: ./target/site/jacoco
+#          flags: Integration-Tests # optional
+#          verbose: true # optional (default = false)
   build:
     name: Build Run in Docker and Deploy Release
     runs-on: ubuntu-20.04
@@ -68,10 +68,10 @@ jobs:
         run: |
           mvn package -DskipTests
           docker-compose up --abort-on-container-exit
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.REPO_TOKEN }}"
-          prerelease: false
-          automatic_release_tag: "latest"
-          files: |
-            ./target/*.jar
+#      - uses: "marvinpinto/action-automatic-releases@latest"
+#        with:
+#          repo_token: "${{ secrets.REPO_TOKEN }}"
+#          prerelease: false
+#          automatic_release_tag: "latest"
+#          files: |
+#            ./target/*.jar
