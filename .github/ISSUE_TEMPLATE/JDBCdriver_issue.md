@@ -6,7 +6,14 @@ labels: taaks
 assignees: YeminthanRiki, Pie3215
 ---
 
-Expected behavior: connected to the database
-Actual behavior: connecting to the database with no responses
-Specification version: MySQL connector J 8.0.25
-operating system: Window, MacOS, Linux
+### Expected behavior
+connected to the database
+
+### Actual behavior
+connecting to the database with no response
+
+### Specification version 
+MySQL connector J 8.0.25
+
+### Operating system
+Window, MacOS
