@@ -4,6 +4,7 @@
  */
 package com.napier.dev;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -1112,8 +1113,8 @@ public class App {
     }
 
     public void displayTotalPopulation(ArrayList<World> totalPopulation){
-        System.out.printf("%20s%n" ,
-                 "Population");
+        System.out.printf("%-37s%n" ,
+                "Population");
         for (World world : totalPopulation){
 
 //            String Country = world.getCountryLanguage();
@@ -1125,7 +1126,7 @@ public class App {
     }
 
     public void displayContinentPopulation(ArrayList<World> continentPopulation){
-        System.out.printf("%20s%n" ,
+        System.out.printf("%-37s%n" ,
                 "Population");
         for (World world : continentPopulation){
 
@@ -1138,15 +1139,26 @@ public class App {
     }
 
     public void displayCountryPop(ArrayList<World> countryPop){
-        System.out.printf("%20s%n" ,
+        System.out.printf("%-37s%n" ,
                 "Population");
         for (World world : countryPop){
 
 //            String Country = world.getCountryLanguage();
             long Population = world.getCountryPop();
-            String popCountry = String.format("%-37s", world.getTotalPopulation());
+            String popCountry = String.format("%-37s", world.getCountryPop());
 
             System.out.println(popCountry);
+        }
+    }
+
+    public void displayPopRegion(ArrayList<World> popRegion){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popRegion){
+            long Population = world.getRegionPop();
+            String regPop = String.format("%-37s", world.getRegionPop());
+
+            System.out.println(regPop);
         }
     }
 
@@ -1210,14 +1222,14 @@ public class App {
         }
     }
 
-    public ArrayList<World> getTotalPopulation() {
+    public ArrayList<World> getPopulationTotal() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
             String strSelect =
-                    "SELECT sum(country.population) " + "FROM country ";
+                    "SELECT sum(country.population) as Population " + "FROM country ";
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> totalPopulation = new ArrayList<>();
+            ArrayList<World> totalPopulation= new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
@@ -1232,23 +1244,23 @@ public class App {
         }
     }
 
-    public ArrayList<World> getContinentPopulation() {
+    public ArrayList<World> getPopulationContinent() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
             String strSelect =
-                    "SELECT sum(country.population) "
+                    "SELECT sum(country.population) as Population "
                             + "FROM country "
                             + "WHERE country.Continent = 'Asia' ";
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> ContinentPopulation = new ArrayList<>();
+            ArrayList<World> continentPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
-                world.setTotalPopulation(result.getLong("Population"));
-                ContinentPopulation.add(world);
+                world.setContinentPopulation(result.getLong("Population"));
+                continentPopulation.add(world);
             }
-            return ContinentPopulation;
+            return continentPopulation;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
@@ -1256,7 +1268,31 @@ public class App {
         }
     }
 
-    public ArrayList<World> getCountryPop() {
+    public ArrayList<World> getPopulationRegion(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population "
+                            + "FROM country "
+                            + "WHERE country.Region = 'Southeast Asia' ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> regionPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setRegionPop(result.getLong("Population"));
+                regionPopulation.add(world);
+            }
+            return regionPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopCountry() {
         try {
             Statement stmt = con.createStatement();
             // SQL query to calculate total population of the world
@@ -1266,14 +1302,14 @@ public class App {
                             "WHERE country.Name = 'Myanmar' ";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> countryPopulation = new ArrayList<>();
+            ArrayList<World> countryofPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setCountryPop(result.getLong("Population"));
-                countryPopulation.add(world);
+                countryofPopulation.add(world);
             }
-            return countryPopulation;
+            return countryofPopulation;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
@@ -1394,8 +1430,9 @@ public class App {
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
         ArrayList<World> worldPopulation;
-        ArrayList<World> continentPopulation;
-        ArrayList<World> countryPopulation;
+        ArrayList<World> popContinent;
+        ArrayList<World> popofCountry;
+        ArrayList<World> popOfRegion;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1414,17 +1451,20 @@ public class App {
         displayCountryLanguage(language);
 
         printCyanMessage("Total population of the world");
-        worldPopulation = getTotalPopulation();
+        worldPopulation = getPopulationTotal();
         displayTotalPopulation(worldPopulation);
 
         printCyanMessage("Total population of the continent");
-        continentPopulation = getContinentPopulation();
-        displayContinentPopulation(continentPopulation);
+        popContinent = getPopulationContinent();
+        displayContinentPopulation(popContinent);
 
         printCyanMessage("Total population of the country");
-        countryPopulation = getCountryPop();
-        displayCountryPop(countryPopulation);
+        popofCountry = getPopCountry();
+        displayCountryPop(popofCountry);
 
+        printCyanMessage("Total population of the region");
+        popOfRegion = getPopulationRegion();
+        displayPopRegion(popOfRegion);
 
     }
 

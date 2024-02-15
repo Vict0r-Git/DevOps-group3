@@ -20,6 +20,7 @@ public class World
     private long totalPopulation;
     private long continentPopulation;
     private long countryPop;
+    private long regionPop;
 
     // Getter and Setter methods for each field
 
@@ -225,5 +226,13 @@ public class World
 
     public void setContinentPopulation(long continentPopulation) {
         this.continentPopulation = continentPopulation;
+    }
+
+    public long getRegionPop() {
+        return regionPop;
+    }
+
+    public void setRegionPop(long regionPop) {
+        this.regionPop = regionPop;
     }
 }
