@@ -10,6 +10,26 @@ public class PopulationRatio {
 
     private String specifer;
 
+    private String livPercent;
+
+    private String notLivPercent;
+
+    public String getLivPercent() {
+        return livPercent;
+    }
+
+    public void setLivPercent(String livPercent) {
+        this.livPercent = livPercent;
+    }
+
+    public String getNotLivPercent() {
+        return notLivPercent;
+    }
+
+    public void setNotLivPercent(String notLivPercent) {
+        this.notLivPercent = notLivPercent;
+    }
+
     public long getPplPopulation() {
         return pplPopulation;
     }
