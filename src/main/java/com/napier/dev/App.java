@@ -857,6 +857,10 @@ public class App {
         }
     }
 
+    /**
+     * Retrieves the population ratio of people living in continent to the total population in the continent.
+     * @return An ArrayList of PopulationRatio objects containing the population data for each continent.
+     */
     public ArrayList<PopulationRatio> getPopulationOfPeopleContinentRatio() {
         try {
             Statement stmt = con.createStatement();
@@ -903,6 +907,10 @@ public class App {
         }
     }
 
+    /**
+     * Retrieves the population ratio of people living in regions to the total population in each region.
+     * @return An ArrayList of PopulationRatio objects containing the population data for each region.
+     */
     public ArrayList<PopulationRatio> getPopulationOfPeopleRegionRatio() {
         try {
             Statement stmt = con.createStatement();
@@ -949,6 +957,10 @@ public class App {
         }
     }
 
+    /**
+     * Retrieves the population ratio of people living in countries to the total population in each country.
+     * @return An ArrayList of PopulationRatio objects containing the population data for each country.
+     */
     public ArrayList<PopulationRatio> getPopulationOfPeopleCountryRatio() {
         try {
             Statement stmt = con.createStatement();
