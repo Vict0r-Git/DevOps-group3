@@ -1162,6 +1162,17 @@ public class App {
         }
     }
 
+    public void displayPopDistrict(ArrayList<World> popDistrict){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popDistrict){
+            long Population = world.getDistrictPop();
+            String disPop = String.format("%-37s", world.getDistrictPop());
+
+            System.out.println(disPop);
+        }
+    }
+
 
 
     public ArrayList<World> getLanguageCountry() {
@@ -1317,6 +1328,31 @@ public class App {
         }
     }
 
+    public ArrayList<World> getPopulationDistrict(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(city.population) as Population "
+                            + "FROM city "
+                            + "WHERE city.District = 'Gelderland ' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> popDistrict = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setDistrictPop(result.getLong("Population"));
+                popDistrict.add(world);
+            }
+            return popDistrict;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
 
     /**
@@ -1433,6 +1469,7 @@ public class App {
         ArrayList<World> popContinent;
         ArrayList<World> popofCountry;
         ArrayList<World> popOfRegion;
+        ArrayList<World> popofDistrict;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1465,6 +1502,10 @@ public class App {
         printCyanMessage("Total population of the region");
         popOfRegion = getPopulationRegion();
         displayPopRegion(popOfRegion);
+
+        printCyanMessage("Total population of the district");
+        popofDistrict = getPopulationDistrict();
+        displayPopDistrict(popofDistrict);
 
     }
 
