@@ -1101,7 +1101,6 @@ public class App {
     public void displayCountryLanguage(ArrayList<World> countryLanguage){
         System.out.printf("%-37s %-30s %20s%n" ,
                 "Language", "Population", "Percentage");
-
         for (World world : countryLanguage){
 
 //            String Language = world.getCountryLanguage();
@@ -1110,9 +1109,47 @@ public class App {
 
             System.out.println(cuntLang);
         }
-
-
     }
+
+    public void displayTotalPopulation(ArrayList<World> totalPopulation){
+        System.out.printf("%-37s%n" ,
+                 "Population");
+        for (World world : totalPopulation){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getTotalPopulation();
+            String worldPop = String.format("%-37s", world.getTotalPopulation());
+
+            System.out.println(worldPop);
+        }
+    }
+
+    public void displayContinentPopulation(ArrayList<World> continentPopulation){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for (World world : continentPopulation){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getContinentPopulation();
+            String continentPop = String.format("%-37s", world.getContinentPopulation());
+
+            System.out.println(continentPop);
+        }
+    }
+
+    public void displayCountryPop(ArrayList<World> countryPop){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for (World world : countryPop){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getCountryPop();
+            String popCountry = String.format("%-37s", world.getCountryPop());
+
+            System.out.println(popCountry);
+        }
+    }
+
 
 
     public ArrayList<World> getLanguageCountry() {
@@ -1155,16 +1192,6 @@ public class App {
                             "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
                             "WHERE countrylanguage.Language = 'Arabic'";
 
-
-
-
-
-
-
-
-
-
-
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> countryLanguage = new ArrayList<>();
             while (result.next()){
@@ -1173,8 +1200,6 @@ public class App {
                 world.setCountryPopulation(result.getInt("LanguagePopulation"));
                 world.setPercentage(result.getString("PercentageOfTotal"));
                 countryLanguage.add(world);
-
-
             }
             return countryLanguage;
         }
@@ -1184,6 +1209,78 @@ public class App {
             return null;
         }
     }
+
+    public ArrayList<World> getPopulationTotal() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population " + "FROM country ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> totalPopulation= new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setTotalPopulation(result.getLong("Population"));
+                totalPopulation.add(world);
+            }
+            return totalPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopulationContinent() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population "
+                            + "FROM country "
+                            + "WHERE country.Continent = 'Asia' ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> continentPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setContinentPopulation(result.getLong("Population"));
+                continentPopulation.add(world);
+            }
+            return continentPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopCountry() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT Population " +
+                            "FROM country "+
+                            "WHERE country.Name = 'Myanmar' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> countryofPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setCountryPop(result.getLong("Population"));
+                countryofPopulation.add(world);
+            }
+            return countryofPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
 
     /**
@@ -1296,6 +1393,9 @@ public class App {
     public void CR4(){
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
+        ArrayList<World> worldPopulation;
+        ArrayList<World> popContinent;
+        ArrayList<World> popofCountry;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1313,8 +1413,17 @@ public class App {
         language= getLanguageCountry();
         displayCountryLanguage(language);
 
+        printCyanMessage("Total population of the world");
+        worldPopulation = getPopulationTotal();
+        displayTotalPopulation(worldPopulation);
 
+        printCyanMessage("Total population of the continent");
+        popContinent = getPopulationContinent();
+        displayContinentPopulation(popContinent);
 
+        printCyanMessage("Total population of the country");
+        popofCountry = getPopCountry();
+        displayCountryPop(popofCountry);
 
 
     }

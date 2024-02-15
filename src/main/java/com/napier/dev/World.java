@@ -17,6 +17,9 @@ public class World
     private int cityPopulation;
     private String countryLanguage;
     private String percentage;
+    private long totalPopulation;
+    private long continentPopulation;
+    private long countryPop;
 
     // Getter and Setter methods for each field
 
@@ -183,7 +186,8 @@ public class World
 
     public String getCountryLanguage() {return countryLanguage; }
 
-    public void setCountryLanguage(String countryLanguage) {this.countryLanguage = countryLanguage; }
+    public void setCountryLanguage(String countryLanguage)
+    {this.countryLanguage = countryLanguage; }
 
 
 
@@ -200,4 +204,26 @@ public class World
     public void setPercentage(String percentage) {
         this.percentage = percentage;
    }
+
+    public long getTotalPopulation() {return totalPopulation; }
+
+    public void setTotalPopulation(long totalPopulation) {
+        this.totalPopulation = totalPopulation;
+    }
+
+    public long getCountryPop() {
+        return countryPop;
+    }
+
+    public void setCountryPop(long countryPop) {
+        this.countryPop = countryPop;
+    }
+
+    public long getContinentPopulation() {
+        return continentPopulation;
+    }
+
+    public void setContinentPopulation(long continentPopulation) {
+        this.continentPopulation = continentPopulation;
+    }
 }
