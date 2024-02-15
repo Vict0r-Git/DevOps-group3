@@ -110,6 +110,14 @@ public class AppIntegrationTest {
         assertNull(app.getTopCapitalCitiesCont(15));
         assertNull(app.getTopCapitalCitiesRegion(15));
 
+        // Testing for Population Ratio exception
+        assertNull((app.getPopulationOfPeopleCountryRatio()));
+        assertNull((app.getPopulationOfPeopleRegionRatio()));
+        assertNull((app.getPopulationOfPeopleContinentRatio()));
+
+        // Testing for Country Language exception
+        assertNull((app.getLanguageCountry()));
+
         AppIntegrationTest.setUpBeforeTesting();
     }
 
@@ -274,6 +282,59 @@ public class AppIntegrationTest {
     }
 
     /**
+     *  This method test for the getPopulationOfPeopleContinentRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleContinentRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleContinentRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationOfPeopleRegionRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleRegionRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleRegionRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationOfPeopleCountryRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleCountryRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleCountryRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getLanguageCountry() method in App.java
+     */
+    @Test
+    void testGetLanguageCountry(){
+        // Retrieve list of country languages from the application
+        ArrayList<World> country_lan = app.getLanguageCountry();
+        // Ensure that the list is not null
+        assertNotNull(country_lan);
+        // Assert that the list is not empty
+        Assertions.assertFalse(country_lan.isEmpty());
+    }
+
+
+    /**
      *  This method test for the CR2 method, all method calls' arry lists under the CR2 method are tested
      *  whether they are not null and works correctly.
      */
@@ -294,7 +355,7 @@ public class AppIntegrationTest {
     }
 
     /**
-     *  This method test for the CR3 method, all method calls' array lists under the CR2 method are tested
+     *  This method test for the CR3 method, all method calls' array lists under the CR3 method are tested
      *  whether they are not null and works correctly.
      */
     @Test
@@ -310,6 +371,22 @@ public class AppIntegrationTest {
         assertNotNull(app.getTopCountryByCont(15));
         assertNotNull(app.getTopCitiesWorld(15));
         assertNotNull(app.getTopCitiesWorld(15));
+    }
+
+    /**
+     *  This method test for the CR4 method, all method calls' array lists under the CR4 method are tested
+     *  whether they are not null and works correctly.
+     */
+    @Test
+    void testCR4ArrayListsAreNotNull()
+    {
+        // Call the CR3, Code Review method
+        app.CR4();
+        // Assert that each array list is null
+        assertNotNull(app.getPopulationOfPeopleCountryRatio());
+        assertNotNull(app.getPopulationOfPeopleRegionRatio());
+        assertNotNull(app.getPopulationOfPeopleContinentRatio());
+        assertNotNull(app.getLanguageCountry());
     }
 
     @Test
