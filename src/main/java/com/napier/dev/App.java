@@ -1098,6 +1098,93 @@ public class App {
         }
     }
 
+    public void displayCountryLanguage(ArrayList<World> countryLanguage){
+        System.out.printf("%-37s %-30s %20s%n" ,
+                "Language", "Population", "Percentage");
+
+        for (World world : countryLanguage){
+
+//            String Language = world.getCountryLanguage();
+            int Population = world.getCountryPopulation();
+            String cuntLang = String.format("%-37s %-30s %20s", world.getCountryLanguage(),world.getCountryPopulation(),world.getPercentage());
+
+            System.out.println(cuntLang);
+        }
+
+
+    }
+
+
+    public ArrayList<World> getLanguageCountry() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT 'Chinese' AS Language," +
+                            "SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) AS LanguagePopulation, " +
+                            "CONCAT((SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) / 6078749450) * 100, '%') AS PercentageOfTotal " +
+                            "FROM countrylanguage " +
+                            "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
+                            "WHERE countrylanguage.Language = 'Chinese'" +
+                            "UNION ALL " +
+                            "SELECT 'English' AS Language," +
+                            "SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) AS LanguagePopulation, " +
+                            "CONCAT((SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) / 6078749450) * 100, '%') AS PercentageOfTotal " +
+                            "FROM countrylanguage " +
+                            "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
+                            "WHERE countrylanguage.Language = 'English'" +
+                            "UNION ALL " +
+                            "SELECT 'Hindi' AS Language," +
+                            "SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) AS LanguagePopulation," +
+                            "CONCAT((SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) / 6078749450) * 100, '%') AS PercentageOfTotal " +
+                            "FROM countrylanguage " +
+                            "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
+                            "WHERE countrylanguage.Language = 'Hindi'" +
+                            "UNION ALL " +
+                            "SELECT 'Spanish' AS Language," +
+                            "SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) AS LanguagePopulation," +
+                            "CONCAT((SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) / 6078749450) * 100, '%') AS PercentageOfTotal " +
+                            "FROM countrylanguage " +
+                            "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
+                            "WHERE countrylanguage.Language = 'Spanish'" +
+                            "UNION ALL " +
+                            "SELECT 'Arabic' AS Language," +
+                            "SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) AS LanguagePopulation," +
+                            "CONCAT((SUM(ROUND((countrylanguage.Percentage / 100) * country.Population)) / 6078749450) * 100, '%') AS PercentageOfTotal " +
+                            "FROM countrylanguage " +
+                            "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
+                            "WHERE countrylanguage.Language = 'Arabic'";
+
+
+
+
+
+
+
+
+
+
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> countryLanguage = new ArrayList<>();
+            while (result.next()){
+                World world = new World();
+                world.setCountryLanguage(result.getString("Language"));
+                world.setCountryPopulation(result.getInt("LanguagePopulation"));
+                world.setPercentage(result.getString("PercentageOfTotal"));
+                countryLanguage.add(world);
+
+
+            }
+            return countryLanguage;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
     /**
      * The CR2() method represents code review 2.
@@ -1208,6 +1295,7 @@ public class App {
 
     public void CR4(){
         ArrayList<PopulationRatio> population;
+        ArrayList<World> language;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1220,6 +1308,15 @@ public class App {
         printCyanMessage("Country Ratio");
         population  = getPopulationOfPeopleCountryRatio();
         displayPopulationRatio(population, "Country");
+
+        printCyanMessage(("Chinese, English, Hindi, Spanish, Arabic spoken percentage of the world population:"));
+        language= getLanguageCountry();
+        displayCountryLanguage(language);
+
+
+
+
+
     }
 
     /**

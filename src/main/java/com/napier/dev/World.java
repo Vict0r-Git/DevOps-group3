@@ -16,7 +16,7 @@ public class World
     private String district;
     private int cityPopulation;
     private String countryLanguage;
-    private float percentage;
+    private String percentage;
 
     // Getter and Setter methods for each field
 
@@ -180,35 +180,24 @@ public class World
         this.cityPopulation = cityPopulation;
     }
 
-//    /**
-//     * Gets the country language.
-//     * @return The country language.
-//     */
-//    public String getCountryLanguage() {
-//        return countryLanguage;
-//    }
-//
-//    /**
-//     * Sets the country language.
-//     * @param countryLanguage The country language to set.
-//     */
-//    public void setCountryLanguage(String countryLanguage) {
-//        this.countryLanguage = countryLanguage;
-//    }
-//
-//    /**
-//     * Gets the percentage.
-//     * @return The percentage.
-//     */
-//    public float getPercentage() {
-//        return percentage;
-//    }
-//
-//    /**
-//     * Sets the percentage.
-//     * @param percentage The percentage to set.
-//     */
-//    public void setPercentage(float percentage) {
-//        this.percentage = percentage;
-//    }
+
+    public String getCountryLanguage() {return countryLanguage; }
+
+    public void setCountryLanguage(String countryLanguage) {this.countryLanguage = countryLanguage; }
+
+
+
+
+
+    public String getPercentage() {
+        return percentage;
+   }
+
+    /**
+     * Sets the percentage.
+     * @param percentage The percentage to set.
+     */
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
+   }
 }
