@@ -155,6 +155,80 @@ public class AppUnitTest
         world.setCountryName("Myanmar");
         world.setCityPopulation(700000);
         cities.add(world);
-        app.displayCities(cities);
+        app.displayCapitalCities(cities);
+    }
+
+    /**
+     * Testing displayPopulationRatio() method
+     */
+    @Test
+    void testDisplayPopulationRatioNull(){
+        // Test the displayCountryLanguage method with a null input
+        app.displayPopulationRatio(null, "String");
+    }
+
+    @Test
+    void testDisplayPopulationRatioContainNull(){
+        // Test the displayPopulationRatio method with a null array list
+        ArrayList<PopulationRatio> population = new ArrayList<>();
+        population.add(null);
+        app.displayPopulationRatio(population, "String");
+    }
+
+    @Test
+    void testDisplayPopulationRatioEmpty(){
+        // Test the displayPopulationRatio method with an empty list of capital cities
+        ArrayList<PopulationRatio> population = new ArrayList<>();
+        app.displayPopulationRatio(population, null);
+    }
+
+    @Test
+    void testDisplayPopulationRatio() {
+        // Test the displayPopulationRatio method non-null, whether the data passed as expected
+        ArrayList<PopulationRatio> populationRatios = new ArrayList<>();
+        PopulationRatio ratio = new PopulationRatio();
+        ratio.setSpecifer("Asia");
+        ratio.setPplPopulation(10000);
+        ratio.setPopLivCT(8000);
+        ratio.setPopNotLivCT(2000);
+        populationRatios.add(ratio);
+        app.displayPopulationRatio(populationRatios, "String");
+    }
+
+
+    /**
+     * Testing displayCountryLanguage() method
+     */
+    @Test
+    void testDisplayCountryLanguageContainNull(){
+        // Test the displayCountryLanguage method with a null array list
+        ArrayList<World> country_language = new ArrayList<>();
+        country_language.add(null);
+        app.displayCountryLanguage(country_language);
+    }
+
+    @Test
+    void testDisplayCountryLanguageEmpty(){
+        // Test the displayCountryLanguage method with an empty list of capital cities
+        ArrayList<World> country_language = new ArrayList<>();
+        app.displayCountryLanguage(country_language);
+    }
+
+    @Test
+    void testDisplayCountryLanguageNull(){
+        // Test the displayCountryLanguage method with a null input
+        app.displayCountryLanguage(null);
+    }
+
+    @Test
+    void testDisplayCountryLanguage() {
+        // Test the displayCountryLanguage method non-null, whether the data passed as expected
+        ArrayList<World> country_language = new ArrayList<>();
+        World world = new World();
+        world.setCountryLanguage("English");
+        world.setCountryPopulation(10000000);
+        world.setPercentage("40%");
+        country_language.add(world);
+        app.displayCountryLanguage(country_language);
     }
 }

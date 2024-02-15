@@ -1085,12 +1085,22 @@ public class App {
     }
 
     public void displayPopulationRatio(ArrayList<PopulationRatio> populationRatios, String str) {
+        if (populationRatios == null)
+        {
+            System.out.println("No population found");
+            return;
+        }
         // Print header
         System.out.printf("%-47s %-50s %-49s %13s%n",
                 str + " Name" ,"Total People Living In " + str, "Total People Living In Cities", "Total People Not Living in Cities");
 
         // Loop over all cities in the list
         for (PopulationRatio ratio : populationRatios) {
+            if (ratio == null)
+            {
+                System.out.println("Ratio data is null");
+                continue;
+            }
             String world_str =
                     String.format("%-47s %-50d %-49d %13d",
                             ratio.getSpecifer() ,ratio.getPplPopulation(), ratio.getPopLivCT(), ratio.getPopNotLivCT());
@@ -1099,10 +1109,20 @@ public class App {
     }
 
     public void displayCountryLanguage(ArrayList<World> countryLanguage){
+        if (countryLanguage == null)
+        {
+            System.out.println("No country language found");
+            return;
+        }
         System.out.printf("%-37s %-30s %20s%n" ,
                 "Language", "Population", "Percentage");
 
         for (World world : countryLanguage){
+            if (world == null)
+            {
+                System.out.println("Country language is null");
+                continue;
+            }
 
 //            String Language = world.getCountryLanguage();
             int Population = world.getCountryPopulation();
@@ -1155,16 +1175,6 @@ public class App {
                             "JOIN world.country ON countrylanguage.CountryCode = country.Code " +
                             "WHERE countrylanguage.Language = 'Arabic'";
 
-
-
-
-
-
-
-
-
-
-
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<World> countryLanguage = new ArrayList<>();
             while (result.next()){
@@ -1173,8 +1183,6 @@ public class App {
                 world.setCountryPopulation(result.getInt("LanguagePopulation"));
                 world.setPercentage(result.getString("PercentageOfTotal"));
                 countryLanguage.add(world);
-
-
             }
             return countryLanguage;
         }
@@ -1296,9 +1304,6 @@ public class App {
     public void CR4(){
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
-        ArrayList<World> worldPopulation;
-        ArrayList<World> popContinent;
-        ArrayList<World> popofCountry;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1315,11 +1320,6 @@ public class App {
         printCyanMessage(("Chinese, English, Hindi, Spanish, Arabic spoken percentage of the world population:"));
         language= getLanguageCountry();
         displayCountryLanguage(language);
-
-
-
-
-
     }
 
     /**
