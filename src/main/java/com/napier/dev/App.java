@@ -1349,14 +1349,14 @@ public class App {
                             + "WHERE city.District = 'Gelderland ' ";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<World> popDistrict = new ArrayList<>();
+            ArrayList<World> districtPopulation = new ArrayList<>();
             // Iterating through the result set to populate World objects
             while (result.next()) {
                 World world = new World();
                 world.setDistrictPop(result.getLong("Population"));
-                popDistrict.add(world);
+                districtPopulation.add(world);
             }
-            return popDistrict;
+            return districtPopulation;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
