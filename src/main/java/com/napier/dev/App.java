@@ -1305,6 +1305,9 @@ public class App {
         displayCapitalCities(city);
     }
 
+    /**
+     * The CR4() method represents code review 4.
+     */
     public void CR4(){
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
