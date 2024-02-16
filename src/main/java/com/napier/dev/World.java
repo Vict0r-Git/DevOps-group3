@@ -1,10 +1,10 @@
 package com.napier.dev;
 
 /**
- * Represents an employee
+ * Represents a world entity.
  */
-public class World
-{
+public class World {
+    // Fields to store various attributes of a world entity
     private String countryName;
     private String continent;
     private String region;
@@ -122,21 +122,21 @@ public class World
         this.code = code;
     }
 
-//    /**
-//     * Gets the code2.
-//     * @return The code2.
-//     */
-//    public String getCode2() {
-//        return code2;
-//    }
-//
-//    /**
-//     * Sets the code2.
-//     * @param code2 The code2 to set.
-//     */
-//    public void setCode2(String code2) {
-//        this.code2 = code2;
-//    }
+    //    /**
+    //     * Gets the code2.
+    //     * @return The code2.
+    //     */
+    //    public String getCode2() {
+    //        return code2;
+    //    }
+    //
+    //    /**
+    //     * Sets the code2.
+    //     * @param code2 The code2 to set.
+    //     */
+    //    public void setCode2(String code2) {
+    //        this.code2 = code2;
+    //    }
 
     /**
      * Gets the city name.
@@ -186,19 +186,29 @@ public class World
         this.cityPopulation = cityPopulation;
     }
 
+    /**
+     * Gets the country language.
+     * @return The country language.
+     */
+    public String getCountryLanguage() {
+        return countryLanguage;
+    }
 
-    public String getCountryLanguage() {return countryLanguage; }
+    /**
+     * Sets the country language.
+     * @param countryLanguage The country language to set.
+     */
+    public void setCountryLanguage(String countryLanguage) {
+        this.countryLanguage = countryLanguage;
+    }
 
-    public void setCountryLanguage(String countryLanguage)
-    {this.countryLanguage = countryLanguage; }
-
-
-
-
-
+    /**
+     * Gets the percentage.
+     * @return The percentage.
+     */
     public String getPercentage() {
         return percentage;
-   }
+    }
 
     /**
      * Sets the percentage.
@@ -206,50 +216,100 @@ public class World
      */
     public void setPercentage(String percentage) {
         this.percentage = percentage;
-   }
+    }
 
-    public long getTotalPopulation() {return totalPopulation; }
+    /**
+     * Gets the total population.
+     * @return The total population.
+     */
+    public long getTotalPopulation() {
+        return totalPopulation;
+    }
 
+    /**
+     * Sets the total population.
+     * @param totalPopulation The total population to set.
+     */
     public void setTotalPopulation(long totalPopulation) {
         this.totalPopulation = totalPopulation;
     }
 
+    /**
+     * Gets the country population.
+     * @return The country population.
+     */
     public long getCountryPop() {
         return countryPop;
     }
 
+    /**
+     * Sets the country population.
+     * @param countryPop The country population to set.
+     */
     public void setCountryPop(long countryPop) {
         this.countryPop = countryPop;
     }
 
+    /**
+     * Gets the continent population.
+     * @return The continent population.
+     */
     public long getContinentPopulation() {
         return continentPopulation;
     }
 
+    /**
+     * Sets the continent population.
+     * @param continentPopulation The continent population to set.
+     */
     public void setContinentPopulation(long continentPopulation) {
         this.continentPopulation = continentPopulation;
     }
 
+    /**
+     * Gets the region population.
+     * @return The region population.
+     */
     public long getRegionPop() {
         return regionPop;
     }
 
+    /**
+     * Sets the region population.
+     * @param regionPop The region population to set.
+     */
     public void setRegionPop(long regionPop) {
         this.regionPop = regionPop;
     }
 
+    /**
+     * Gets the district population.
+     * @return The district population.
+     */
     public long getDistrictPop() {
         return districtPop;
     }
 
+    /**
+     * Sets the district population.
+     * @param districtPop The district population to set.
+     */
     public void setDistrictPop(long districtPop) {
         this.districtPop = districtPop;
     }
 
+    /**
+     * Gets the city population.
+     * @return The city population.
+     */
     public long getCityPop() {
         return cityPop;
     }
 
+    /**
+     * Sets the city population.
+     * @param cityPop The city population to set.
+     */
     public void setCityPop(long cityPop) {
         this.cityPop = cityPop;
     }
