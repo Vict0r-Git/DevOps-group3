@@ -867,7 +867,7 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage,\n" +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage, " +
                             "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
@@ -917,7 +917,7 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage,\n" +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
                             "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
@@ -967,7 +967,7 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage,\n" +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
                             "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
