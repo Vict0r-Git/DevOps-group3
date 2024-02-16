@@ -1528,23 +1528,23 @@ public class App {
         worldPopulation = getPopulationTotal();
         displayTotalPopulation(worldPopulation);
 
-        printCyanMessage("Total population of the continent");
+        printCyanMessage("Total population of the continent 'Asia'");
         popContinent = getPopulationContinent();
         displayContinentPopulation(popContinent);
 
-        printCyanMessage("Total population of the country");
+        printCyanMessage("Total population of the country 'Myanmar'");
         popofCountry = getPopCountry();
         displayCountryPop(popofCountry);
 
-        printCyanMessage("Total population of the region");
+        printCyanMessage("Total population of the region 'Southeast Asia'");
         popOfRegion = getPopulationRegion();
         displayPopRegion(popOfRegion);
 
-        printCyanMessage("Total population of the district");
+        printCyanMessage("Total population of the district 'Gelderland'");
         popofDistrict = getPopulationDistrict();
         displayPopDistrict(popofDistrict);
 
-        printCyanMessage("Total population of the city");
+        printCyanMessage("Total population of the city 'Sydney'");
         CityofPop = getCityPopulation();
         displayPopCity(CityofPop);
     }
