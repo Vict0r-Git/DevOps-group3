@@ -4,6 +4,7 @@
  */
 package com.napier.dev;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
@@ -866,7 +867,9 @@ public class App {
                             "    country.Continent AS Specifier, " +
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
-                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
+                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -892,6 +895,8 @@ public class App {
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
+                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
                 populationContinentR.add(ratio);
             }
@@ -912,7 +917,9 @@ public class App {
                             "    country.Region AS Specifier, " +
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
-                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
+                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -938,6 +945,8 @@ public class App {
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
+                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
                 populationContinentR.add(ratio);
             }
@@ -958,7 +967,9 @@ public class App {
                             "    country.Name AS Specifier, " +
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
-                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference " +
+                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
+                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
+                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -984,6 +995,8 @@ public class App {
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
+                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
+                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
                 populationContinentR.add(ratio);
             }
@@ -1085,44 +1098,26 @@ public class App {
     }
 
     public void displayPopulationRatio(ArrayList<PopulationRatio> populationRatios, String str) {
-        if (populationRatios == null)
-        {
-            System.out.println("No population found");
-            return;
-        }
         // Print header
-        System.out.printf("%-47s %-50s %-49s %13s%n",
-                str + " Name" ,"Total People Living In " + str, "Total People Living In Cities", "Total People Not Living in Cities");
+        System.out.printf("%-15s %-40s %-13s %-13s %-13s  %13s%n",
+                str + " Name" ,"Total People Living In " + str, "Total People Living In Cities",
+                "Percentage of People Living In Cities","Total People Not Living in Cities",
+                "Percentage of People not Living in Cities");
 
         // Loop over all cities in the list
         for (PopulationRatio ratio : populationRatios) {
-            if (ratio == null)
-            {
-                System.out.println("Ratio data is null");
-                continue;
-            }
             String world_str =
-                    String.format("%-47s %-50d %-49d %13d",
-                            ratio.getSpecifer() ,ratio.getPplPopulation(), ratio.getPopLivCT(), ratio.getPopNotLivCT());
+                    String.format("%-15s %-40d %-13d %-13s %-13d  %13s",
+                            ratio.getSpecifer() ,ratio.getPplPopulation(), ratio.getPopLivCT(),
+                            ratio.getLivPercent(), ratio.getPopNotLivCT(), ratio.getNotLivPercent());
             System.out.println(world_str);
         }
     }
 
     public void displayCountryLanguage(ArrayList<World> countryLanguage){
-        if (countryLanguage == null)
-        {
-            System.out.println("No country language found");
-            return;
-        }
         System.out.printf("%-37s %-30s %20s%n" ,
                 "Language", "Population", "Percentage");
-
         for (World world : countryLanguage){
-            if (world == null)
-            {
-                System.out.println("Country language is null");
-                continue;
-            }
 
 //            String Language = world.getCountryLanguage();
             int Population = world.getCountryPopulation();
@@ -1130,9 +1125,80 @@ public class App {
 
             System.out.println(cuntLang);
         }
-
-
     }
+
+    public void displayTotalPopulation(ArrayList<World> totalPopulation){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for (World world : totalPopulation){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getTotalPopulation();
+            String worldPop = String.format("%-37s", world.getTotalPopulation());
+
+            System.out.println(worldPop);
+        }
+    }
+
+    public void displayContinentPopulation(ArrayList<World> continentPopulation){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for (World world : continentPopulation){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getContinentPopulation();
+            String continentPop = String.format("%-37s", world.getContinentPopulation());
+
+            System.out.println(continentPop);
+        }
+    }
+
+    public void displayCountryPop(ArrayList<World> countryPop){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for (World world : countryPop){
+
+//            String Country = world.getCountryLanguage();
+            long Population = world.getCountryPop();
+            String popCountry = String.format("%-37s", world.getCountryPop());
+
+            System.out.println(popCountry);
+        }
+    }
+
+    public void displayPopRegion(ArrayList<World> popRegion){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popRegion){
+            long Population = world.getRegionPop();
+            String regPop = String.format("%-37s", world.getRegionPop());
+
+            System.out.println(regPop);
+        }
+    }
+
+    public void displayPopDistrict(ArrayList<World> popDistrict){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popDistrict){
+            long Population = world.getDistrictPop();
+            String disPop = String.format("%-37s", world.getDistrictPop());
+
+            System.out.println(disPop);
+        }
+    }
+
+    public void displayPopCity(ArrayList<World> popCity){
+        System.out.printf("%-37s%n" ,
+                "Population");
+        for(World world : popCity){
+            long Population = world.getCityPop();
+            String PopOfCity = String.format("%-37s", world.getCityPop());
+
+            System.out.println(PopOfCity);
+        }
+    }
+
 
 
     public ArrayList<World> getLanguageCountry() {
@@ -1192,6 +1258,152 @@ public class App {
             return null;
         }
     }
+
+    public ArrayList<World> getPopulationTotal() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population " + "FROM country ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> totalPopulation= new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setTotalPopulation(result.getLong("Population"));
+                totalPopulation.add(world);
+            }
+            return totalPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopulationContinent() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population "
+                            + "FROM country "
+                            + "WHERE country.Continent = 'Asia' ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> continentPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setContinentPopulation(result.getLong("Population"));
+                continentPopulation.add(world);
+            }
+            return continentPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopulationRegion(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(country.population) as Population "
+                            + "FROM country "
+                            + "WHERE country.Region = 'Southeast Asia' ";
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> regionPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setRegionPop(result.getLong("Population"));
+                regionPopulation.add(world);
+            }
+            return regionPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopCountry() {
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT Population " +
+                            "FROM country "+
+                            "WHERE country.Name = 'Myanmar' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> countryofPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setCountryPop(result.getLong("Population"));
+                countryofPopulation.add(world);
+            }
+            return countryofPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getPopulationDistrict(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT sum(city.population) as Population "
+                            + "FROM city "
+                            + "WHERE city.District = 'Gelderland' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> districtPopulation = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setDistrictPop(result.getLong("Population"));
+                districtPopulation.add(world);
+            }
+            return districtPopulation;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
+    public ArrayList<World> getCityPopulation(){
+        try {
+            Statement stmt = con.createStatement();
+            // SQL query to calculate total population of the world
+            String strSelect =
+                    "SELECT city.population as Population "
+                            + "FROM city "
+                            + "WHERE city.Name = 'Sydney' ";
+
+            ResultSet result = stmt.executeQuery(strSelect);
+            ArrayList<World> popCity = new ArrayList<>();
+            // Iterating through the result set to populate World objects
+            while (result.next()) {
+                World world = new World();
+                world.setCityPop(result.getLong("Population"));
+                popCity.add(world);
+            }
+            return popCity;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities in world details");
+            return null;
+        }
+    }
+
 
 
     /**
@@ -1304,6 +1516,12 @@ public class App {
     public void CR4(){
         ArrayList<PopulationRatio> population;
         ArrayList<World> language;
+        ArrayList<World> worldPopulation;
+        ArrayList<World> popContinent;
+        ArrayList<World> popofCountry;
+        ArrayList<World> popOfRegion;
+        ArrayList<World> popofDistrict;
+        ArrayList<World> CityofPop;
 
         printCyanMessage("Continent Ratio");
         population  = getPopulationOfPeopleContinentRatio();
@@ -1320,6 +1538,30 @@ public class App {
         printCyanMessage(("Chinese, English, Hindi, Spanish, Arabic spoken percentage of the world population:"));
         language= getLanguageCountry();
         displayCountryLanguage(language);
+
+        printCyanMessage("Total population of the world");
+        worldPopulation = getPopulationTotal();
+        displayTotalPopulation(worldPopulation);
+
+        printCyanMessage("Total population of the continent 'Asia'");
+        popContinent = getPopulationContinent();
+        displayContinentPopulation(popContinent);
+
+        printCyanMessage("Total population of the country 'Myanmar'");
+        popofCountry = getPopCountry();
+        displayCountryPop(popofCountry);
+
+        printCyanMessage("Total population of the region 'Southeast Asia'");
+        popOfRegion = getPopulationRegion();
+        displayPopRegion(popOfRegion);
+
+        printCyanMessage("Total population of the district 'Gelderland'");
+        popofDistrict = getPopulationDistrict();
+        displayPopDistrict(popofDistrict);
+
+        printCyanMessage("Total population of the city 'Sydney'");
+        CityofPop = getCityPopulation();
+        displayPopCity(CityofPop);
     }
 
     /**
