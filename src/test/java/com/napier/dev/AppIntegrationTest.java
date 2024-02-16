@@ -986,4 +986,89 @@ public class AppIntegrationTest {
         }
     }
 
+    @Test
+    void testGetPopulationRatioContinent() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleContinentRatio();
+        PopulationRatio top = r.get(0);
+        if ("Asia".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("Antarctica".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetPopulationRatioRegion() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleRegionRatio();
+        PopulationRatio top = r.get(0);
+        if ("Eastern Asia".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("Antarctica".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetPopulationRatioCountry() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleCountryRatio();
+        PopulationRatio top = r.get(0);
+        if ("China".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("United States Minor Outlying Islands".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCountryLanguage() {
+        ArrayList<World> r = app.getLanguageCountry();
+        World top = r.get(0);
+        if ("Chinese".equals(top.getCountryLanguage())) {
+            if (r.size() > 1) {
+                World botCity = r.get(r.size() - 1);
+                if ("Arabic".equals(botCity.getCountryLanguage())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
 }
