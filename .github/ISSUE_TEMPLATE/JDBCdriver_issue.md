@@ -2,7 +2,7 @@
 name: SQL JDBC issue
 about: Database is not connected
 title: "[25.1.2024]"
-labels: taaks
+labels: tasks
 assignees: YeminthanRiki, Pie3215
 ---
 
