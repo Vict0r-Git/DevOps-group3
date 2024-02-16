@@ -2,7 +2,8 @@ name: A workflow for The World App
 on:
   push:
     branches:
-      - features/unit-test
+      - develop
+      - master
 jobs:
   UnitTests:
     name: Unit Tests
