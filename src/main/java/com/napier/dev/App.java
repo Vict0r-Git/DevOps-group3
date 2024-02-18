@@ -1396,10 +1396,12 @@ public class App {
             return;
         }
         // Print header
-        System.out.printf("%-15s %-40s %-13s %-13s %-13s  %13s%n",
-                str + " Name" ,"Total People Living In " + str, "Total People Living In Cities",
-                "Percentage of People Living In Cities","Total People Not Living in Cities",
-                "Percentage of People not Living in Cities");
+        System.out.printf("%-45s %-40s %-24s %-15s %-29s %-18s%n",
+                "|"+ str + " Name|" ,"|Total Population In " + str + "|",
+                "|Population in Cities|",
+                "|% in Cities|",
+                "|Population not in Cities|",
+                "|% not in Cities|");
 
         // Loop over all cities in the list
         for (PopulationRatio ratio : populationRatios) {
@@ -1409,7 +1411,7 @@ public class App {
                 continue;
             }
             String world_str =
-                    String.format("%-15s %-30s %-13s %-13s %-13s  %13s",
+                    String.format("%-45s %-40s %-24s %-15s %-29s %-18s",
                             ratio.getSpecifer(),
                             NumberFormat.getNumberInstance(Locale.US).format(ratio.getPplPopulation()),
                             NumberFormat.getNumberInstance(Locale.US).format(ratio.getPopLivCT()),
@@ -1482,7 +1484,7 @@ public class App {
                 System.out.println("Population in continent is null");
                 continue;
             }
-            String continentPop = String.format("%-37s", world.getContinentPopulation());
+            String continentPop = String.format("%-37s", NumberFormat.getNumberInstance(Locale.US).format(world.getContinentPopulation()));
 
             System.out.println(continentPop);
         }
