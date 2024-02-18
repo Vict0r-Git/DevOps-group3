@@ -1461,9 +1461,6 @@ public class App {
                 System.out.println("Total population is null");
                 continue;
             }
-
-//            String Country = world.getCountryLanguage();
-            long Population = world.getTotalPopulation();
             String worldPop = String.format("%-37s",
                     NumberFormat.getNumberInstance(Locale.US).format(world.getTotalPopulation()));
 
