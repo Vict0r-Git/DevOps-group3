@@ -37,5 +37,3 @@ JDK **Version 17**
 ## License 
 
 This project is licensed under the [![LICENSE](https://img.shields.io/github/license/Pie3215/DevOps-group3.svg?style=flat-square)](https://github.com/Pie3215/DevOps-group3/blob/master/LICENSE)
-
-

@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +32,7 @@ public class AppIntegrationTest {
     private static App app;
 
     /**
-     *  Set up the database connection first before testing started 
+     *  Set up the database connection first before testing started
      */
     @BeforeAll
     public static void setUpBeforeTesting() {
@@ -109,6 +112,22 @@ public class AppIntegrationTest {
         assertNull(app.getTopCapitalCitiesWorld(15));
         assertNull(app.getTopCapitalCitiesCont(15));
         assertNull(app.getTopCapitalCitiesRegion(15));
+
+        // Testing for Population Ratio exception
+        assertNull((app.getPopulationOfPeopleCountryRatio()));
+        assertNull((app.getPopulationOfPeopleRegionRatio()));
+        assertNull((app.getPopulationOfPeopleContinentRatio()));
+
+        // Testing for Country Language exception
+        assertNull((app.getLanguageCountry()));
+
+        // Testing Total Populations
+        assertNull(app.getPopulationTotal());
+        assertNull(app.getPopCountry());
+        assertNull(app.getPopulationRegion());
+        assertNull(app.getPopulationContinent());
+        assertNull(app.getPopulationDistrict());
+        assertNull(app.getCityPopulation());
 
         AppIntegrationTest.setUpBeforeTesting();
     }
@@ -274,12 +293,141 @@ public class AppIntegrationTest {
     }
 
     /**
+     *  This method test for the getPopulationOfPeopleContinentRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleContinentRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleContinentRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationOfPeopleRegionRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleRegionRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleRegionRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationOfPeopleCountryRatio() method in App.java
+     */
+    @Test
+    void testGetPopulationOfPeopleCountryRatio(){
+        // Retrieve list of population by country from the application
+        ArrayList<PopulationRatio> pop_ratio = app.getPopulationOfPeopleCountryRatio();
+        // Ensure that the list is not null
+        assertNotNull(pop_ratio);
+        // Assert that the list is not empty
+        Assertions.assertFalse(pop_ratio.isEmpty());
+    }
+
+    /**
+     *  This method test for the getLanguageCountry() method in App.java
+     */
+    @Test
+    void testGetLanguageCountry(){
+        // Retrieve list of country languages from the application
+        ArrayList<World> country_lan = app.getLanguageCountry();
+        // Ensure that the list is not null
+        assertNotNull(country_lan);
+        // Assert that the list is not empty
+        Assertions.assertFalse(country_lan.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationTotal() method in App.java
+     */
+    @Test
+    void testGetPopulationTotal() {
+        // Retrieve list of Total World Population from the application
+        ArrayList<World> population = app.getPopulationTotal();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationContinent() method in App.java
+     */
+    @Test
+    void testGetPopulationContinent() {
+        // Retrieve list of Population Continent from the application
+        ArrayList<World> population = app.getPopulationContinent();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationRegion() method in App.java
+     */
+    @Test
+    void testGetPopulationRegion() {
+        // Retrieve list of Population Region from the application
+        ArrayList<World> population = app.getPopulationRegion();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopCountry() method in App.java
+     */
+    @Test
+    void testGetPopCountry() {
+        // Retrieve list of Population Country from the application
+        ArrayList<World> population = app.getPopCountry();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
+     *  This method test for the getPopulationDistrict() method in App.java
+     */
+    @Test
+    void testGetPopulationDistrict() {
+        // Retrieve list of Population District from the application
+        ArrayList<World> population = app.getPopulationDistrict();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
+     *  This method test for the getCityPopulation() method in App.java
+     */
+    @Test
+    void testGetCityPopulation() {
+        // Retrieve list of Population City from the application
+        ArrayList<World> population = app.getCityPopulation();
+        // Ensure that the list is not null
+        assertNotNull(population);
+        // Assert that the list is not empty
+        Assertions.assertFalse(population.isEmpty());
+    }
+
+    /**
      *  This method test for the CR2 method, all method calls' arry lists under the CR2 method are tested
      *  whether they are not null and works correctly.
      */
     @Test
-    void testCR2ArrayListsAreNotNull()
-    {
+    void testCR2ArrayListsAreNotNull(){
         // Call the CR2, Code Review 2 method
         app.CR2();
         // Assert that each array list is null
@@ -294,7 +442,7 @@ public class AppIntegrationTest {
     }
 
     /**
-     *  This method test for the CR3 method, all method calls' array lists under the CR2 method are tested
+     *  This method test for the CR3 method, all method calls' array lists under the CR3 method are tested
      *  whether they are not null and works correctly.
      */
     @Test
@@ -310,6 +458,28 @@ public class AppIntegrationTest {
         assertNotNull(app.getTopCountryByCont(15));
         assertNotNull(app.getTopCitiesWorld(15));
         assertNotNull(app.getTopCitiesWorld(15));
+    }
+
+    /**
+     *  This method test for the CR4 method, all method calls' array lists under the CR4 method are tested
+     *  whether they are not null and works correctly.
+     */
+    @Test
+    void testCR4ArrayListsAreNotNull()
+    {
+        // Call the CR3, Code Review method
+        app.CR4();
+        // Assert that each array list is null
+        assertNotNull(app.getPopulationOfPeopleCountryRatio());
+        assertNotNull(app.getPopulationOfPeopleRegionRatio());
+        assertNotNull(app.getPopulationOfPeopleContinentRatio());
+        assertNotNull(app.getLanguageCountry());
+        assertNotNull(app.getPopulationTotal());
+        assertNotNull(app.getPopCountry());
+        assertNotNull(app.getPopulationContinent());
+        assertNotNull(app.getPopCountry());
+        assertNotNull(app.getPopulationDistrict());
+        assertNotNull(app.getCityPopulation());
     }
 
     @Test
@@ -907,6 +1077,109 @@ public class AppIntegrationTest {
         else {
             System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
         }
+    }
+
+    @Test
+    void testGetPopulationRatioContinent() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleContinentRatio();
+        PopulationRatio top = r.get(0);
+        if ("Asia".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("Antarctica".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetPopulationRatioRegion() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleRegionRatio();
+        PopulationRatio top = r.get(0);
+        if ("Eastern Asia".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("Antarctica".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+
+    @Test
+    void testGetPopulationRatioCountry() {
+        ArrayList<PopulationRatio> r = app.getPopulationOfPeopleCountryRatio();
+        PopulationRatio top = r.get(0);
+        if ("China".equals(top.getSpecifer())) {
+            if (r.size() > 1) {
+                PopulationRatio botCity = r.get(r.size() - 1);
+                if ("United States Minor Outlying Islands".equals(botCity.getSpecifer())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    @Test
+    void testGetCountryLanguage() {
+        ArrayList<World> r = app.getLanguageCountry();
+        World top = r.get(0);
+        if ("Chinese".equals(top.getCountryLanguage())) {
+            if (r.size() > 1) {
+                World botCity = r.get(r.size() - 1);
+                if ("Arabic".equals(botCity.getCountryLanguage())) {
+                    System.out.println("Testing Methods with expected outcomes passed with correct expected values.");
+                } else {
+                    System.out.println("Testing Methods BOT with expected outcomes failed with correct expected " +
+                            "values.");
+                }
+            } else {
+                System.out.println("Testing Methods with expected outcomes failed with correct expected values.");
+            }
+        } else {
+            System.out.println("Testing Methods TOP with expected outcomes failed with correct expected values.");
+        }
+    }
+
+    /**
+     *  The following method test for the main() in app.java
+     */
+    @Test
+    void testMain() {
+        String[] args = {"localhost:33060", "30000"};
+        app.main(args);
+    }
+
+    /**
+     *  The following method test for the empty args length of main() in app.java
+     */
+    @Test
+    void testMainArgs() {
+        String[] args = { };
+        app.main(args);
     }
 
 }
