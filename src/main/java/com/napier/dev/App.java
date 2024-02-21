@@ -979,28 +979,28 @@ public class App {
             // SQL query to select all capital cities in a country based on population
             String strSelect =
                     "SELECT " +
-                            "    country.Name AS Specifier, " +
-                            "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
-                            "    SUM(country.Population) AS CountryPopulation, " +
-                            "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
-                            "FROM " +
-                            "    world.country " +
-                            "LEFT JOIN " +
-                            "    (SELECT " +
-                            "        country.Name, " +
-                            "        SUM(city.Population) AS TotalCityPopulation " +
-                            "    FROM " +
-                            "        world.country " +
-                            "    LEFT JOIN " +
-                            "        world.city ON country.Code = city.CountryCode " +
-                            "    GROUP BY " +
-                            "        country.Name) AS city_population ON country.Name = city_population.Name " +
-                            "GROUP BY " +
-                            "    country.Name " +
-                            "ORDER BY " +
-                            "    CountryPopulation DESC;";
+            "country.Name AS Specifier, " +
+                    "COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
+            "SUM(country.Population) AS CountryPopulation, " +
+            "SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
+            "CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage, " +
+            "CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
+            "FROM " +
+            "world.country" +
+            "LEFT JOIN " +
+            "(SELECT " +
+            "country.Name, " +
+                    "SUM(city.Population) AS TotalCityPopulation " +
+            "FROM " +
+            "world.country " +
+            "LEFT JOIN " +
+            "world.city ON country.Code = city.CountryCode " +
+            "GROUP BY " +
+            "country.Name) AS city_population ON country.Name = city_population.Name " +
+            "GROUP BY " +
+            "country.Name " +
+            "ORDER BY " +
+            "CountryPopulation DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
             ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
