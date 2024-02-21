@@ -875,8 +875,8 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
+                            "   CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage," +
+                            "   CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -929,8 +929,8 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
+                            "   CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage," +
+                            "   CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -1396,7 +1396,7 @@ public class App {
             return;
         }
         // Print header
-        System.out.printf("%-15s %-40s %-13s %-13s %-13s  %13s%n",
+        System.out.printf("%-37s %-45s %-13s %-13s %-13s  %13s%n",
                 str + " Name" ,"Total People Living In " + str, "Total People Living In Cities",
                 "Percentage of People Living In Cities","Total People Not Living in Cities",
                 "Percentage of People not Living in Cities");
@@ -1409,7 +1409,7 @@ public class App {
                 continue;
             }
             String world_str =
-                    String.format("%-15s %-30s %-13s %-13s %-13s  %13s",
+                    String.format("%-37s %-45s %-13s %-13s %-13s  %13s%n",
                             ratio.getSpecifer(),
                             NumberFormat.getNumberInstance(Locale.US).format(ratio.getPplPopulation()),
                             NumberFormat.getNumberInstance(Locale.US).format(ratio.getPopLivCT()),
