@@ -986,7 +986,7 @@ public class App {
             "CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage, " +
             "CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
             "FROM " +
-            "world.country" +
+            "world.country " +
             "LEFT JOIN " +
             "(SELECT " +
             "country.Name, " +
