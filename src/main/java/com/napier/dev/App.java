@@ -875,8 +875,8 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
+                            "    CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage," +
+                            "    CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -902,8 +902,16 @@ public class App {
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
-                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
-                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
+                // If the city population percentage data is null, it will bs showed as 0%
+                ratio.setLivPercent(
+                        result.getString("CityPopulationPercentage") != null ?
+                                result.getString("CityPopulationPercentage") : "0%"
+                );
+                // If the population difference data is null, it will bs showed as 0%
+                ratio.setNotLivPercent(
+                        result.getString("PopulationDifferencePercentage") != null ?
+                                result.getString("PopulationDifferencePercentage") : "0%"
+                );
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
                 populationContinentR.add(ratio);
             }
@@ -914,6 +922,7 @@ public class App {
             return null;
         }
     }
+
 
     /**
      * Retrieves the population ratio of people living in cities versus not living in cities for each region.
@@ -929,8 +938,8 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
+                            "    CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage," +
+                            "    CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -949,25 +958,34 @@ public class App {
                             "    CountryPopulation DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
+            ArrayList<PopulationRatio> populationRegionR = new ArrayList<>();
             // Iterating through the result set to populate PopulationRatio objects
             while (result.next()) {
                 PopulationRatio ratio = new PopulationRatio();
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
-                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
-                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
+                // If the city population percentage data is null, it will bs showed as 0%
+                ratio.setLivPercent(
+                        result.getString("CityPopulationPercentage") != null ?
+                                result.getString("CityPopulationPercentage") : "0%"
+                );
+                // If the population difference percentage data is null, it will bs showed as 0%
+                ratio.setNotLivPercent(
+                        result.getString("PopulationDifferencePercentage") != null ?
+                                result.getString("PopulationDifferencePercentage") : "0%"
+                );
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
-                populationContinentR.add(ratio);
+                populationRegionR.add(ratio);
             }
-            return populationContinentR;
+            return populationRegionR;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
             return null;
         }
     }
+
 
     /**
      * Retrieves the population ratio of people living in cities versus not living in cities for each country.
@@ -983,8 +1001,8 @@ public class App {
                             "    COALESCE(city_population.TotalCityPopulation, 0) AS TotalCityPopulation, " +
                             "    SUM(country.Population) AS CountryPopulation, " +
                             "    SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0) AS PopulationDifference, " +
-                            "   CONCAT((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS CityPopulationPercentage," +
-                            "   CONCAT(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, '%') AS PopulationDifferencePercentage " +
+                            "    CONCAT(ROUND((COALESCE(city_population.TotalCityPopulation, 0) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS CityPopulationPercentage, " +
+                            "    CONCAT(ROUND(((SUM(country.Population) - COALESCE(city_population.TotalCityPopulation, 0)) / NULLIF(SUM(country.Population), 0)) * 100, 2), '%') AS PopulationDifferencePercentage " +
                             "FROM " +
                             "    world.country " +
                             "LEFT JOIN " +
@@ -1003,25 +1021,34 @@ public class App {
                             "    CountryPopulation DESC;";
 
             ResultSet result = stmt.executeQuery(strSelect);
-            ArrayList<PopulationRatio> populationContinentR = new ArrayList<>();
+            ArrayList<PopulationRatio> populationCountryR = new ArrayList<>();
             // Iterating through the result set to populate PopulationRatio objects
             while (result.next()) {
                 PopulationRatio ratio = new PopulationRatio();
                 ratio.setSpecifer(result.getString("Specifier"));
                 ratio.setPplPopulation(result.getLong("CountryPopulation"));
                 ratio.setPopLivCT(result.getLong("TotalCityPopulation"));
-                ratio.setLivPercent(result.getString("CityPopulationPercentage"));
-                ratio.setNotLivPercent(result.getString("PopulationDifferencePercentage"));
+                // If the city population percentage data is null, it will bs showed as 0%
+                ratio.setLivPercent(
+                        result.getString("CityPopulationPercentage") != null ?
+                                result.getString("CityPopulationPercentage") : "0%"
+                );
+                // If the population difference percentage data is null, it will bs showed as 0%
+                ratio.setNotLivPercent(
+                        result.getString("PopulationDifferencePercentage") != null ?
+                                result.getString("PopulationDifferencePercentage") : "0%"
+                );
                 ratio.setPopNotLivCT(result.getLong("PopulationDifference"));
-                populationContinentR.add(ratio);
+                populationCountryR.add(ratio);
             }
-            return populationContinentR;
+            return populationCountryR;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get cities in world details");
             return null;
         }
     }
+
 
     /**
      * Retrieves the population of speakers for specific languages in each country.
