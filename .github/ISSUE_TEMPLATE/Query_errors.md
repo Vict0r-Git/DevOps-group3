@@ -19,7 +19,7 @@ OR
 Balnk Table with no data
 
 ### Specification version
-v1.0-ALPHA,v1.1-ALPHA,v1.2-ALPHA,v1.3-ALPHA,
+v1.0-ALPHA,v1.1-ALPHA,v1.2-ALPHA,v1.3-ALPHA
 
 ### Operating system
 Window, MacOS
