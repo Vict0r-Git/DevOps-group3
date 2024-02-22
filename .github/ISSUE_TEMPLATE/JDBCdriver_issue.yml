@@ -1,10 +1,11 @@
 name: SQL JDBC issue
-about: Database is not connected
+description: Database is not connected
+
 title: "[25.1.2024]"
 labels: task
 assignees: YeminthanRiki, Pie3215
 
-description: |
+body: |
   ### Expected behavior
   connected to the database
 
