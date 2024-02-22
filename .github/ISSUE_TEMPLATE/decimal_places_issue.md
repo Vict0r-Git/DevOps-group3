@@ -1,5 +1,5 @@
 ---
-name: Format Error issue
+name: Decimal places format issue
 about: unformatted spaces in output tables
 title: "[25.1.2024]"
 labels: task
