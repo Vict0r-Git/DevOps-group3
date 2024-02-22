@@ -12,7 +12,7 @@ connected to the database
 ### Actual behavior
 connecting to the database with no response
 
-### Specification version 
+### Specification version
 MySQL connector J 8.0.25
 
 ### Operating system
